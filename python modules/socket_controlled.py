@@ -3,7 +3,6 @@ from mathutils import Matrix, Vector
 import socket
 import bpy
 import time
-import PhysicsConstraints
 
 # Initialization
 init_time = time.time()
@@ -27,10 +26,9 @@ class G:
               events.DKEY:v.yxx}
     igv = Vector((0,0,bpy.data.scenes[scene.name].game_settings.physics_gravity))
 
-    #logic.mouse.visible = True
     logic.mouse.position = 0.5, 0.5  # centre mouse
 
-nogo = True
+socket_on = False
 torques = dict()
 buf = ""
 last_time = 0.0
@@ -46,7 +44,7 @@ TCP_IP = "127.0.0.1"
 TCP_PORT = 80
 BUFFER_SIZE = 8192
 
-if False == nogo:
+if socket_on:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((TCP_IP, TCP_PORT))
 
@@ -54,7 +52,7 @@ if False == nogo:
 #      Main loop       #
 ########################
 def main_loop(cont):
-    global nogo, torques, buf, BUFFER_SIZE
+    global socket_on, torques, buf, BUFFER_SIZE
     global last_time, oldAngVel
 
     # Timekeeping
@@ -62,6 +60,7 @@ def main_loop(cont):
     timestep = current_time - last_time
     last_time = current_time
 
+    # Camera control
     G.viewer.applyForce(G.igv, False)
     for e in G.ev:
         if logic.keyboard.events[e] == logic.KX_INPUT_ACTIVE:
@@ -82,10 +81,10 @@ def main_loop(cont):
 
     # Parsing the orders from the socket
     order_received = False
-    while not nogo and not order_received:
+    while socket_on and not order_received:
         data = s.recv(BUFFER_SIZE)
         if not data:
-            nogo = True
+            socket_on = False
             break
         buf += data.decode()
         if "\\n" in buf:
@@ -123,7 +122,7 @@ def main_loop(cont):
                 oldAngVel.update(entry)
                 socket_msg += str(object.name) + " Ang accel: " + str(angAccel) + "\n"
 
-    if not nogo:
+    if socket_on:
         socket_msg += "Center of gravity: " + str(center_of_gravity) + "\r"
         s.send(socket_msg.encode())
 

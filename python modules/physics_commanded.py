@@ -1,13 +1,33 @@
-import bge
+from bge import logic, constraints, events
+from mathutils import Vector, Matrix
+from os import path
 import time
-import PhysicsConstraints
-import os
-import mathutils
+import bpy
 
 # Initialization
 init_time = time.time()
-bge.constraints.setNumIterations(120)
-scene = bge.logic.getCurrentScene()
+constraints.setNumIterations(120)
+scene = logic.getCurrentScene()
+cont = logic.getCurrentController()
+
+# Camera setup
+class G:
+    viewer = cont.owner
+    camera = scene.active_camera
+    viewer.worldPosition = camera.worldPosition
+    camwoe = camera.worldOrientation.to_euler()
+    viewer.worldOrientation = Matrix.Rotation(camwoe.z, 3, 'Z')
+    camera.setParent(viewer)
+    camera.localOrientation = Matrix.Rotation(camwoe.x, 3, 'X')
+
+    v = Vector((0,0.2))
+    ev = {events.ZKEY:v.xyx,
+              events.SKEY:-v.xyx,
+              events.QKEY:-v.yxx,
+              events.DKEY:v.yxx}
+    igv = Vector((0,0,bpy.data.scenes[scene.name].game_settings.physics_gravity))
+
+    logic.mouse.position = 0.5, 0.5  # centre mouse
 
 go = True
 index = 0
@@ -18,13 +38,13 @@ last_line = False
 last_time = 0.0
 oldAngVel = dict()
 for object in scene.objects:
-    vec = mathutils.Vector((0.0,0.0,0.0))
+    vec = Vector((0.0,0.0,0.0))
     vec.freeze()
     entry={(object.name, vec)}
     oldAngVel.update(entry)
 
 # Path to the file containing the orders
-full_path = os.path.join('C:\\', 'Users', 'Hwk', 'Google Drive', 'Thesis', 'Assets', 'orders.txt')
+full_path = path.join('C:\\', 'Users', 'Hwk', 'Repos', 'Thesis', 'text orders', 'orders.txt')
 
 # Load the textfile containing the orders into a buffer
 # TO DO : do it in smaller chunks, and read the file when
@@ -44,6 +64,21 @@ def report_physics(cont):
     current_time = time.time() - init_time
     timestep = current_time - last_time
     last_time = current_time
+
+    # Camera control
+    G.viewer.applyForce(G.igv, False)
+    for e in G.ev:
+        if logic.keyboard.events[e] == logic.KX_INPUT_ACTIVE:
+            G.viewer.localLinearVelocity += G.ev[e]
+
+    mmb = logic.mouse.events[logic.KX_MOUSE_BUT_MIDDLE]
+    if mmb:
+        if mmb == logic.KX_INPUT_JUST_ACTIVATED:
+            logic.mouse.position = 0.5,0.5
+        elif mmb == logic.KX_INPUT_ACTIVE:
+            G.camera.applyRotation((-(round(logic.mouse.position[1],2)-0.5),0,0), True)
+            G.viewer.localAngularVelocity += Vector((0,0,2.0 * (0.5-logic.mouse.position[0])))
+            logic.mouse.position = 0.5, 0.5
 
     # Grouping the strings together for one big 'print'
     msg = "Time " + str(current_time) + " dT " + str(timestep) + "\n"
@@ -75,7 +110,7 @@ def report_physics(cont):
 
     # Computing center of gravity and reporting it
     # Also, computing angular accelerations
-    center_of_gravity = mathutils.Vector((0,0,0))
+    center_of_gravity = Vector((0,0,0))
     mass = 0.0
     for object in scene.objects:
         if object.name != "Hemi" and object.name != "Plane" and object.name != "Empty" and object.name != "Camera":
