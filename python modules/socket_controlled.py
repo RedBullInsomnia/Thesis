@@ -107,7 +107,7 @@ def main_loop(cont):
     center_of_gravity = Vector((0,0,0))
     mass = 0.0
     for object in scene.objects:
-        if object.name != "Hemi" and object.name != "Plane" and object.name != "Empty" and object.name != "Camera":
+        if not object.name.startswith("Goal") and object.name != "Hemi" and object.name != "Plane" and object.name != "Empty" and object.name != "Camera":
             # First, center of gravity
             mass_total = mass + object.mass
             center_of_gravity = (mass*center_of_gravity + object.mass*object.worldPosition) / mass_total

@@ -1,5 +1,4 @@
 %% Matlab script that communicates with blender through a socket
-
 clear all;
 
 % Setting up the socket
