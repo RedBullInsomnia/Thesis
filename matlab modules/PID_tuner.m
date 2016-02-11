@@ -13,6 +13,7 @@ while count < 4
         index = find(data==13);
         if 0 == isempty(index)
             info = char(data(1, 1:index(1)-1));
+            disp(info)
             infos(count + 1) = str2double(info);
             data = data(1, index(1)+1:end);
             count = count + 1;
@@ -25,8 +26,8 @@ kp = infos(2);
 ki = infos(3);
 kd = infos(4);
 
-i = 1;
-while i < 1201
+i = 0;
+while i < 300
     % Read data
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
@@ -34,7 +35,7 @@ while i < 1201
         index = find(data==13);
         if 0 == isempty(index)
             ang = char(data(1, 1:index(1)-1));
-            angle(i) = str2double(ang);
+            angle(i+1) = str2double(ang);
             data = data(1,index(1)+1:end);
             i = i + 1;
         end
@@ -43,7 +44,7 @@ end
 
 figure
 dt = 1/60;
-x = 0:dt:(i-2)*dt;
+x = 0:dt:(i-1)*dt;
 plot(x, angle)
 hold on
 plot(get(gca, 'xlim'), [d_angle d_angle], 'r--');
