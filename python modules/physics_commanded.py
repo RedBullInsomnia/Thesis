@@ -130,4 +130,4 @@ def report_physics(cont):
 
     msg += "Center of gravity: " + str(center_of_gravity)
 
-    print(msg, flush = True)
+    #print(msg, flush = True)
