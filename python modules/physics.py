@@ -12,8 +12,3 @@ def report_physics(cont):
     scene = bge.logic.getCurrentScene()
     
     elapsed_time = time.time() - init_time
-    
-    #print("Elapsed time:", elapsed_time)
-    #for object in scene.objects:
-     #   print("Object :", object.name)
-     #   print("Velocity :", object.getLinearVelocity()) 
