@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{blender_for_robotics}
+Herman Bruyninckx.
+\newblock Blender for robotics and robotics for blender.
+\newblock {\em Dept. of Mechanical Engineering, KU Leuven, Belgium}, 2004.
+
+\bibitem{engines_comparison}
+Tom Erez, Yuval Tassa, and Emanuel Todorov.
+\newblock Simulation tools for model-based robotics: Comparison of bullet,
+  havok, mujoco, ode and physx.
+
+\end{thebibliography}

@@ -1,0 +1,34 @@
+\cite{blender_for_robotics}
+The list of physics simulating engines is quite long, but the most popular ones are, in no particular order
+\begin{enumerate}
+\item Bullet
+\item ODE
+\item DART
+\item Simbody
+\item PhysX
+\item Havok
+\end{enumerate}
+Bullet was chosen because while it does not distinguish itself when it comes to pure physical simulation \cite{engines_comparison}, a 3D modelling application called Blender is built atop of it, providing excellent tools for fast and easy robot modelisation. Blender also provides access to Bullet through a well document Python API.
+
+\begin{table}[htp]
+\center
+\caption{Features comparison}
+\begin{tabularx}{\textwidth}{@{} X X X X X X @{}}
+\toprule
+\textbf{Engine} & \textbf{License} & \textbf{Coordinates} & \textbf{Origin} & \textbf{Editor} &\textbf{Solver type}\\ 
+\midrule
+Bullet & Free & Maximal & Games & Blender & Iterative \\ 
+
+ODE & Free & Maximal & Simplified robot dynamics, games & & Iterative\\ 
+
+DART & Free & Generalized & Computer graphics, robot control & &\\
+
+Simbody & Free & Generalized & Biomechamics & \\
+
+PhysX & Proprietary & Maximal & Games & \\
+
+Havok & Proprietary & Maximal & Games & \\
+\bottomrule
+\end{tabularx}
+\label{table:specs}
+\end{table}

@@ -5,20 +5,12 @@ import socket
 import sys
 import math
 
-cont = bge.logic.getCurrentController()
-own = cont.owner
-
-desired_angle = 0.0
-old_desired_angle = 0.0
-goal_angle = 0.0
+time_ = 0.0
+desired_angle = 0.5
 
 int_err = 0.0
-time_ = 0.0
 last_err = 0.0
 dt = 1/60
-Kp = -2200.0
-Ki = -1600.0
-Kd = -600.0
 
 TCP_IP ="127.0.0.1"
 TCP_PORT = 80
@@ -82,11 +74,15 @@ def clamp(min_val, max_val, val):
     return max(min_val, min(max_val, val))
 
 # Low level PID controller
-def control_servo(desired_angle):
-    global time_, int_err, dt, last_err, Kp, Ki, Kd, own
-
+def control_servo(desired_angle, own):
+    global time_, int_err, dt, last_err
+    
+    Kp = -2200
+    Ki = -1600
+    Kd = -600
+    
     treshold = 20
-    torque_max = 10000
+    torque_max = 4000
 
     time_ = time_ + dt
 
@@ -105,7 +101,6 @@ def control_servo(desired_angle):
     last_err = error
 
     correction = Kp*error + Ki*int_err + Kd*d_err
-    correction = correction * torque_max
     correction = clamp(-torque_max, torque_max, correction)
     own.applyTorque((correction, 0,0), True)
 
@@ -117,22 +112,19 @@ def control_servo(desired_angle):
     #print("")
 
 def position_control():
-    global time_, own, old_desired_angle, desired_angle, goal_angle
+    cont = bge.logic.getCurrentController()
+    own = cont.owner
 
     current_angle = own.localOrientation.to_euler()[0]
     print("Name", own)
     print("current angle:", current_angle)
-    if desired_angle != old_desired_angle:
-        old_desired_angle = desired_angle
-        difference = (desired_angle - current_angle)
-        goal_angle = difference/10
 
     difference = (desired_angle - current_angle)
     print("difference:", difference)
-    goal_angle = (goal_angle + 0.2*difference)
-    goal_angle = clamp(-desired_angle, desired_angle, goal_angle)
-        
+    goal_angle = current_angle + 0.7*difference
+    #goal_angle = clamp(-desired_angle, desired_angle, goal_angle)
+
     print("New goal:", goal_angle)
     print("")
 
-    control_servo(goal_angle)
+    control_servo(goal_angle, own)
