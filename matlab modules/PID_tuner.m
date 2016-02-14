@@ -1,5 +1,7 @@
 clear all
 
+!"C:/Program Files/Blender Foundation/Blender/blenderplayer.exe" "C:/Users/Hwk/Repos/Thesis/servo_pid.blend" &
+
 t = tcpip('127.0.0.1', 80, 'NetworkRole', 'server');
 fopen(t);
 disp('Blender connected')
@@ -27,7 +29,7 @@ ki = infos(3);
 kd = infos(4);
 
 i = 0;
-while i < 300
+while i < 1000
     % Read data
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
@@ -42,10 +44,22 @@ while i < 300
     end
 end
 
+angle1 = angle(1:2:end);
+angle2 = angle(2:2:end);
+
 figure
 dt = 1/60;
-x = 0:dt:(i-1)*dt;
-plot(x, angle)
+x = 0:dt:((i-1)/2)*dt;
+plot(x, angle1)
+hold on
+plot(get(gca, 'xlim'), [d_angle d_angle], 'r--');
+str = sprintf ('Kp = %f, Ki = %f, Kd = %f', kp, ki, kd);
+title(str)
+
+figure
+dt = 1/60;
+x = 0:dt:(i-1)*dt/2;
+plot(x, angle2)
 hold on
 plot(get(gca, 'xlim'), [d_angle d_angle], 'r--');
 str = sprintf ('Kp = %f, Ki = %f, Kd = %f', kp, ki, kd);
