@@ -1,7 +1,7 @@
 clear all
 num_servos = 1;
 
-!"C:/Program Files/Blender Foundation/Blender/blenderplayer.exe" "C:/Users/Hubert/Repos/Thesis/1servo_pid.blend" &
+!"C:/Program Files/Blender Foundation/Blender/blenderplayer.exe" "C:/Users/Hwk/Repos/Thesis/1servo_pid.blend" &
 
 t = tcpip('127.0.0.1', 80, 'NetworkRole', 'server');
 fopen(t);
@@ -24,12 +24,13 @@ while count < 3
     end
 end
 
+
 d_angle(1) = infos(1);
 kp = infos(2);
 ki = infos(3);
 
 i = 0;
-while i < 500
+while i < 2000
     % Read data
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
@@ -48,7 +49,7 @@ if num_servos == 2
 	angle1 = angle(1:2:end);
     angle2 = angle(2:2:end);
     figure
-    dt = 1/60;
+    dt = 1/411;
     x = 0:dt:((i-1)/2)*dt;
     plot(x, angle1)
     hold on
