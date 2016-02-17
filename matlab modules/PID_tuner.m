@@ -9,7 +9,7 @@ disp('Blender connected')
 
 count = 0;
 data = zeros(0,0);
-while count < 5
+while count < 3
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
         data = [data, fread(t, incoming)'];
@@ -25,13 +25,11 @@ while count < 5
 end
 
 d_angle(1) = infos(1);
-d_angle(2) = infos(2);
-kp = infos(3);
-ki = infos(4);
-kd = infos(5);
+kp = infos(2);
+ki = infos(3);
 
 i = 0;
-while i < 1000
+while i < 500
     % Read data
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
@@ -55,7 +53,7 @@ if num_servos == 2
     plot(x, angle1)
     hold on
     plot(get(gca, 'xlim'), [d_angle(1) d_angle(1)], 'r--');
-    str = sprintf ('Kp = %f, Ki = %f, Kd = %f', kp, ki, kd);
+    str = sprintf ('Kp = %f, Ki = %f', kp, ki);
     title(str)
 
     figure
@@ -64,7 +62,7 @@ if num_servos == 2
     plot(x, angle2)
     hold on
     plot(get(gca, 'xlim'), [d_angle(2) d_angle(2)], 'r--');
-    str = sprintf ('Kp = %f, Ki = %f, Kd = %f', kp, ki, kd);
+    str = sprintf ('Kp = %f, Ki = %f', kp, ki);
     title(str)
 else
     figure
@@ -73,7 +71,7 @@ else
     plot(x, angle)
     hold on
     plot(get(gca, 'xlim'), [d_angle(1) d_angle(1)], 'r--');
-    str = sprintf ('Kp = %f, Ki = %f, Kd = %f', kp, ki, kd);
+    str = sprintf ('Kp = %f, Ki = %f', kp, ki);
     title(str)
 end
 
