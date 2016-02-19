@@ -30,7 +30,7 @@ kp = infos(2);
 ki = infos(3);
 
 i = 0;
-while i < 2000
+while i < 300
     % Read data
     incoming = get(t, 'BytesAvailable');
     if (incoming > 0)
@@ -49,7 +49,7 @@ if num_servos == 2
 	angle1 = angle(1:2:end);
     angle2 = angle(2:2:end);
     figure
-    dt = 1/411;
+    dt = 1/60;
     x = 0:dt:((i-1)/2)*dt;
     plot(x, angle1)
     hold on
