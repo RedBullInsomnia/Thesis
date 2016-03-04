@@ -20,28 +20,16 @@ function simulation_client_vrep()
     % See http://www.v-rep.eu/helpFiles/en/remoteApiServerSide.htm
     vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
     
-    % retrieve handles to joints
-    handles = struct('clientID', clientID);
-    for i=0:15
-        [~, handles.joint(i+1)] = vrep.simxGetObjectHandle(clientID, sprintf('Robot_joint%d',i), vrep.simx_opmode_blocking);
-    end
+    % retrieve handles to servos, joints
+    handles = robot_init(vrep, clientID);
     
-    % Now send some data to V-REP in a non-blocking fashion:
-    vrep.simxAddStatusbarMessage(clientID,'Hello V-REP!', vrep.simx_opmode_oneshot);
+    [~, centerZ] = vrep.simxGetFloatSignal(clientID, 'centerOfMassZ', vrep.simx_opmode_oneshot_wait)
     
-    instructions(1,:) = [double(handles.joint(2)), 20*pi/180];
-    instructions(2,:) = [double(handles.joint(16)), -10*pi/180];
+    instructions(1,:) = [double(handles.joints(2)), 20*pi/180];
+    instructions(2,:) = [double(handles.joints(16)), -10*pi/180];
     
     for i=0:100
-        tic
         send_instructions(vrep, clientID, instructions);
-        
-        % Make sure that we do not go faster that the simulator
-        elapsed = toc;
-        timeleft = timestep - elapsed;
-        if (timeleft > 0),
-            pause(min(timeleft, .01));
-        end
     end
     
     % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
