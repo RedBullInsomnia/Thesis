@@ -4,7 +4,7 @@ function res = send_instructions( vrep, clientID, angle_instructions )
 
     for i=1:size(angle_instructions, 1)
        res = vrep.simxSetJointTargetPosition(clientID, angle_instructions(i,1),...
-           angle_instructions(i,2), vrep.simx_opmode_oneshot);
+           angle_instructions(i,2), vrep.simx_opmode_oneshot_wait);
     end
     
     vrep.simxSynchronousTrigger(clientID);

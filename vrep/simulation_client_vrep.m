@@ -23,10 +23,11 @@ function simulation_client_vrep()
     % retrieve handles to servos, joints
     handles = robot_init(vrep, clientID);
     
-    [~, centerZ] = vrep.simxGetFloatSignal(clientID, 'centerOfMassZ', vrep.simx_opmode_oneshot_wait)
+    % Retrieve center of mass
+    [~, centerZ] = vrep.simxGetFloatSignal(clientID, 'centerOfMassZ', vrep.simx_opmode_oneshot_wait);
     
-    instructions(1,:) = [double(handles.joints(2)), 20*pi/180];
-    instructions(2,:) = [double(handles.joints(16)), -10*pi/180];
+    instructions(1,:) = [double(handles.left_leg_joints(2)), -20*pi/180];
+    instructions(2,:) = [double(handles.left_leg_joints(4)), 10*pi/180];
     
     for i=0:100
         send_instructions(vrep, clientID, instructions);
