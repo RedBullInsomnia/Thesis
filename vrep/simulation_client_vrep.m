@@ -29,7 +29,7 @@ handles = robot_init(vrep, clientID);
 
 t = 0;
 while true && t < 1
-    instructions = standup_supine(handles, t);
+    instructions = standup_prone(handles, t);
     send_instructions(vrep, clientID, instructions);
     t = t + dt
 end
