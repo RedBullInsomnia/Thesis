@@ -10,18 +10,18 @@ left_arm = [-1, -1];
 right_arm = [-1, -1];
 for i=1:2
     [~, left_arm(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_arm%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('left_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_arm(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_arm%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('right_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
 end
 
 left_leg = [-1, -1, -1, -1, -1];
 right_leg = [-1, -1, -1, -1, -1];
 for i=1:4
     [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_leg%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('left_leg_servo%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_leg%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('right_leg_servo%d', i), vrep.simx_opmode_oneshot_wait);
 end
 
 handles.left_arm = left_arm;
@@ -38,9 +38,9 @@ left_arm_joints = [-1, -1, -1];
 right_arm_joints = [-1, -1, -1];
 for i=1:3
     [~, left_arm_joints(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_arm_joint%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('left_arm%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_arm_joints(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_arm_joint%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('right_arm%d', i), vrep.simx_opmode_oneshot_wait);
     % Clear previous orders
     instructions(j, :) = [double(left_arm_joints(i)), 0];
     j = j + 1;
@@ -53,9 +53,9 @@ right_leg_joints = [-1, -1, -1, -1, -1, -1];
 
 for i=1:6
     [~, left_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_leg_joint%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('left_leg%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_leg_joint%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('right_leg%d', i), vrep.simx_opmode_oneshot_wait);
     % Clear previous orders
     instructions(j, :) = [double(left_leg_joints(i)), 0];
     j = j + 1;

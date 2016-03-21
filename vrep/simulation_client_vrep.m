@@ -28,7 +28,7 @@ handles = robot_init(vrep, clientID);
 %[~, centerZ] = vrep.simxGetFloatSignal(clientID, 'centerOfMassZ', vrep.simx_opmode_oneshot_wait);
 
 t = 0;
-while true && t < 1
+while true && t < 2
     instructions = standup_prone(handles, t);
     send_instructions(vrep, clientID, instructions);
     t = t + dt
@@ -38,6 +38,7 @@ end
 vrep.simxGetPingTime(clientID);
 
 % Now close the connection to V-REP:
+%vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 vrep.simxFinish(clientID);
 vrep.delete(); % call the destructor!
 disp('Program ended');
