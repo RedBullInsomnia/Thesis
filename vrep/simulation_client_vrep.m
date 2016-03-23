@@ -63,6 +63,7 @@ t = 0;
 i = 1;
 while true && t < 1
     instructions = standup_prone(handles, i, hips, knees, feet, shoulders, arms);
+    COM = getCOM(vrep, clientID)
     send_instructions(vrep, clientID, instructions);
     t = t + dt
     if i < 31
