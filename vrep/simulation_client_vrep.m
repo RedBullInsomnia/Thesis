@@ -46,29 +46,50 @@ arms_setpoints = [degtorad(-90), degtorad(-90), degtorad(-90), degtorad(-90)];
 arms = interp1(x, arms_setpoints, xq, 'linear');
 
 % display points
-figure
-subplot(5,1,1)
-plot(x, hips_setpoints, 'o', xq , hips, ':.');
-
-subplot(5,1,2)
-plot(x, knees_setpoints, 'o', xq , knees, ':.');
-
-subplot(5,1,3)
-plot(x, feet_setpoints, 'o', xq , feet, ':.');
-
-subplot(5,1,4)
-plot(x, shoulders_setpoints, 'o', xq , shoulders, ':.');
+display = 1;
+if display == 1
+    figure
+    subplot(5,1,1)
+    plot(x, hips_setpoints, 'o', xq , hips, ':.');
+    ylim([-2.5, 2.5])
+    ylabel('hips')
+    
+    subplot(5,1,2)
+    plot(x, knees_setpoints, 'o', xq , knees, ':.');
+    ylim([-2.5, 2.5])
+    ylabel('knees')
+    
+    subplot(5,1,3)
+    plot(x, feet_setpoints, 'o', xq , feet, ':.');
+    ylim([-2.5, 2.5])
+    ylabel('feet')
+    
+    subplot(5,1,4)
+    plot(x, shoulders_setpoints, 'o', xq , shoulders, ':.');
+    ylim([-2.5, 2.5])
+    ylabel('shoulders')
+    
+    subplot(5,1,5)
+    plot(x, arms_setpoints, 'o', xq , arms, ':.');
+    ylim([-2.5, 2.5])
+    ylabel('arms')
+end
 
 t = 0;
 i = 1;
-while true && t < 1
+while true && t < 0.5
     instructions = standup_prone(handles, i, hips, knees, feet, shoulders, arms);
-    COM = getCOM(vrep, clientID)
+    COM(i,:) = getCOM(vrep, clientID);
     send_instructions(vrep, clientID, instructions);
     t = t + dt
     if i < 31
         i = i + 1;
     end
+end
+
+if display == 1
+    figure
+    plot3(COM(:,1), COM(:,2), COM(:,3))
 end
 
 % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
