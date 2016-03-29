@@ -1,4 +1,9 @@
-function instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms)
+function instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows)
+
+if i > length(hips)
+    instructions(1, :) = [double(h.right_leg_joints(2)), hips(end)];
+    return;
+end
 
 instructions(1,:) = [double(h.right_leg_joints(2)), hips(i)];
 instructions(2,:) = [double(h.left_leg_joints(2)), hips(i)];
@@ -14,6 +19,9 @@ instructions(8,:) = [double(h.left_arm_joints(1)), shoulders(i)];
 
 instructions(9,:) = [double(h.right_arm_joints(2)), arms(i)];
 instructions(10,:) = [double(h.left_arm_joints(2)), -arms(i)];
+
+instructions(11,:) = [double(h.right_arm_joints(3)), elbows(i)];
+instructions(12,:) = [double(h.left_arm_joints(3)), -elbows(i)];
 
 end
 

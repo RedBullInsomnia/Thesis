@@ -1,5 +1,4 @@
 function simulation_client_vrep()
-
 dt = .01;
 
 disp('Program started');
@@ -22,31 +21,31 @@ cleanupObj = onCleanup(@() cleanup_vrep(vrep, clientID));
 vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 
 % retrieve handles to servos, joints
-handles = robot_init(vrep, clientID);
-
-% Retrieve center of mass
-%[~, centerZ] = vrep.simxGetFloatSignal(clientID, 'centerOfMassZ', vrep.simx_opmode_oneshot_wait);
+h = robot_init(vrep, clientID);
 
 % generate standup sequence
-x = 0:.1:.3;
-xq = 0:0.01:.3;
-hips_setpoints = [degtorad(30), degtorad(-40), degtorad(-150), degtorad(-20)];
-hips = interp1(x, hips_setpoints, xq, 'spline');
+x = 0:.05:.1;
+xq = 0:0.01:.1;
+hips_setpoints = [degtorad(30), degtorad(-110), degtorad(-110)];
+hips = interp1(x, hips_setpoints, xq, 'linear');
 
-knees_setpoints = [0, 0, degtorad(120), degtorad(20)];
-knees = interp1(x, knees_setpoints, xq, 'spline');
+knees_setpoints = [0, degtorad(90), degtorad(110)];
+knees = interp1(x, knees_setpoints, xq, 'linear');
 
-feet_setpoints = [degtorad(-65), degtorad(-55), degtorad(-30), degtorad(0)];
-feet = interp1(x, feet_setpoints, xq, 'spline');
+feet_setpoints = [degtorad(-75), degtorad(-75), degtorad(-50)];
+feet = interp1(x, feet_setpoints, xq, 'linear');
 
-shoulders_setpoints = [degtorad(-70), degtorad(-100), degtorad(-75), degtorad(-30)];
-shoulders = interp1(x, shoulders_setpoints, xq, 'spline');
+shoulders_setpoints = [degtorad(-70), degtorad(-70), degtorad(-80)];
+shoulders = interp1(x, shoulders_setpoints, xq, 'linear');
 
-arms_setpoints = [degtorad(-90), degtorad(-90), degtorad(-90), degtorad(-90)];
+arms_setpoints = [degtorad(0), degtorad(0), degtorad(-90)];
 arms = interp1(x, arms_setpoints, xq, 'linear');
 
+elbows_setpoints = [degtorad(-90), degtorad(-90), degtorad(0)];
+elbows = interp1(x, elbows_setpoints, xq, 'linear');
+
 % display points
-display = 1;
+display = 0;
 if display == 1
     figure
     subplot(5,1,1)
@@ -78,11 +77,13 @@ end
 t = 0;
 i = 1;
 while true && t < 0.5
-    instructions = standup_prone(handles, i, hips, knees, feet, shoulders, arms);
+    %instructions = standup_prone(handles, i, hips, knees, feet, shoulders, arms, elbows);
+    instructions(1,:) = [double(h.right_leg_joints(2)), 0];
     COM(i,:) = getCOM(vrep, clientID);
+    isInsideSupportArea(vrep, clientID, COM(i,:), h)
     send_instructions(vrep, clientID, instructions);
     t = t + dt
-    if i < 31
+    if i < 11
         i = i + 1;
     end
 end
@@ -96,7 +97,7 @@ end
 vrep.simxGetPingTime(clientID);
 
 % Now close the connection to V-REP:
-vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
+%vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 vrep.simxFinish(clientID);
 vrep.delete(); % call the destructor!
 disp('Program ended');
