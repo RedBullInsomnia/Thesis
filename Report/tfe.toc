@@ -1,8 +1,25 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}
 \contentsline {section}{\numberline {1.1}Introduction}{6}{section.1.1}
-\contentsline {chapter}{\numberline {2}Setting up the simulation}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}Choosing the right engine}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Settings}{8}{section.2.2}
-\contentsline {section}{\numberline {2.3}Model}{8}{section.2.3}
-\contentsline {chapter}{\numberline {3}Conclusion}{9}{chapter.3}
+\contentsline {chapter}{\numberline {2}Simulator}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Simulation of rigid body dynamics}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Existing simulators}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Choice}{8}{section.2.3}
+\contentsline {chapter}{\numberline {3}Modelling tools}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Blender}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}V-REP}{9}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Servos}{9}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Joints}{9}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Sensors (accel, cog)}{9}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Springs}{9}{subsection.3.2.4}
+\contentsline {chapter}{\numberline {4}Simulation}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}Interface (api)}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}First simple simulations}{10}{section.4.2}
+\contentsline {section}{\numberline {4.3}Robot design}{10}{section.4.3}
+\contentsline {section}{\numberline {4.4}Application ! stand up routines}{10}{section.4.4}
+\contentsline {chapter}{\numberline {5}Physical validation}{11}{chapter.5}
+\contentsline {section}{\numberline {5.1}Mode exp\IeC {\'e}rimental}{11}{section.5.1}
+\contentsline {section}{\numberline {5.2}Experiments}{11}{section.5.2}
+\contentsline {section}{\numberline {5.3}Servo tuning}{11}{section.5.3}
+\contentsline {section}{\numberline {5.4}Results}{11}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion}{12}{chapter.6}

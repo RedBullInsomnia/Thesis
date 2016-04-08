@@ -1,7 +1,24 @@
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Introduction}{chapter.1}% 2
-\BOOKMARK [0][-]{chapter.2}{Setting up the simulation}{}% 3
-\BOOKMARK [1][-]{section.2.1}{Choosing the right engine}{chapter.2}% 4
-\BOOKMARK [1][-]{section.2.2}{Settings}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.3}{Model}{chapter.2}% 6
-\BOOKMARK [0][-]{chapter.3}{Conclusion}{}% 7
+\BOOKMARK [0][-]{chapter.2}{Simulator}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Simulation of rigid body dynamics}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Existing simulators}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Choice}{chapter.2}% 6
+\BOOKMARK [0][-]{chapter.3}{Modelling tools}{}% 7
+\BOOKMARK [1][-]{section.3.1}{Blender}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.2}{V-REP}{chapter.3}% 9
+\BOOKMARK [2][-]{subsection.3.2.1}{Servos}{section.3.2}% 10
+\BOOKMARK [2][-]{subsection.3.2.2}{Joints}{section.3.2}% 11
+\BOOKMARK [2][-]{subsection.3.2.3}{Sensors \(accel, cog\)}{section.3.2}% 12
+\BOOKMARK [2][-]{subsection.3.2.4}{Springs}{section.3.2}% 13
+\BOOKMARK [0][-]{chapter.4}{Simulation}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Interface \(api\)}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.2}{First simple simulations}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.3}{Robot design}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.4}{Application ! stand up routines}{chapter.4}% 18
+\BOOKMARK [0][-]{chapter.5}{Physical validation}{}% 19
+\BOOKMARK [1][-]{section.5.1}{Mode exp\351rimental}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Experiments}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.3}{Servo tuning}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.4}{Results}{chapter.5}% 23
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 24
