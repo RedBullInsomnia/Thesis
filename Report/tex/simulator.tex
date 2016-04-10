@@ -1,8 +1,12 @@
+In this chapter we discuss the choice of V-rep as the simulation tool for this project. We begin by explaining the basics of rigid body dynamics simulation, take a survey of some of the existing simulators and finally test some of them.
+
 \section{Simulation of rigid body dynamics}
 
-\section{Existing simulators}
+\section{Available simulators}
+The basis of the simulation is the ability to simulate the dynamics of the robot and the friction with the soil. So, something bare-bone as Matlab or bullet could be used, 
+
 \cite{blender_for_robotics}
-The list of physics simulating engines is quite long, but the most popular ones are, in no particular order
+The list of physics simulating engines is quite long, but the most popular ones are, in no particular order :
 \begin{enumerate}
 \item Bullet
 \item ODE
@@ -15,7 +19,6 @@ Bullet was chosen because while it does not distinguish itself when it comes to 
 
 \begin{table}[htp]
 \center
-\caption{Features comparison}
 \begin{tabularx}{\textwidth}{@{} X X X X X X @{}}
 \toprule
 \textbf{Engine} & \textbf{License} & \textbf{Coordinates} & \textbf{Origin} & \textbf{Editor} &\textbf{Solver type}\\ 
@@ -33,6 +36,34 @@ PhysX & Proprietary & Maximal & Games & \\
 Havok & Proprietary & Maximal & Games & \\
 \bottomrule
 \end{tabularx}
+\caption{Features comparison}
 \label{table:specs}
 \end{table}
+
+\begin{table}[htp]
+\center
+\begin{tabularx}{\textwidth}{@{} l l X X X X @{}}
+\toprule
+\textbf{Simulator} & \textbf{License} & \textbf{Physics engine(s)} & \textbf{Integrated editor} & \textbf{Modelling}\\ 
+\midrule
+Blender & Free & Bullet & Fully fledged & Internal\\ 
+
+V-REP & Free (educational license) & Bullet, ODE, Newton, Vortex(10s limit) & Limited & Can import .COLLADA\\
+
+Gazebo & Free & Bullet, ODE, Simbody, DART & Limited & SDF format\\
+
+Webots & Proprietary & ODE & None & SDF format\\
+
+Matlab & Proprietary & None & None & Mathematical\\
+\bottomrule
+\end{tabularx}
+\caption{Comparison of simulators }
+\label{table:simulators_comp}
+\end{table}
+
+\section{Tested simulators}
+Blender is originally a 3D modelling and rendering software. It uses the Bullet physics engine to simulate realistic physics in animations. It has a Python interface which can be used to script a simulation.
+
+V-rep integrates a simulator that can run on different physics engines and supports remote operation. 
+
 \section{Choice}

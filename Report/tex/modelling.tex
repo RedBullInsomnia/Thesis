@@ -1,16 +1,20 @@
 This chapter covers the tools used in order to create a model of the robot, from the placement of the servos and joints to the incorporation of accelerometers.
 
 \section{Blender}
-The modelling of the robot starts in Blender, where the servos and the joints will be positioned. The justification is that it is faster to do it in Blender than in V-Rep, because of its better interface. 
+The modelling of the robot starts in Blender, where the servos and the joints are be positioned. The justification is that it is faster to do it in Blender than in V-Rep, because of its better interface. 
 
-For the import operation into V-REP, the model is exported to the COLLADA format.
+In preparation of the import operation into V-REP, the model is exported to the COLLADA format.
 
 \section{V-REP}
 V-Rep can import COLLADA files. What is left now, is linking the servos together and adding the sensors.
+
 \subsection{Servos}
 Servos are simulated by joints.
+
 \subsection{Joints}
 Joints are a basic block in v-rep, and they link two objects together. 
 
 \subsection{Sensors (accel, cog)}
+The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface.
+
 \subsection{Springs}
