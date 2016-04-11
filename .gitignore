@@ -42,3 +42,5 @@ Thumbs.db
 # Matlab backup files #
 #######################
 *.asv
+
+/Debug
