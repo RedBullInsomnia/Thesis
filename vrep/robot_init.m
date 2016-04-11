@@ -79,8 +79,8 @@ handles.right_arm_joints = right_arm_joints;
 
 cameras = [-1, -1];
 for i = 1:2
-    [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('camera%d', (i-1)), vrep.simx_opmode_oneshot_wait);
+    [~, cameras(i)] = vrep.simxGetObjectHandle(clientID,...
+        sprintf('head%d', (i)), vrep.simx_opmode_oneshot_wait);
 end
 
 handles.cameras = cameras;
