@@ -77,8 +77,7 @@ end
 t = 0;
 i = 1;
 while true && t < 0.5
-    %instructions = standup_prone(handles, i, hips, knees, feet, shoulders, arms, elbows);
-    instructions(1,:) = [double(h.right_leg_joints(2)), 0];
+    instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
     COM(i,:) = getCOM(vrep, clientID);
     isInsideSupportArea(vrep, clientID, COM(i,:), h)
     send_instructions(vrep, clientID, instructions);
