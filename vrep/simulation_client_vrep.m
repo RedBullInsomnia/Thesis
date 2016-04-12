@@ -32,10 +32,10 @@ hips = interp1(x, hips_setpoints, xq, 'linear');
 knees_setpoints = [0, degtorad(90), degtorad(110)];
 knees = interp1(x, knees_setpoints, xq, 'linear');
 
-feet_setpoints = [degtorad(-75), degtorad(-75), degtorad(-50)];
+feet_setpoints = [degtorad(-75), degtorad(-75), degtorad(-70)];
 feet = interp1(x, feet_setpoints, xq, 'linear');
 
-shoulders_setpoints = [degtorad(-70), degtorad(-70), degtorad(-80)];
+shoulders_setpoints = [degtorad(70), degtorad(70), degtorad(100)];
 shoulders = interp1(x, shoulders_setpoints, xq, 'linear');
 
 arms_setpoints = [degtorad(0), degtorad(0), degtorad(-90)];

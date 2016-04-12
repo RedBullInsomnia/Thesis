@@ -11,8 +11,8 @@ instructions(2,:) = [double(h.left_leg_joints(2)), hips(i)];
 instructions(3,:) = [double(h.right_leg_joints(4)), knees(i)];
 instructions(4,:) = [double(h.left_leg_joints(4)), knees(i)];
 
-instructions(5,:) = [double(h.right_leg_joints(6)), feet(i)];
-instructions(6,:) = [double(h.left_leg_joints(6)), feet(i)];
+instructions(5,:) = [double(h.right_leg_joints(5)), feet(i)];
+instructions(6,:) = [double(h.left_leg_joints(5)), feet(i)];
 
 instructions(7,:) = [double(h.right_arm_joints(1)), shoulders(i)];
 instructions(8,:) = [double(h.left_arm_joints(1)), shoulders(i)];
