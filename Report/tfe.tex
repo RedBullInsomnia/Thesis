@@ -6,7 +6,11 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{tocbibind}
 \usepackage{parskip}
+
+% To have '-' instead of bullets in the itemize environment
+\def\labelitemi{--}
 
 % For hyperlinks and meta data
 \usepackage{hyperref}
@@ -31,6 +35,7 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
+
 % Margins
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
@@ -56,7 +61,6 @@
 
 %% Intro
 \chapter{Introduction}
-\section{Introduction}
 \input{tex/intro.tex}
 
 %% Pre-work
