@@ -20,13 +20,13 @@ for i=1:2
         sprintf('right_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
 end
 
-left_leg = [-1, -1, -1, -1, -1];
-right_leg = [-1, -1, -1, -1, -1];
-for i=1:5
+left_leg = [-1, -1, -1, -1];
+right_leg = [-1, -1, -1, -1];
+for i=1:4
     [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_leg_servo%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('left_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
     [~, right_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_leg_servo%d', i), vrep.simx_opmode_oneshot_wait);
+        sprintf('right_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
 end
 
 handles.left_arm = left_arm;
@@ -36,6 +36,8 @@ handles.right_leg = right_leg;
 
 %% Joints
 
+j = 1;
+
 left_arm_joints = [-1, -1, -1];
 right_arm_joints = [-1, -1, -1];
 for i = 1:3
@@ -43,6 +45,12 @@ for i = 1:3
         sprintf('left_arm%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_arm_joints(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('right_arm%d', i), vrep.simx_opmode_oneshot_wait);
+    
+    % Reset instructions
+    instructions(j, :) = [double(left_arm_joints(i)), 0];
+    j = j + 1;
+    instructions(j, :) = [double(right_arm_joints(i)), 0];
+    j = j + 1;
 end
 
 left_leg_joints = [-1, -1, -1, -1, -1, -1];
@@ -52,7 +60,11 @@ for i = 1:6
         sprintf('left_leg%d', i), vrep.simx_opmode_oneshot_wait);
     [~, right_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('right_leg%d', i), vrep.simx_opmode_oneshot_wait);
-    % Clear previous orders
+    
+    instructions(j, :) = [double(left_leg_joints(i)), 0];
+    j = j + 1;
+    instructions(j, :) = [double(right_leg_joints(i)), 0];
+    j = j + 1;
 end
 
 handles.left_leg_joints = left_leg_joints;
@@ -69,5 +81,8 @@ for i = 1:2
 end
 
 handles.cameras = cameras;
+
+% Clear old instructions
+send_instructions(vrep, clientID, instructions);
 
 end

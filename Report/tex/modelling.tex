@@ -1,12 +1,24 @@
 This chapter covers the tools used in order to create a model of the robot, from the placement of the servos and joints to the incorporation of accelerometers.
 
 \section{Blender}
-The modelling of the robot starts in Blender, where the servos and the joints are be positioned. The justification is that it is faster to do it in Blender than in V-Rep, because of its better interface. 
+The first stage of the modelling is done in Blender which is a lot more suited to this kind of work than V-Rep. 
+Blender is used to do the following :
+\begin{itemize}
+\item place the servos, hinges and other elements in place.
+\item simplify the servos, hinges into simple convex shapes with a low vertex count.
+\item place position markers for the joints to be placed in V-Rep.
+\end{itemize}
 
-In preparation of the import operation into V-REP, the model is exported to the COLLADA format.
+The model is finally exported in the COLLADA format.
 
 \section{V-REP}
-V-Rep can import COLLADA files. What is left now, is linking the servos together and adding the sensors.
+The model is finalized by :
+\begin{itemize}
+\item defining the mass and inertia of each piece(compiled in \cref{table:weights}) and enabling them for dynamic simulation.
+\item adding joints between servos. For 2DOF joints, hinges are used as intermediates.
+\item adding scripts to simulate sensors (COG, accelerometers).
+\item adding springs on the legs through the use of prismatic and spheric joints.
+\end{itemize}
 
 \begin{table}[htp]
 \center
@@ -22,15 +34,19 @@ Frame Fr-07 & & \\
 Frame Fr-101-H3 & 7 & \\
 \bottomrule
 \end{tabularx}
-\caption{Weights of the different modules}
-\label{table:specs}
+\caption{Weights and dimensions of the pieces of the robot}
+\label{table:weights}
 \end{table}
 
 \subsection{Servos}
 Servos are simulated by joints.
 
 \subsection{Joints}
-Joints are a basic block in v-rep, and they link two objects together. 
+Spherical joint : 3DOF angular.
+
+Prismatic joint : 1DOF linear.
+
+Revolute joint : 1DOF angular.
 
 \subsection{Sensors (accel, cog)}
 The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface.

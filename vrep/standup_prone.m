@@ -5,8 +5,8 @@ if i > length(hips)
     return;
 end
 
-instructions(1,:) = [double(h.right_leg_joints(2)), hips(i)];
-instructions(2,:) = [double(h.left_leg_joints(2)), hips(i)];
+instructions(1,:) = [double(h.right_leg_joints(3)), hips(i)];
+instructions(2,:) = [double(h.left_leg_joints(3)), hips(i)];
 
 instructions(3,:) = [double(h.right_leg_joints(4)), knees(i)];
 instructions(4,:) = [double(h.left_leg_joints(4)), knees(i)];
