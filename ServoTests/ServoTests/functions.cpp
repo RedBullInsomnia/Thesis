@@ -81,3 +81,60 @@ void PrintErrorCode()
 	if (dxl_get_rxpacket_error(ERRBIT_INSTRUCTION) == 1)
 		cout << "Instruction code error!" << endl;
 }
+
+int selectMode()
+{
+	int choice = 0;
+	while (choice <= 0 || choice >= 4)
+	{
+		cout << "Select the operation mode :" << endl;
+		cout << "1. Manual (enter target position)" << endl;
+		cout << "2. Torque test" << endl;
+		cout << "3. Rotation speed test" << endl;
+		cout << "Your choice (1, 2 or 3) ? ";
+		cin >> choice;
+	}
+	return choice;
+}
+
+void manualMode()
+{
+	int goal_pos, present_pos, comm_status, moving;
+
+	cout << "Goal position ? (-1 to quit)";
+	cin >> goal_pos;
+	if (goal_pos == -1)
+		return;
+
+	dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos);
+	do
+	{
+		// Read present position
+		present_pos = dxl_read_word(DEFAULT_ID, P_PRESENT_POSITION_L);
+		comm_status = dxl_get_result();
+		if (comm_status == COMM_RXSUCCESS)
+		{
+			cout << goal_pos << " " << present_pos << endl;
+			PrintErrorCode();
+		}
+		else
+		{
+			PrintCommStatus(comm_status);
+			break;
+		}
+
+		// Check moving done
+		moving = dxl_read_byte(DEFAULT_ID, P_MOVING);
+		comm_status = dxl_get_result();
+		if (comm_status == COMM_RXSUCCESS)
+		{
+			PrintErrorCode();
+		}
+		else
+		{
+			PrintCommStatus(comm_status);
+			break;
+		}
+
+	} while (moving == 1);
+}

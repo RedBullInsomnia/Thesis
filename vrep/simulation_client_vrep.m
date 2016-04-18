@@ -45,7 +45,7 @@ elbows_setpoints = [0, 0, 0, 0, 0];
 elbows = interp1(x, elbows_setpoints, xq, 'linear');
 
 % display points
-display = 1;
+display = 0;
 if display == 1
     figure
     subplot(5,1,1)
@@ -75,16 +75,17 @@ if display == 1
 end
 
 t = 0;
-i = 1;
-while true && t < 0.3
-    instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
+%i = 1;
+while true && t < 0.5
+    %instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
+    instructions = standup_prone(h, t);
     %COM(i,:) = getCOM(vrep, clientID);
     %isInsideSupportArea(vrep, clientID, COM(i,:), h)
     send_instructions(vrep, clientID, instructions);
     t = t + dt
-    if i < 6
-        i = i + 1;
-    end
+%     if i < 6
+%         i = i + 1;
+%     end
 end
 
 % if display == 1

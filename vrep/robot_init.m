@@ -11,28 +11,28 @@ handles.center = center;
 
 %% Retrieve servos' handles
 
-left_arm = [-1, -1];
-right_arm = [-1, -1];
-for i=1:2
-    [~, left_arm(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
-    [~, right_arm(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
-end
-
-left_leg = [-1, -1, -1, -1];
-right_leg = [-1, -1, -1, -1];
-for i=1:4
-    [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('left_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
-    [~, right_leg(i)] = vrep.simxGetObjectHandle(clientID,...
-        sprintf('right_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
-end
-
-handles.left_arm = left_arm;
-handles.right_arm = right_arm;
-handles.left_leg = left_leg;
-handles.right_leg = right_leg;
+% left_arm = [-1, -1];
+% right_arm = [-1, -1];
+% for i=1:2
+%     [~, left_arm(i)] = vrep.simxGetObjectHandle(clientID,...
+%         sprintf('left_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
+%     [~, right_arm(i)] = vrep.simxGetObjectHandle(clientID,...
+%         sprintf('right_arm_servo%d', i), vrep.simx_opmode_oneshot_wait);
+% end
+% 
+% left_leg = [-1, -1, -1, -1];
+% right_leg = [-1, -1, -1, -1];
+% for i=1:4
+%     [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
+%         sprintf('left_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
+%     [~, right_leg(i)] = vrep.simxGetObjectHandle(clientID,...
+%         sprintf('right_leg_servo%d', (i+1)), vrep.simx_opmode_oneshot_wait);
+% end
+% 
+% handles.left_arm = left_arm;
+% handles.right_arm = right_arm;
+% handles.left_leg = left_leg;
+% handles.right_leg = right_leg;
 
 %% Joints
 

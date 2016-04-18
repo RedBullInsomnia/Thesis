@@ -1,11 +1,8 @@
 In this chapter we discuss the choice of V-rep as the simulation tool for this project. We begin by explaining the basics of rigid body dynamics simulation, take a survey of some of the existing simulators and finally test some of them.
 
 \section{Simulation of rigid body dynamics}
+TO DO
 
-\section{Available simulators}
-The basis of the simulation is the ability to simulate the dynamics of the robot and the friction with the soil. So, something bare-bone as Matlab or bullet could be used, 
-
-\cite{blender_for_robotics}
 The list of physics simulating engines is quite long, but the most popular ones are, in no particular order :
 \begin{enumerate}
 \item Bullet
@@ -15,7 +12,6 @@ The list of physics simulating engines is quite long, but the most popular ones 
 \item PhysX
 \item Havok
 \end{enumerate}
-Bullet was chosen because while it does not distinguish itself when it comes to pure physical simulation \cite{engines_comparison}, a 3D modelling application called Blender is built atop of it, providing excellent tools for fast and easy robot modelisation. Blender also provides access to Bullet through a well document Python API.
 
 \begin{table}[htp]
 \center
@@ -36,9 +32,47 @@ PhysX & Proprietary & Maximal & Games & \\
 Havok & Proprietary & Maximal & Games & \\
 \bottomrule
 \end{tabularx}
-\caption{Features comparison}
+\caption{Features comparison\cite{engines_comparison}}
 \label{table:specs}
 \end{table}
+
+\section{Available simulators}
+An integrated simulation tool is preferred over a bare-bones physics engine because :
+\begin{itemize}
+\item time would be lost on creating 3D visualization
+\item time would be lost on writing code to import model
+\item time would be lost on debugging
+\end{itemize}
+and all that before the actual work could begin.
+
+\textbf{Blender\cite{blender_for_robotics}
+} : \begin{itemize}
+\item Uses the Bullet engine
+\item Scripting via Python, remote control possible through socket
+\item Modelling tool readily available
+\item Comment : Hard to use because of obscure simulation options and difficulty to correctly set inertias
+\end{itemize}
+
+\textbf{Gazebo} : \begin{itemize}
+\item Can use Bullet, Newton or ODE.
+\item Scripting via C++
+\item Uses URDF format for models
+\item Comment : Hard to use because model must be in URDF format, which no CAD excepted 3dworks exports to. Furthermore, compiled language takes longer to test.
+\end{itemize}
+
+\textbf{V-Rep}: \begin{itemize}
+\item Can use Bullet, Newton or ODE.
+\item Internal scripting in LUA
+\item Can import 3D collada models.
+\item Comment : Best tool so far because model can be imported and the inertias are easy to control, simulation options as well.
+\end{itemize}
+
+\textbf{Matlab}: \begin{itemize}
+\item Analytical modelling
+\item Mathcode
+\item No visualization
+\item Comment : Not adapted because tedious modelling and no visualization and hard to handle friction and difficult to handle other objects.
+\end{itemize}
 
 \begin{table}[htp]
 \center
@@ -61,9 +95,9 @@ Matlab & Proprietary & None & None & Mathematical\\
 \label{table:simulators_comp}
 \end{table}
 
-\section{Tested simulators}
-Blender is originally a 3D modelling and rendering software. It uses the Bullet physics engine to simulate realistic physics in animations. It has a Python interface which can be used to script a simulation.
-
-V-rep integrates a simulator that can run on different physics engines and supports remote operation. 
-
 \section{Choice}
+Out of Gazebo, V-Rep and Blender, V-Rep is chosen as the best tool because\begin{itemize}
+\item Gives the choice between 3 engines, something blender cannot do
+\item Makes it easier than Gazebo to create models, because Gazebo uses the URDF format
+\item Gives better access than blender to the physical options of the simulation (intertias, timestep of engine)
+\end{itemize}

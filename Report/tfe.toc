@@ -6,9 +6,8 @@
 \contentsline {section}{\numberline {1.2}Scope}{6}{section.1.2}
 \contentsline {chapter}{\numberline {2}Simulator}{7}{chapter.2}
 \contentsline {section}{\numberline {2.1}Simulation of rigid body dynamics}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Available simulators}{7}{section.2.2}
-\contentsline {section}{\numberline {2.3}Tested simulators}{7}{section.2.3}
-\contentsline {section}{\numberline {2.4}Choice}{9}{section.2.4}
+\contentsline {section}{\numberline {2.2}Available simulators}{8}{section.2.2}
+\contentsline {section}{\numberline {2.3}Choice}{8}{section.2.3}
 \contentsline {chapter}{\numberline {3}Modelling tools}{10}{chapter.3}
 \contentsline {section}{\numberline {3.1}Blender}{10}{section.3.1}
 \contentsline {section}{\numberline {3.2}V-REP}{10}{section.3.2}
@@ -20,11 +19,11 @@
 \contentsline {section}{\numberline {4.1}Interface (api)}{12}{section.4.1}
 \contentsline {section}{\numberline {4.2}First simple simulations}{12}{section.4.2}
 \contentsline {section}{\numberline {4.3}Robot design}{12}{section.4.3}
-\contentsline {section}{\numberline {4.4}Application ! stand up routines}{12}{section.4.4}
+\contentsline {section}{\numberline {4.4}Application : stand up routines}{12}{section.4.4}
 \contentsline {chapter}{\numberline {5}Physical validation}{13}{chapter.5}
-\contentsline {section}{\numberline {5.1}Mode exp\IeC {\'e}rimental}{13}{section.5.1}
+\contentsline {section}{\numberline {5.1}Experimental set-up}{13}{section.5.1}
 \contentsline {section}{\numberline {5.2}Experiments}{13}{section.5.2}
 \contentsline {section}{\numberline {5.3}Servo tuning}{13}{section.5.3}
 \contentsline {section}{\numberline {5.4}Results}{13}{section.5.4}
 \contentsline {chapter}{\numberline {6}Conclusion}{14}{chapter.6}
-\contentsline {chapter}{Bibliography}{15}{chapter*.4}
+\contentsline {chapter}{Bibliography}{15}{chapter*.8}

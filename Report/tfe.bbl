@@ -5,9 +5,25 @@ Herman Bruyninckx.
 \newblock Blender for robotics and robotics for blender.
 \newblock {\em Dept. of Mechanical Engineering, KU Leuven, Belgium}, 2004.
 
+\bibitem{mx_28_manual}
+Dynamixel.
+\newblock Robotis e-manual v1.27.00, 2016.
+\newblock [Online; accessed 18-April-2016].
+
 \bibitem{engines_comparison}
 Tom Erez, Yuval Tassa, and Emanuel Todorov.
 \newblock Simulation tools for model-based robotics: Comparison of bullet,
   havok, mujoco, ode and physx.
+
+\bibitem{vrep_manual}
+Coppelia Robotics.
+\newblock V-rep user manual 3.3.0, 2016.
+\newblock [Online; accessed 18-April-2016].
+
+\bibitem{standing_up_routines}
+J{\"o}rg St{\"u}ckler, Johannes Schwenk, and Sven Behnke.
+\newblock Getting back on two feet: Reliable standing-up routines for a
+  humanoid robot.
+\newblock In {\em IAS}, pages 676--685, 2006.
 
 \end{thebibliography}

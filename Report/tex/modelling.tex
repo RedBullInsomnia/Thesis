@@ -22,16 +22,16 @@ The model is finalized by :
 
 \begin{table}[htp]
 \center
-\begin{tabularx}{\textwidth}{@{} X X l @{}}
+\begin{tabularx}{\textwidth}{@{} X X X l @{}}
 \toprule
-\textbf{Module} & \textbf{Weight [g]} & \textbf{Dimensions [mm x mm x mm]}\\ 
+\textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$g/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
 \midrule
-Odroid C-2 & 40 & 85.0 x 56.0\\
-Li-Po battery & 188 & 103.0 x 33.0 x 34.0\\
-Mx-28R & 72 & 35.6 x 50.6 x 35.5\\
-LI-USB30-M021C & 22 & 26.0 x 26.0 x 14.7\\
-Frame Fr-07 & & \\
-Frame Fr-101-H3 & 7 & \\
+Odroid C-2 & 40 &  & 85.0 x 56.0\\
+Li-Po battery & 188 & 2000 & 103.0 x 33.0 x 34.0\\
+Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
+LI-USB30-M021C & 22 & 2200 & 26.0 x 26.0 x 14.7\\
+Frame Fr-07 & & 1200 & \\
+Frame Fr-101-H3 & 7 & 1200 & \\
 \bottomrule
 \end{tabularx}
 \caption{Weights and dimensions of the pieces of the robot}
@@ -49,6 +49,9 @@ Prismatic joint : 1DOF linear.
 Revolute joint : 1DOF angular.
 
 \subsection{Sensors (accel, cog)}
-The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface.
+The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface\cite{vrep_manual}.
+
+
 
 \subsection{Springs}
+Springs are simulated by prismatic and spherical joints.
