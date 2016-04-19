@@ -6,14 +6,21 @@ The set-up consists in :
 \end{itemize}
 
 \section{Experiments}
-The first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. 
+The first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. The setup is represented on \cref{fig:exp1}.
 
-At $12V$, the torque\cite{mx_28_manual} of the servo is supposedly $2.5N.m$. With a hinge of length $2cm$ the servo should be able to handle $12.5Kg$ since 
+At $12V$, the maximal torque\cite{mx_28_manual} of the servo is supposedly $2.5N.m$. To test this, a weight of $2kg$ is hanged at $12.5cm$ from the center of the servo, because since 
 \begin{align*}
-2.5 &= x \cdot 0.02\\
-x &= 125 N\\
-&= 12.74 kg
+2.5 - 9.81 \cdot (0.007 \cdot 0.01 + 0.016 \cdot 0.0725) &= x \cdot 0.125\\
+x &= 20 N\\
+&= 2.03 kg
 \end{align*}
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.5\textwidth]{figures/exp1}
+    \caption[Experimental setup for torque testing]{Experimental setup for torque testing : A weight of $2kg$ is suspended at $12.5cm$ from the servo, resulting in a torque of $2.5Nm$. The goal is to test whether the servo is able to move the weight upwards from the depicted initial situation.}
+    \label{fig:exp1}
+\end{figure}
 
 \section{Servo tuning}
 

@@ -25,5 +25,5 @@
 \contentsline {section}{\numberline {5.2}Experiments}{13}{section.5.2}
 \contentsline {section}{\numberline {5.3}Servo tuning}{13}{section.5.3}
 \contentsline {section}{\numberline {5.4}Results}{13}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusion}{14}{chapter.6}
-\contentsline {chapter}{Bibliography}{15}{chapter*.8}
+\contentsline {chapter}{\numberline {6}Conclusion}{15}{chapter.6}
+\contentsline {chapter}{Bibliography}{16}{chapter*.9}
