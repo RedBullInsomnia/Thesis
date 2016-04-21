@@ -15,15 +15,15 @@
 \contentsline {subsection}{\numberline {3.2.2}Joints}{6}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Sensors (accel, cog)}{6}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Springs}{6}{subsection.3.2.4}
-\contentsline {chapter}{\numberline {4}Simulation}{7}{chapter.4}
-\contentsline {section}{\numberline {4.1}Interface (api)}{7}{section.4.1}
-\contentsline {section}{\numberline {4.2}First simple simulations}{7}{section.4.2}
-\contentsline {section}{\numberline {4.3}Robot design}{7}{section.4.3}
-\contentsline {section}{\numberline {4.4}Application : stand up routines}{7}{section.4.4}
-\contentsline {chapter}{\numberline {5}Physical validation}{8}{chapter.5}
-\contentsline {section}{\numberline {5.1}Experimental set-up}{8}{section.5.1}
-\contentsline {section}{\numberline {5.2}Experiments}{8}{section.5.2}
-\contentsline {section}{\numberline {5.3}Servo tuning}{9}{section.5.3}
-\contentsline {section}{\numberline {5.4}Results}{9}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusion}{10}{chapter.6}
-\contentsline {chapter}{Bibliography}{11}{chapter*.13}
+\contentsline {chapter}{\numberline {4}Simulation}{8}{chapter.4}
+\contentsline {section}{\numberline {4.1}Interface (api)}{8}{section.4.1}
+\contentsline {section}{\numberline {4.2}First simple simulations}{8}{section.4.2}
+\contentsline {section}{\numberline {4.3}Robot design}{8}{section.4.3}
+\contentsline {section}{\numberline {4.4}Application : stand up routines}{9}{section.4.4}
+\contentsline {chapter}{\numberline {5}Physical validation}{10}{chapter.5}
+\contentsline {section}{\numberline {5.1}Experimental set-up}{10}{section.5.1}
+\contentsline {section}{\numberline {5.2}Experiments}{10}{section.5.2}
+\contentsline {section}{\numberline {5.3}Servo tuning}{11}{section.5.3}
+\contentsline {section}{\numberline {5.4}Results}{11}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion}{12}{chapter.6}
+\contentsline {chapter}{Bibliography}{13}{chapter*.14}

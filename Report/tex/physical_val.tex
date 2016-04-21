@@ -1,21 +1,19 @@
+In this chapter experiments with real servos will be conducted in order to, firstly, tune the parameters of the simulation (servo's characteristics) and, secondly, verify that the simulation correctly predicts the behaviour of a real-life configuration.
+
 \section{Experimental set-up}
-The set-up consists in :
-\begin{itemize}
-\item A camera that films the movements of a servo configuration.
-\item A simulation of that servo configuration in V-Rep.
-\end{itemize}
+The set-up is explained on \cref{fig:exp_setup}. In later experiments a camera will be used to film the motion of the servos and compare it to the results of the simulation that is supposed to predict it.
 
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.6\textwidth]{figures/exp_setup}
-\caption{Experimental setup}
+\caption{Experimental setup : The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device. It converts an USB port into a serial port.}
 \label{fig:exp_setup}
 \end{figure}
 
 \section{Experiments}
-The first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. The setup is represented on \cref{fig:exp1}.
+The purpose of the first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. The setup is represented on \cref{fig:exp1}.
 
-At $12V$, the maximal torque\cite{mx_28_manual} of the servo is supposedly $2.5N.m$. To test this, a weight of $2kg$ is hanged at $12.5cm$ from the center of the servo, because since 
+At $12V$, the maximal torque of the servo is supposedly $2.5N.m$, as claimed by \cite{mx_28_manual}. To test this, a weight of $2kg$ is hanged at $12.5cm$ from the center of the servo, because since 
 \begin{align*}
 2.5 - 9.81 \cdot (0.007 \cdot 0.01 + 0.016 \cdot 0.0725) &= x \cdot 0.125\\
 x &= 20 N\\
@@ -29,7 +27,7 @@ x &= 20 N\\
     \label{fig:exp1}
 \end{figure}
 
-Results
+The experimental results are compared to the claims of \cite{mx_28_manual} in \cref{table:exp1_results}.
 \begin{table}[htp]
 \center
 \begin{tabularx}{\textwidth}{@{}l X X X @{}}

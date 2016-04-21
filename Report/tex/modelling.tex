@@ -8,7 +8,7 @@ Blender is used to :
 \item place these servos, hinges, cameras and other elements
 \item place position markers for the joints, springs to be added in V-Rep.
 \end{itemize}
-An example of the state the model is in after this stage is present on \cref{fig:modelling_blender}. Finally, the model exported in the COLLADA format.
+An example of the state the model is in after this stage is present on \cref{fig:modelling_blender}. When done with this, the model exported in the COLLADA format.
 
 \begin{figure}[htp]
 \center
@@ -42,7 +42,7 @@ Frame Fr-07 & & 1200 & \\
 Frame Fr-101-H3 & 7 & 1200 & \\
 \bottomrule
 \end{tabularx}
-\caption{Weights and dimensions of the pieces of the robot}
+\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
 \label{table:weights}
 \end{table}
 
@@ -59,7 +59,13 @@ Revolute joint : 1DOF angular.
 \subsection{Sensors (accel, cog)}
 The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface\cite{vrep_manual}.
 
-
-
 \subsection{Springs}
 Springs are simulated by prismatic and spherical joints.
+
+An example of what the model looks like at the end of this process is visible on \cref{fig:modelling_vrep}.
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.6\textwidth]{figures/modelling_vrep}
+    \caption{}
+    \label{fig:modelling_vrep}
+\end{figure}
