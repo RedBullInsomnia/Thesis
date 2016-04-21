@@ -2,7 +2,7 @@
 \BOOKMARK [0][-]{chapter*.3}{List of Figures}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
 \BOOKMARK [1][-]{section.1.1}{Context}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.2}{Scope}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.2}{Specifications}{chapter.1}% 5
 \BOOKMARK [0][-]{chapter.2}{Simulator}{}% 6
 \BOOKMARK [1][-]{section.2.1}{Simulation of rigid body dynamics}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.2}{Available simulators}{chapter.2}% 8
@@ -25,4 +25,4 @@
 \BOOKMARK [1][-]{section.5.3}{Servo tuning}{chapter.5}% 25
 \BOOKMARK [1][-]{section.5.4}{Results}{chapter.5}% 26
 \BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 27
-\BOOKMARK [0][-]{chapter*.9}{Bibliography}{}% 28
+\BOOKMARK [0][-]{chapter*.13}{Bibliography}{}% 28

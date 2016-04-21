@@ -101,7 +101,7 @@ void manualMode()
 {
 	int goal_pos, present_pos, comm_status, moving;
 
-	cout << "Goal position ? (-1 to quit)";
+	cout << "Goal position [0, 4095] ? (-1 to quit)";
 	cin >> goal_pos;
 	if (goal_pos == -1)
 		return;

@@ -34,6 +34,7 @@ int main()
 			go = 0;
 			break;
 		default:
+			go = 3;
 			break;
 		}
 	}

@@ -2,22 +2,30 @@ This chapter covers the tools used in order to create a model of the robot, from
 
 \section{Blender}
 The first stage of the modelling is done in Blender which is a lot more suited to this kind of work than V-Rep. 
-Blender is used to do the following :
+Blender is used to :
 \begin{itemize}
-\item place the servos, hinges and other elements in place.
-\item simplify the servos, hinges into simple convex shapes with a low vertex count.
-\item place position markers for the joints to be placed in V-Rep.
+\item simplify the servos, hinges into simple convex shapes that behave better in a physical simulation.
+\item place these servos, hinges, cameras and other elements
+\item place position markers for the joints, springs to be added in V-Rep.
 \end{itemize}
+An example of the state the model is in after this stage is present on \cref{fig:modelling_blender}. Finally, the model exported in the COLLADA format.
 
-The model is finally exported in the COLLADA format.
+\begin{figure}[htp]
+\center
+\includegraphics[width=0.6\textwidth]{figures/modelling_blender}
+\caption[Front view of the robot's model at the end of the modelling in Blender]{Front view of the robot's model at the end of the modelling in Blender. The grey boxes represent the servos, the red pieces are standard Dynamixel frames, the blue are non-standard, the green cylinders are the hands.}
+\label{fig:modelling_blender}
+\end{figure}
 
 \section{V-REP}
 The model is finalized by :
 \begin{itemize}
 \item defining the mass and inertia of each piece(compiled in \cref{table:weights}) and enabling them for dynamic simulation.
-\item adding joints between servos. For 2DOF joints, hinges are used as intermediates.
+\item adding joints between servos. For 2DOF joints, frame are used as intermediates.
+\item adding vision sensors to simulate cameras.
 \item adding scripts to simulate sensors (COG, accelerometers).
 \item adding springs on the legs through the use of prismatic and spheric joints.
+\item
 \end{itemize}
 
 \begin{table}[htp]

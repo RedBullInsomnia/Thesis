@@ -52,16 +52,14 @@
 
 \input{tex/titlepage.tex}
 
-\input{tex/abstract.tex}
-
-\chapter*{Acknowledgements}
-\input{tex/thanks.tex}
-
 \tableofcontents
 
 \listoffigures
 
 %% Intro
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
 \chapter{Introduction}
 \input{tex/intro.tex}
 
@@ -80,7 +78,7 @@
 
 \chapter{Conclusion}
 
-\bibliographystyle{plain}
-\bibliography{bib} 
+\bibliographystyle{alpha}
+\bibliography{bib}
 
 \end{document}
