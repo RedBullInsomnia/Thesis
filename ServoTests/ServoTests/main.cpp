@@ -12,31 +12,43 @@ using namespace std;
 int main()
 {
 	// Open device
-	if (initDevice(DEFAULT_PORTNUM, DEFAULT_BAUDNUM) == 0)
+    if (initDevice() == 0)
 		return 0;
+    int go = 1;
+    
+    // Limit speed
+    int speed = 0;
+    cout << "What max speed do you want to set ?(-1 to quit)" << endl;
+    cin >> speed;
+    if (-1 == speed)
+        go = 0;
 
-	// Choose mode
-	int mode = selectMode();
-
-	int go = 1;
+    int order = 0;
 	while (go == 1)
 	{
-		cout << "Press any key to continue!(press ESC to quit)" << endl;
-		if (_getch() == 0x1b)
-			break;
-
-		// Write goal position
-		switch (mode) {
-		case 1:
-			manualMode();
-			break;
-		case 2:
-			go = 0;
-			break;
-		default:
-			go = 3;
-			break;
-		}
+        // Write goal position
+        cout << "What do you want to do ? (-1 to quit, -2 for help)" << endl;
+        cin >> order;
+        if (-1 == order)
+            break;
+        else if (-2 == order)
+        {
+            cout << endl;
+            cout << "Enter -1 to quit" << endl;
+            cout << "Enter 1 for another test cycle" << endl;
+            cout << "Enter 2 to change the speed limit " << endl;
+        }
+        else if (1 == order)
+        {
+            testCycleMode();
+        }
+        else if (2 == order)
+        {
+            cout << "What limit do you want to set ?" << endl;
+            cin >> order;
+            setSpeedLimit(order);
+            cout << "Speed limit set to " << order << endl;
+        }
 	}
 
 	// Close device

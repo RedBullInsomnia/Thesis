@@ -6,9 +6,9 @@
 using namespace std;
 
 //Init device
-int initDevice(int PORTNUM, int BAUDNUM)
+int initDevice()
 {
-	if (dxl_initialize(PORTNUM, BAUDNUM) == 0)
+	if (dxl_initialize(DEFAULT_PORTNUM, DEFAULT_BAUDNUM) == 0)
 	{
 		cout << "Failed to open USB2Dynamixel!" << endl;
 		cout << "Press any key to terminate..." << endl;
@@ -137,4 +137,70 @@ void manualMode()
 		}
 
 	} while (moving == 1);
+}
+
+void setSpeedLimit(int speed_limit)
+{
+    if (speed_limit > 1023)
+        speed_limit = 1023;
+    else if (speed_limit < 0)
+        speed_limit = 0;
+
+    dxl_write_word(DEFAULT_ID, P_MOVING_SPEED_L, speed_limit);
+}
+
+void resetServo()
+{
+    int reset_torque = 1023;//max value
+    dxl_write_word(DEFAULT_ID, P_TORQUE_LIMIT_L, reset_torque);
+    dxl_write_byte(DEFAULT_ID, P_LED, 0);
+    dxl_write_byte(DEFAULT_ID, P_ALARM_LED, 0);
+    dxl_write_byte(DEFAULT_ID, P_ALARM_SHUTDOWN, 0);
+}
+
+void testCycleMode()
+{
+    int goal_pos[] = { 1600, 2000 };
+    int present_pos, comm_status, moving, index = 0;
+
+    dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos[index]);
+    do
+    {
+        // Read present position
+        present_pos = dxl_read_word(DEFAULT_ID, P_PRESENT_POSITION_L);
+        comm_status = dxl_get_result();
+        if (comm_status == COMM_RXSUCCESS)
+        {
+            cout << goal_pos << " " << present_pos << endl;
+            PrintErrorCode();
+        }
+        else
+        {
+            PrintCommStatus(comm_status);
+            break;
+        }
+
+        // Check moving done
+        moving = dxl_read_byte(DEFAULT_ID, P_MOVING);
+        comm_status = dxl_get_result();
+        if (comm_status == COMM_RXSUCCESS)
+        {
+            if (moving == 0)
+            {
+                // Change goal position
+                if (index == 0)
+                    index = 1;
+                else
+                    index = 0;
+            }
+
+            PrintErrorCode();
+        }
+        else
+        {
+            PrintCommStatus(comm_status);
+            break;
+        }
+
+    } while (moving == 1);
 }
