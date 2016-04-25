@@ -1,15 +1,41 @@
-\section{Interface (api)}
+In this section we will explain how to use the simulator and how it was used to influence the design of the robot. Finally some simulations will be shown.
+
+\section{Simulation setup}
+The architecture of the system is explained on \cref{fig:remoteApi}. We choose to operate in the synchronous operating mode : before V-REP simulates a timestep it waits for a trigger, allowing us to precisely control the robot.
 
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.6\textwidth]{figures/remoteApiSynchronous}
-\caption{Synchronous operation mode explanation}
+\caption[Simulation setup]{Explanation of the architecture of the simulation. The simulation runs on two threads : the simulation and the server thread. The server threads can receive orders from a client thread which is controlled by a custom application of our own.}
 \label{fig:remoteApi}
 \end{figure}
 
-\section{First simple simulations}
+\section{Applications}
+\subsection{Static stability}
+\begin{table}[htp]
+\center
+\begin{tabularx}{\textwidth}{@{} X X X l @{}}
+\toprule
+\textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
+\midrule
+Odroid C-2 & 40 &  & 85.0 x 56.0 x 10.0\\
+Li-Po battery & 188 & 2304 & 103.0 x 33.0 x 24.0\\
+Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
+LI-USB30-M021C & 22 & 2200 & 26.0 x 26.0 x 14.7\\
+Frame Fr-07 & & 1200 & \\
+Frame Fr-101-H3 & 7 & 1200 & \\
+\bottomrule
+\end{tabularx}
+\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
+\label{table:weights}
+\end{table}
+\subsection{Standing up routines}
+This section is heavily inspired by \cite{Stuckler06}
 
-\section{Robot design}
+\subsection{Walking}
+
+\section{Influence on robot's design}
+The simulator helped shape the robot through simulations that unveiled serious design problems (inability to stand after a fall, inability to walk).
 
 The final dimensions of the robot respect the rules of the contest:
 \begin{itemize}
@@ -18,7 +44,4 @@ The final dimensions of the robot respect the rules of the contest:
 \item Height of legs : $cm$
 \item Height max is $< 1.5 \times 61.3$.
 \item Foot area is $ cm^2$.
-\end{itemize} 
-
-\section{Application : stand up routines}
-This section is heavily inspired by \cite{Stuckler06}
+\end{itemize}

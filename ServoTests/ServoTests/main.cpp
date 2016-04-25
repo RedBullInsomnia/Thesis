@@ -19,11 +19,13 @@ int main()
     // Limit speed
     int speed = 0;
     cout << "What max speed do you want to set ?(-1 to quit)" << endl;
+	cout << "40 seems to be a good value, 0 for no limit" << endl;
     cin >> speed;
     if (-1 == speed)
         go = 0;
 
     int order = 0;
+	int index = 0;
 	while (go == 1)
 	{
         // Write goal position
@@ -40,7 +42,8 @@ int main()
         }
         else if (1 == order)
         {
-            testCycleMode();
+            testCycleMode(index);
+			index = (index + 1) % 2;
         }
         else if (2 == order)
         {

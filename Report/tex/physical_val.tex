@@ -6,11 +6,11 @@ The set-up is explained on \cref{fig:exp_setup}. In later experiments a camera w
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.6\textwidth]{figures/exp_setup}
-\caption{Experimental setup : The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device. It converts an USB port into a serial port.}
+\caption[Experimental setup]{Experimental setup : The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device. It converts an USB port into a serial port.}
 \label{fig:exp_setup}
 \end{figure}
 
-\section{Experiments}
+\section{Experiment 1}
 The purpose of the first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. The setup is represented on \cref{fig:exp1}.
 
 At $12V$, the maximal torque of the servo is supposedly $2.5N.m$, as claimed by \cite{mx_28_manual}. To test this, a weight of $2kg$ is hanged at $12.5cm$ from the center of the servo, because since 
@@ -23,7 +23,7 @@ x &= 20 N\\
 \begin{figure}[htp]
 \center
     \includegraphics[width = 0.5\textwidth]{figures/exp1}
-    \caption[Experimental setup for torque testing]{Experimental setup for torque testing : A weight of $2kg$ is suspended at $12.5cm$ from the servo, resulting in a torque of $2.5Nm$. The goal is to test whether the servo is able to move the weight upwards from the depicted initial situation.}
+    \caption[Experimental setup for torque testing]{Experimental setup for torque testing. A weight $w$ of is suspended at a distance $d$ from the servo, resulting in a applied torque of $w \times g \times d$. The goal consists in finding the weight $w$ for which the servo is unable to lift the arm.}
     \label{fig:exp1}
 \end{figure}
 
@@ -42,6 +42,6 @@ The experimental results are compared to the claims of \cite{mx_28_manual} in \c
 \label{table:exp1_results}
 \end{table}
 
-\section{Servo tuning}
+\section{Experiment 2}
 
-\section{Results}
+\section{Conclusion}

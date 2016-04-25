@@ -158,10 +158,10 @@ void resetServo()
     dxl_write_byte(DEFAULT_ID, P_ALARM_SHUTDOWN, 0);
 }
 
-void testCycleMode()
+void testCycleMode(int index)
 {
-    int goal_pos[] = { 1600, 2000 };
-    int present_pos, comm_status, moving, index = 0;
+    int goal_pos[2] = { 1600, 2000 };
+	int present_pos, comm_status, moving;
 
     dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos[index]);
     do
@@ -171,7 +171,7 @@ void testCycleMode()
         comm_status = dxl_get_result();
         if (comm_status == COMM_RXSUCCESS)
         {
-            cout << goal_pos << " " << present_pos << endl;
+            cout << goal_pos[index] << " " << (int)present_pos << endl;
             PrintErrorCode();
         }
         else
@@ -188,8 +188,11 @@ void testCycleMode()
             if (moving == 0)
             {
                 // Change goal position
-                if (index == 0)
-                    index = 1;
+				if (index == 0)
+				{
+					index = 1;
+					//moving = 1;
+				}
                 else
                     index = 0;
             }

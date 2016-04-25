@@ -30,7 +30,7 @@ void PrintErrorCode();
 int selectMode();
 
 void manualMode();
-void testCycleMode();
+void testCycleMode(int index);
 
 void setSpeedLimit(int speed_limit);
 

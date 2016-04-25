@@ -49,20 +49,20 @@ and all that before the actual work could begin.
 } : \begin{itemize}
 \item Uses the Bullet engine
 \item Scripting via Python, remote control possible through socket
-\item Modelling tool readily available
-\item Comment : Hard to use because of obscure simulation options and difficulty to correctly set inertias
+\item Very complete modelling tool, in a class of its own.
+\item Comment : Hard to use because of obscure simulation options and difficulties to correctly set inertias
 \end{itemize}
 
 \textbf{Gazebo} : \begin{itemize}
 \item Can use Bullet, Simbody, DART or ODE.
 \item Scripting via C++
 \item Uses SDF format for models.
-\item Comment : Hard to use because model must be in URDF format, which no CAD excepted 3dworks exports to. Furthermore, compiled language takes longer to test.
+\item Comment : Hard to use because model must be in SDF format, which no CAD excepted 3dworks exports to. Furthermore, compiled language takes longer to test.
 \end{itemize}
 
 \textbf{V-Rep}: \begin{itemize}
 \item Can use Bullet, Newton or ODE.
-\item Internal scripting in LUA
+\item Internal scripting in LUA, provides remote API class.
 \item Can import 3D collada models.
 \item Comment : Best tool so far because model can be imported and the inertias are easy to control, simulation options as well.
 \end{itemize}
@@ -91,7 +91,7 @@ Webots & Proprietary & ODE & None & SDF format\\
 Matlab & Proprietary & None & None & Mathematical\\
 \bottomrule
 \end{tabularx}
-\caption{Comparison of simulators }
+\caption{Comparison of simulators}
 \label{table:simulators_comp}
 \end{table}
 
@@ -100,4 +100,9 @@ Out of Gazebo, V-Rep and Blender, V-Rep is chosen as the best tool because\begin
 \item Gives the choice between 3 engines, something blender cannot do
 \item Makes it easier than Gazebo to create models, because Gazebo uses the URDF format
 \item Gives better access than blender to the physical options of the simulation (intertias, timestep of engine)
+\item It is multi-platform. 
 \end{itemize}
+
+The physics engine used is Newton Dynamics because simple tests showed it to be the most stable with a high number of joints, with the exception of Vortex but it requires a license to run more than $10s$.
+
+While Blender is not used as the primary simulation tool, it is used in the early phases of the modelling because it is what it does best. More on it in the next chapter. 

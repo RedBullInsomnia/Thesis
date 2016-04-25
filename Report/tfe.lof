@@ -1,13 +1,14 @@
 \select@language {english}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Two teams of Nao robots playing against each other}}{1}{figure.caption.4}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Architecture of the simulation}}{2}{figure.caption.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Front view of the robot's model at the end of the modelling in Blender}}{5}{figure.caption.7}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \relax }}{7}{figure.caption.9}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Front view of the robot's model at the end of the modelling in Blender}}{6}{figure.caption.8}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces View of the robot's model at the end of the modelling in V-REP}}{8}{figure.caption.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Synchronous operation mode explanation\relax }}{8}{figure.caption.10}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Experimental setup}}{9}{figure.caption.10}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Experimental setup for torque testing}}{10}{figure.caption.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Experimental setup : The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device. It converts an USB port into a serial port.\relax }}{10}{figure.caption.11}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Experimental setup for torque testing}}{11}{figure.caption.12}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulation setup}}{11}{figure.caption.13}
 \addvspace {10\p@ }
