@@ -1,4 +1,10 @@
-\begin{thebibliography}{Dyn16}
+\begin{thebibliography}{BET14}
+
+\bibitem[BET14]{bender2014interactive}
+Jan Bender, Kenny Erleben, and Jeff Trinkle.
+\newblock Interactive simulation of rigid body dynamics in computer graphics.
+\newblock In {\em Computer Graphics Forum}, volume~33, pages 246--270. Wiley
+  Online Library, 2014.
 
 \bibitem[Bru04]{Bruyninckx04}
 Herman Bruyninckx.

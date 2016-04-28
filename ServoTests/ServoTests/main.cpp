@@ -15,14 +15,16 @@ int main()
     if (initDevice() == 0)
 		return 0;
     int go = 1;
-    
+
     // Limit speed
     int speed = 0;
     cout << "What max speed do you want to set ?(-1 to quit)" << endl;
-	cout << "40 seems to be a good value, 0 for no limit" << endl;
+    cout << "40 seems to be a good value, 0 for no limit" << endl;
     cin >> speed;
-    if (-1 == speed)
-        go = 0;
+	  if (-1 == speed)
+		  go = 0;
+      else
+		setSpeedLimit(speed);
 
     int order = 0;
 	int index = 0;
@@ -39,6 +41,7 @@ int main()
             cout << "Enter -1 to quit" << endl;
             cout << "Enter 1 for another test cycle" << endl;
             cout << "Enter 2 to change the speed limit " << endl;
+			cout << "Enter 3 to reset the servo after an overload" << endl;
         }
         else if (1 == order)
         {
@@ -52,6 +55,11 @@ int main()
             setSpeedLimit(order);
             cout << "Speed limit set to " << order << endl;
         }
+		else if (3 == order)
+		{
+			cout << "Resetting servo" << endl;
+			resetServo();
+		}
 	}
 
 	// Close device

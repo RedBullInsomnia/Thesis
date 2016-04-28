@@ -13,13 +13,6 @@ The set-up is explained on \cref{fig:exp_setup}. In later experiments a camera w
 \section{Experiment 1}
 The purpose of the first experiment is to test the torque : to that end, a frame is fixed onto a single servo and weighted. The setup is represented on \cref{fig:exp1}.
 
-At $12V$, the maximal torque of the servo is supposedly $2.5N.m$, as claimed by \cite{mx_28_manual}. To test this, a weight of $2kg$ is hanged at $12.5cm$ from the center of the servo, because since 
-\begin{align*}
-2.5 - 9.81 \cdot (0.007 \cdot 0.01 + 0.016 \cdot 0.0725) &= x \cdot 0.125\\
-x &= 20 N\\
-&= 2.03 kg
-\end{align*}
-
 \begin{figure}[htp]
 \center
     \includegraphics[width = 0.5\textwidth]{figures/exp1}
@@ -27,7 +20,7 @@ x &= 20 N\\
     \label{fig:exp1}
 \end{figure}
 
-The experimental results are compared to the claims of \cite{mx_28_manual} in \cref{table:exp1_results}.
+In our case, $d$ was equal to $22.5cm$ and we could reach a weight $w$ of $740g$ at $1.84V$. This equals to a torque of $1.64Ncm$. The complete results are listed in \cref{table:exp1_results}.
 \begin{table}[htp]
 \center
 \begin{tabularx}{\textwidth}{@{}l X X X @{}}
@@ -35,13 +28,14 @@ The experimental results are compared to the claims of \cite{mx_28_manual} in \c
 & \textbf{Stall torque @11.1V $[N.m]$} & \textbf{Stall torque @12V $[N.m]$} & \textbf{Stall torque @14.8V $[N.m]$}\\ 
 \midrule
 \textbf{Theoretical} & 2.1 & 2.5 & 3.1\\ 
-\textbf{Experimental} &  &  & \\ 
+\textbf{Experimental} &  &  & 1.64\\ 
 \bottomrule
 \end{tabularx}
-\caption{Experimental stall torques at different tested voltages}
+\caption[Results of experiment 1]{Experimental stall torques at different tested voltages. Theoretical values taken from \cite{mx_28_manual}}.
 \label{table:exp1_results}
 \end{table}
 
 \section{Experiment 2}
+
 
 \section{Conclusion}
