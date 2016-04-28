@@ -1,6 +1,13 @@
 In this section we will explain how to use the simulator and how it was used to influence the design of the robot. Finally some simulations will be shown.
 
 \section{Simulation setup}
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.6\textwidth]{figures/simulation_principles}
+    \caption{Schematic view of the simulation system. V-Rep handles solely the simulation of the robot and the control is established through a socket link with an external application which in our case is a MATLAB script.}
+    \label{fig:simulation_principles}
+\end{figure}
+
 The architecture of the system is explained on \cref{fig:remoteApi}. We choose to operate in the synchronous operating mode : before V-REP simulates a timestep it waits for a trigger, allowing us to precisely control the robot.
 
 \begin{figure}[htp]

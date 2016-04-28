@@ -18,6 +18,7 @@ cleanupObj = onCleanup(@() cleanup_vrep(vrep, clientID));
 
 % This will only work in "continuous remote API server service"
 % See http://www.v-rep.eu/helpFiles/en/remoteApiServerSide.htm
+vrep.simxSynchronous(clientID, true);
 vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 
 % retrieve handles to servos, joints
@@ -76,7 +77,7 @@ end
 
 t = 0;
 %i = 1;
-while true && t < 0.5
+while true && t < 5
     %instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
     instructions = standup_prone(h, t);
     %COM(i,:) = getCOM(vrep, clientID);

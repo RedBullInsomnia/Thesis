@@ -1,14 +1,15 @@
 \select@language {english}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Two teams of Nao robots playing against each other}}{1}{figure.caption.4}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Architecture of the simulation}}{2}{figure.caption.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Front view of the robot's model at the end of the modelling in Blender}}{6}{figure.caption.8}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces View of the robot's model at the end of the modelling in V-REP}}{8}{figure.caption.9}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Front view of the robot's model at the end of the modelling in Blender}}{6}{figure.caption.7}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces View of the robot's model at the end of the modelling in V-REP}}{8}{figure.caption.8}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Experimental setup}}{9}{figure.caption.10}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Experimental setup for torque testing}}{10}{figure.caption.11}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Experimental setup}}{9}{figure.caption.9}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Experimental setup for torque testing}}{10}{figure.caption.10}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Experimental setup dynamics testing}}{10}{figure.caption.12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulation setup}}{11}{figure.caption.13}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schematic view of the simulation system. V-Rep handles solely the simulation of the robot and the control is established through a socket link with an external application which in our case is a MATLAB script.\relax }}{11}{figure.caption.13}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation setup}}{12}{figure.caption.14}
 \addvspace {10\p@ }

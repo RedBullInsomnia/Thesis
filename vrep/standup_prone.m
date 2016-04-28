@@ -27,7 +27,7 @@
 
 function instructions = standup_prone(h, t)
 
-if t < 0.07
+if t < 0.7
     % Phase 1 Lift the trunk;
     %hips
     instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(30)];
@@ -42,7 +42,7 @@ if t < 0.07
     
     instructions(7,:) = [double(h.right_arm_joints(2)), degtorad(90)];
     instructions(8,:) = [double(h.left_arm_joints(2)), degtorad(-90)];
-elseif t < 0.14
+elseif t < 1.4
     % Phase 2 Faire le dos rond
     instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(-40)];
     instructions(2,:) = [double(h.left_leg_joints(3)), degtorad(-40)];
@@ -53,7 +53,7 @@ elseif t < 0.14
     % Feet
     instructions(5,:) = [double(h.right_leg_joints(5)), degtorad(-40)];
     instructions(6,:) = [double(h.left_leg_joints(5)), degtorad(-40)];
-elseif t < 0.25
+elseif t < 2.5
     % Phase 3 Bring the knees in
     instructions(1,:) = [double(h.right_leg_joints(4)), degtorad(80)];
     instructions(2,:) = [double(h.left_leg_joints(4)), degtorad(80)];
