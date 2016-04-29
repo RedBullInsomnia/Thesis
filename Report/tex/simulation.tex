@@ -1,11 +1,13 @@
 In this section we will explain how to use the simulator and how it was used to influence the design of the robot. Finally some simulations will be shown.
 
 \section{Simulation setup}
+The basic idea of the simulation is presented on \cref{fig:simulation_principles}.
+
 \begin{figure}[htp]
 \center
-    \includegraphics[width = 0.6\textwidth]{figures/simulation_principles}
-    \caption{Schematic view of the simulation system. V-Rep handles solely the simulation of the robot and the control is established through a socket link with an external application which in our case is a MATLAB script.}
-    \label{fig:simulation_principles}
+\includegraphics[width=0.6\textwidth]{figures/simulation_principles}
+\caption[Simulation principles]{Simulation principles}
+\label{fig:simulation_principles}
 \end{figure}
 
 The architecture of the system is explained on \cref{fig:remoteApi}. We choose to operate in the synchronous operating mode : before V-REP simulates a timestep it waits for a trigger, allowing us to precisely control the robot.
@@ -19,6 +21,9 @@ The architecture of the system is explained on \cref{fig:remoteApi}. We choose t
 
 \section{Applications}
 \subsection{Static stability}
+The first application is simply to build a model of the robot and test if it is able to stand upright on its own. 
+
+The different constituting elements are listed in \cref{table:weights}. 
 \begin{table}[htp]
 \center
 \begin{tabularx}{\textwidth}{@{} X X X l @{}}
@@ -36,6 +41,9 @@ Frame Fr-101-H3 & 7 & 1200 & \\
 \caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
 \label{table:weights}
 \end{table}
+
+The servos of the robot are simply ordered to hold their initial angle and the simulation determines that the robot can indeed stand upright without any active stabilization.
+
 \subsection{Standing up routines}
 This section is heavily inspired by \cite{Stuckler06}
 
@@ -43,6 +51,22 @@ This section is heavily inspired by \cite{Stuckler06}
 
 \section{Influence on robot's design}
 The simulator helped shape the robot through simulations that unveiled serious design problems (inability to stand after a fall, inability to walk).
+
+The first design is visible on \cref{fig:first_robot}. It was plagued by stability problems, overcomplicated arms and simulation difficulties. 
+\begin{figure}[htp]
+\center
+\includegraphics[width=0.6\textwidth]{figures/robot1}
+\caption[Initial robot design]{First robot design. Arms use 4 servos each, making it quite heavy.}
+\label{fig:first_robot}
+\end{figure}
+
+The final design, visible on \cref{fig:final_robot} has better stability, wider movement possibilities and can stand up and walk more easily. 
+\begin{figure}[htp]
+\center
+\includegraphics[width=0.6\textwidth]{figures/robot2}
+\caption[Final robot design]{Final robot design. Arms now use 3 servos. The feet and the hips use a different configuration to have wider movement possibilities and bring down the center of gravity.}
+\label{fig:final_robot}
+\end{figure}
 
 The final dimensions of the robot respect the rules of the contest:
 \begin{itemize}

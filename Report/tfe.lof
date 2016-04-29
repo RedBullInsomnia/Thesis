@@ -10,6 +10,8 @@
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Experimental setup for torque testing}}{10}{figure.caption.10}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Experimental setup dynamics testing}}{10}{figure.caption.12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schematic view of the simulation system. V-Rep handles solely the simulation of the robot and the control is established through a socket link with an external application which in our case is a MATLAB script.\relax }}{11}{figure.caption.13}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulation principles}}{11}{figure.caption.13}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Simulation setup}}{12}{figure.caption.14}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Initial robot design}}{13}{figure.caption.16}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Final robot design}}{14}{figure.caption.17}
 \addvspace {10\p@ }
