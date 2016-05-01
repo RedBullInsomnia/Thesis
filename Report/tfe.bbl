@@ -1,10 +1,15 @@
-\begin{thebibliography}{BET14}
+\begin{thebibliography}{IPPN14}
 
 \bibitem[BET14]{bender2014interactive}
 Jan Bender, Kenny Erleben, and Jeff Trinkle.
 \newblock Interactive simulation of rigid body dynamics in computer graphics.
 \newblock In {\em Computer Graphics Forum}, volume~33, pages 246--270. Wiley
   Online Library, 2014.
+
+\bibitem[Ble15]{blender_roadmap}
+Blender.
+\newblock 2.8 project developer kickoff meeting notes, 2015.
+\newblock [Online; accessed 01-May-2016].
 
 \bibitem[Bru04]{Bruyninckx04}
 Herman Bruyninckx.
@@ -16,10 +21,18 @@ Dynamixel.
 \newblock Robotis e-manual v1.27.00, 2016.
 \newblock [Online; accessed 18-April-2016].
 
-\bibitem[ETT]{engines_comparison}
+\bibitem[ETT15]{engines_comparison}
 Tom Erez, Yuval Tassa, and Emanuel Todorov.
 \newblock Simulation tools for model-based robotics: Comparison of bullet,
   havok, mujoco, ode and physx.
+\newblock {\em International Conference on Robotics and Automation}, 2015.
+
+\bibitem[IPPN14]{ivaldi2014tools}
+Serena Ivaldi, Jan Peters, Vincent Padois, and Francesco Nori.
+\newblock Tools for simulating humanoid robot dynamics: a survey based on user
+  feedback.
+\newblock In {\em Humanoid Robots (Humanoids), 2014 14th IEEE-RAS International
+  Conference on}, pages 842--849. IEEE, 2014.
 
 \bibitem[Rob16]{vrep_manual}
 Coppelia Robotics.

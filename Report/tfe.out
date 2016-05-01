@@ -2,30 +2,38 @@
 \BOOKMARK [0][-]{chapter*.3}{List of Figures}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
 \BOOKMARK [1][-]{section.1.1}{Context}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.2}{Specifications}{chapter.1}% 5
-\BOOKMARK [0][-]{chapter.2}{Choosing the tools}{}% 6
-\BOOKMARK [1][-]{section.2.1}{Principles of rigid body dynamics simulation}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.2}{Available simulators}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.3}{Choice}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Modelling tools usage}{}% 10
-\BOOKMARK [1][-]{section.3.1}{Blender}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.2}{V-REP}{chapter.3}% 12
-\BOOKMARK [2][-]{subsection.3.2.1}{Servos}{section.3.2}% 13
-\BOOKMARK [2][-]{subsection.3.2.2}{Joints}{section.3.2}% 14
-\BOOKMARK [2][-]{subsection.3.2.3}{Sensors \(accel, cog\)}{section.3.2}% 15
-\BOOKMARK [2][-]{subsection.3.2.4}{Springs}{section.3.2}% 16
-\BOOKMARK [1][-]{section.3.3}{Simulation settings}{chapter.3}% 17
-\BOOKMARK [0][-]{chapter.4}{Physical validation}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Experimental set-up}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Experiment 1}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.3}{Experiment 2}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.4}{Conclusion}{chapter.4}% 22
-\BOOKMARK [0][-]{chapter.5}{Simulation}{}% 23
-\BOOKMARK [1][-]{section.5.1}{Simulation setup}{chapter.5}% 24
-\BOOKMARK [1][-]{section.5.2}{Applications}{chapter.5}% 25
-\BOOKMARK [2][-]{subsection.5.2.1}{Static stability}{section.5.2}% 26
-\BOOKMARK [2][-]{subsection.5.2.2}{Standing up routines}{section.5.2}% 27
-\BOOKMARK [2][-]{subsection.5.2.3}{Walking}{section.5.2}% 28
-\BOOKMARK [1][-]{section.5.3}{Influence on robot's design}{chapter.5}% 29
-\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 30
-\BOOKMARK [0][-]{chapter*.18}{Bibliography}{}% 31
+\BOOKMARK [1][-]{section.1.2}{Goals of the project}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.3}{Structure of the report}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Principles of simulation}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Principles of rigid body dynamics simulation}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Choosing the tools}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Available simulators}{chapter.3}% 10
+\BOOKMARK [2][-]{subsection.3.1.1}{Barebone physics engines}{section.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.1.2}{Simulators}{section.3.1}% 12
+\BOOKMARK [1][-]{section.3.2}{Tested software}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Choice}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Modelling tools usage}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Blender}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{V-REP}{chapter.4}% 17
+\BOOKMARK [2][-]{subsection.4.2.1}{Servos}{section.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.2.2}{Joints}{section.4.2}% 19
+\BOOKMARK [2][-]{subsection.4.2.3}{Sensors \(accel, cog\)}{section.4.2}% 20
+\BOOKMARK [2][-]{subsection.4.2.4}{Springs}{section.4.2}% 21
+\BOOKMARK [1][-]{section.4.3}{Simulation settings}{chapter.4}% 22
+\BOOKMARK [0][-]{chapter.5}{Physical validation}{}% 23
+\BOOKMARK [1][-]{section.5.1}{Experimental set-up}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.2}{Experiment 1}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.3}{Experiment 2}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.4}{Conclusion}{chapter.5}% 27
+\BOOKMARK [0][-]{chapter.6}{Simulation}{}% 28
+\BOOKMARK [1][-]{section.6.1}{Simulation setup}{chapter.6}% 29
+\BOOKMARK [1][-]{section.6.2}{Applications}{chapter.6}% 30
+\BOOKMARK [2][-]{subsection.6.2.1}{Static stability}{section.6.2}% 31
+\BOOKMARK [2][-]{subsection.6.2.2}{Standing up routines}{section.6.2}% 32
+\BOOKMARK [2][-]{subsection.6.2.3}{Walking}{section.6.2}% 33
+\BOOKMARK [1][-]{section.6.3}{Influence on robot's design}{chapter.6}% 34
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 35
+\BOOKMARK [1][-]{section.7.1}{Conclusion}{chapter.7}% 36
+\BOOKMARK [1][-]{section.7.2}{Future work}{chapter.7}% 37
+\BOOKMARK [2][-]{subsection.7.2.1}{Modelling}{section.7.2}% 38
+\BOOKMARK [0][-]{chapter*.18}{Bibliography}{}% 39
