@@ -24,62 +24,16 @@ vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 % retrieve handles to servos, joints
 h = robot_init(vrep, clientID);
 
-% generate standup sequence
-x = 0:.05:.2;
-xq = 0:0.01:.2;
-hips_setpoints = [degtorad(30), degtorad(-130), degtorad(-130), degtorad(-120), degtorad(-110)];
-hips = interp1(x, hips_setpoints, xq, 'linear');
-
-knees_setpoints = [0, degtorad(90), degtorad(50), degtorad(40), degtorad(30)];
-knees = interp1(x, knees_setpoints, xq, 'linear');
-
-feet_setpoints = [degtorad(-100), degtorad(-40), 0, 0, 0];
-feet = interp1(x, feet_setpoints, xq, 'linear');
-
-shoulders_setpoints = [degtorad(-70), degtorad(-70), degtorad(-100), degtorad(-90), degtorad(-90)];
-shoulders = interp1(x, shoulders_setpoints, xq, 'linear');
-
-arms_setpoints = [0, degtorad(-90), degtorad(-90), degtorad(-90), degtorad(-90)];
-arms = interp1(x, arms_setpoints, xq, 'linear');
-
-elbows_setpoints = [0, 0, 0, 0, 0];
-elbows = interp1(x, elbows_setpoints, xq, 'linear');
-
 % display points
-display = 0;
-if display == 1
-    figure
-    subplot(5,1,1)
-    plot(x, hips_setpoints, 'o', xq , hips, ':.');
-    ylim([-2.5, 2.5])
-    ylabel('hips')
-    
-    subplot(5,1,2)
-    plot(x, knees_setpoints, 'o', xq , knees, ':.');
-    ylim([-2.5, 2.5])
-    ylabel('knees')
-    
-    subplot(5,1,3)
-    plot(x, feet_setpoints, 'o', xq , feet, ':.');
-    ylim([-2.5, 2.5])
-    ylabel('feet')
-    
-    subplot(5,1,4)
-    plot(x, shoulders_setpoints, 'o', xq , shoulders, ':.');
-    ylim([-2.5, 2.5])
-    ylabel('shoulders')
-    
-    subplot(5,1,5)
-    plot(x, arms_setpoints, 'o', xq , arms, ':.');
-    ylim([-2.5, 2.5])
-    ylabel('arms')
-end
-
 t = 0;
-%i = 1;
+
+i = 1;
 while true && t < 5
     %instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
     instructions = standup_prone(h, t);
+    
+    graphs(i, :, :) = instructions;
+    i = i + 1;
     %COM(i,:) = getCOM(vrep, clientID);
     %isInsideSupportArea(vrep, clientID, COM(i,:), h)
     send_instructions(vrep, clientID, instructions);
@@ -89,6 +43,7 @@ while true && t < 5
 %     end
 end
 
+graphs
 % if display == 1
 %     figure
 %     plot3(COM(:,1), COM(:,2), COM(:,3))
