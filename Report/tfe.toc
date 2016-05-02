@@ -1,6 +1,7 @@
 \select@language {english}
 \contentsline {chapter}{Contents}{ii}{chapter*.2}
 \contentsline {chapter}{List of Figures}{iv}{chapter*.3}
+\contentsline {chapter}{List of Tables}{v}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Context}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Goals of the project}{2}{section.1.2}
@@ -30,11 +31,12 @@
 \contentsline {section}{\numberline {6.1}Simulation setup}{13}{section.6.1}
 \contentsline {section}{\numberline {6.2}Applications}{13}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Static stability}{13}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Standing up routines}{15}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.2}Standing up routines}{14}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Walking}{15}{subsection.6.2.3}
 \contentsline {section}{\numberline {6.3}Influence on robot's design}{15}{section.6.3}
 \contentsline {chapter}{\numberline {7}Conclusion}{17}{chapter.7}
 \contentsline {section}{\numberline {7.1}Conclusion}{17}{section.7.1}
 \contentsline {section}{\numberline {7.2}Future work}{17}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Modelling}{17}{subsection.7.2.1}
-\contentsline {chapter}{Bibliography}{18}{chapter*.18}
+\contentsline {chapter}{Bibliography}{18}{chapter*.19}
+\contentsline {chapter}{\numberline {A}Rules}{19}{appendix.A}

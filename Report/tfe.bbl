@@ -34,6 +34,10 @@ Serena Ivaldi, Jan Peters, Vincent Padois, and Francesco Nori.
 \newblock In {\em Humanoid Robots (Humanoids), 2014 14th IEEE-RAS International
   Conference on}, pages 842--849. IEEE, 2014.
 
+\bibitem[Rob15]{robocup_rules}
+Robocup.
+\newblock Robocup soccer humanoid league rules and setup, 2015.
+
 \bibitem[Rob16]{vrep_manual}
 Coppelia Robotics.
 \newblock V-rep user manual 3.3.0, 2016.
