@@ -45,8 +45,15 @@ elseif t < 2.5
     instructions(8,:) = [double(h.left_leg_joints(5)), degtorad(-14)];
 else
     % Phase 4 Stand up
-    instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(-110)];
-    instructions(2,:) = [double(h.left_leg_joints(3)), degtorad(-110)];
+    instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(-100)];
+    instructions(2,:) = [double(h.left_leg_joints(3)), degtorad(-100)];
+    
+    instructions(3,:) = [double(h.right_leg_joints(4)), degtorad(40)];
+    instructions(4,:) = [double(h.left_leg_joints(4)), degtorad(40)];
+    
+    % Feet
+    instructions(5,:) = [double(h.right_leg_joints(5)), degtorad(-20)];
+    instructions(6,:) = [double(h.left_leg_joints(5)), degtorad(-20)];
     %
     %     % Arms
     %     instructions(3,:) = [double(h.right_arm_joints(1)), degtorad(-30)];
