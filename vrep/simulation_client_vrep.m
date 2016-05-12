@@ -19,34 +19,26 @@ cleanupObj = onCleanup(@() cleanup_vrep(vrep, clientID));
 % This will only work in "continuous remote API server service"
 % See http://www.v-rep.eu/helpFiles/en/remoteApiServerSide.htm
 vrep.simxSynchronous(clientID, true);
-vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 
 % retrieve handles to servos, joints
 h = robot_init(vrep, clientID);
+
+vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 
 % display points
 t = 0;
 
 i = 1;
 while true && t < 3
-    %instructions = standup_prone(h, i, hips, knees, feet, shoulders, arms, elbows);
     instructions = standup_prone(h, t);
+    %instructions = walk(h, t);
     
-    %graphs(i, :, :) = instructions;
     i = i + 1;
     %COM(i,:) = getCOM(vrep, clientID);
     %isInsideSupportArea(vrep, clientID, COM(i,:), h)
     send_instructions(vrep, clientID, instructions);
     t = t + dt
-%     if i < 6
-%         i = i + 1;
-%     end
 end
-
-% if display == 1
-%     figure
-%     plot3(COM(:,1), COM(:,2), COM(:,3))
-% end
 
 % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
 vrep.simxGetPingTime(clientID);
@@ -118,6 +110,46 @@ else
     % Arms
     instructions(7,:) = [double(h.right_arm_joints(1)), degtorad(-30)];
     instructions(8,:) = [double(h.left_arm_joints(1)), degtorad(-30)];
+end
+end
+
+function instructions = walk(h, t)
+
+if t < 0.2
+    instructions(1, : ) = [double(h.right_leg_joints(2)), degtorad(0)];
+elseif t < 0.3
+    % bring body over the right leg
+    instructions(1, :) = [double(h.right_leg_joints(2)), degtorad(12)];
+    instructions(2, :) = [double(h.right_leg_joints(6)), degtorad(-12)];
+    
+    % bring arm close to body
+    instructions(3, :) = [double(h.left_arm_joints(2)), degtorad(-70)];
+    
+elseif t < 0.5
+    
+    instructions(1, :) = [double(h.right_leg_joints(2)), degtorad(12)];
+    instructions(2, :) = [double(h.right_leg_joints(6)), degtorad(-14)];
+    instructions(3, :) = [double(h.left_leg_joints(3)), degtorad(-30)];
+    instructions(4, :) = [double(h.left_leg_joints(4)), degtorad(30)];
+    instructions(5, :) = [double(h.left_leg_joints(5)), degtorad(-30)];
+
+% elseif t < 0.7
+% 
+%     instructions(1, :) = [double(h.right_leg_joints(3)), degtorad(-16)];
+%     instructions(2, :) = [double(h.right_leg_joints(6)), degtorad(0)];
+%     
+% else
+%     
+%     instructions(1, :) = [double(h.left_leg_joints(3)), degtorad(0)];
+%     instructions(2, :) = [double(h.left_leg_joints(4)), degtorad(0)];
+%     instructions(3, :) = [double(h.left_leg_joints(5)), degtorad(0)];
+%     instructions(4, : ) = [double(h.right_leg_joints(2)), degtorad(0)];
+%     
+% end
+% 
+
+else
+    instructions(1, :) = [double(h.left_arm_joints(2)), degtorad(-70)];
 end
 
 end

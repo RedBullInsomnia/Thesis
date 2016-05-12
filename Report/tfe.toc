@@ -6,15 +6,18 @@
 \contentsline {section}{\numberline {1.1}Context}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Goals of the project}{2}{section.1.2}
 \contentsline {section}{\numberline {1.3}Structure of the report}{2}{section.1.3}
-\contentsline {chapter}{\numberline {2}Principles of simulation}{3}{chapter.2}
+\contentsline {chapter}{\numberline {2}Principles of interactive rigid body simulation}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Principles of rigid body dynamics simulation}{3}{section.2.1}
 \contentsline {chapter}{\numberline {3}Choosing the tools}{4}{chapter.3}
-\contentsline {section}{\numberline {3.1}Available simulators}{4}{section.3.1}
+\contentsline {section}{\numberline {3.1}Available tools}{4}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Barebone physics engines}{4}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Simulators}{5}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Tested software}{6}{section.3.2}
-\contentsline {section}{\numberline {3.3}Choice}{6}{section.3.3}
-\contentsline {chapter}{\numberline {4}Modelling tools usage}{8}{chapter.4}
+\contentsline {subsection}{\numberline {3.2.1}Blender}{6}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Gazebo}{6}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}V-Rep}{7}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Choice}{7}{section.3.3}
+\contentsline {chapter}{\numberline {4}Presentation of Blender and V-Rep}{8}{chapter.4}
 \contentsline {section}{\numberline {4.1}Blender}{8}{section.4.1}
 \contentsline {section}{\numberline {4.2}V-REP}{9}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Servos}{9}{subsection.4.2.1}
@@ -34,9 +37,9 @@
 \contentsline {subsection}{\numberline {6.2.2}Standing up routines}{14}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Walking}{15}{subsection.6.2.3}
 \contentsline {section}{\numberline {6.3}Influence on robot's design}{15}{section.6.3}
-\contentsline {chapter}{\numberline {7}Conclusion}{17}{chapter.7}
-\contentsline {section}{\numberline {7.1}Conclusion}{17}{section.7.1}
-\contentsline {section}{\numberline {7.2}Future work}{17}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Modelling}{17}{subsection.7.2.1}
-\contentsline {chapter}{Bibliography}{18}{chapter*.19}
-\contentsline {chapter}{\numberline {A}Rules}{19}{appendix.A}
+\contentsline {chapter}{\numberline {7}Conclusion}{18}{chapter.7}
+\contentsline {section}{\numberline {7.1}Conclusion}{18}{section.7.1}
+\contentsline {section}{\numberline {7.2}Future work}{18}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Modelling}{18}{subsection.7.2.1}
+\contentsline {chapter}{Bibliography}{19}{chapter*.20}
+\contentsline {chapter}{\numberline {A}Rules}{20}{appendix.A}

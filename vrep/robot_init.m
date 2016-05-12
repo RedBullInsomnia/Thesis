@@ -47,10 +47,8 @@ for i = 1:3
         sprintf('right_arm%d', i), vrep.simx_opmode_oneshot_wait);
     
     % Reset instructions
-    instructions(j, :) = [double(left_arm_joints(i)), 0];
-    j = j + 1;
-    instructions(j, :) = [double(right_arm_joints(i)), 0];
-    j = j + 1;
+    instructions(j, :) = [double(left_arm_joints(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(right_arm_joints(i)), 0]; j = j + 1;
 end
 
 left_leg_joints = [-1, -1, -1, -1, -1, -1];
@@ -61,10 +59,8 @@ for i = 1:6
     [~, right_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('right_leg%d', i), vrep.simx_opmode_oneshot_wait);
     
-    instructions(j, :) = [double(left_leg_joints(i)), 0];
-    j = j + 1;
-    instructions(j, :) = [double(right_leg_joints(i)), 0];
-    j = j + 1;
+    instructions(j, :) = [double(left_leg_joints(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(right_leg_joints(i)), 0]; j = j + 1;
 end
 
 handles.left_leg_joints = left_leg_joints;

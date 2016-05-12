@@ -1,21 +1,21 @@
-In this section we will explain how to use the simulator and how it was used to influence the design of the robot. Finally some simulations will be shown.
+In this section we explain how to use the simulator and how some simulations influenced the design of the robot.
 
 \section{Simulation setup}
-The basic idea of the simulation is presented on \cref{fig:simulation_principles}.
+The basic idea is to use V-Rep as a simulation platform and use TCP/IP to have another program control the simulation from outside. This gives us great implementation flexibility and we can substitute the real robot by the simulation model easily. This is represented on \cref{fig:simulation_principles}. For this thesis, the control code will be written in MATLAB. 
 
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.6\textwidth]{figures/simulation_principles}
-\caption[Simulation principles]{The idea is to let V-Rep simulate the robot and control with the actual code that runs on the robot.}
+\caption[Simulation principles]{V-Rep simulates the robot while an external program sends order to the robot over TCP/IP thanks to the client/server thread provided by V-Rep.}
 \label{fig:simulation_principles}
 \end{figure}
 
-The architecture of the system is explained on \cref{fig:remoteApi}. We choose to operate in the synchronous operating mode : before V-REP simulates a timestep it waits for a trigger, allowing us to precisely control the robot.
+Furthermore, the simulation will operate in the synchronous operation mode. That is, each simulation timestep must be triggered by the control code, allowing precise control of the robot. \Cref{fig:remoteApi} presents how V-Rep and the control code interact in synchronous mode.
 
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.6\textwidth]{figures/remoteApiSynchronous}
-\caption[Simulation interaction]{Typical interaction between the simulator and the control code. The simulation runs on two threads : the simulation and the server thread. The server threads can receive orders from a client thread which is controlled by a custom application of our own.}
+\caption[Simulation interaction]{Typical interaction between the simulator and the control code. The simulation runs on two threads : the simulation and the server thread. The server threads can receive orders from a client thread which is controlled by a custom application of our own. The simulator waits for a trigger before simulating the next timestep.}
 \label{fig:remoteApi}
 \end{figure}
 
@@ -25,11 +25,20 @@ The first application is simply to build a model of the robot and test if it is 
 
 The modelling begins in Blender where pieces are simplified/made convex and placed to create the structure of the robot. The model is then exported (in COLLADA) and imported into V-Rep. 
 
+The feet are approximated by a thicker block in order to help with the collision detection. They are also given a high friction.
+
+The torque of the servos is computed from the maximal torque of the DC motor and the reduction ratio of the gears. 
+\begin{align*}
+Torque &= TorqueMotor \times ReductionRatio\\
+&= 3.67e^{-3} \times 193\\
+&= 0.7083 Nm
+\end{align*} 
+
 In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.6$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
 
 \begin{table}[htp]
 \center
-\begin{tabularx}{\textwidth}{@{} X X X l @{}}
+\begin{tabularx}{\textwidth}{@{} l X X l @{}}
 \toprule
 \textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
 \midrule
@@ -45,7 +54,7 @@ Frame Fr-101-H3 & 7 & 1200 & \\
 \label{table:weights}
 \end{table}
 
-The springs on the leg are simulated two spherical joints and one prismatic joint set to spring-damper mode.
+The springs on the leg are simulated by two spherical joints and one prismatic joint set to spring-damper mode.
 
 The servos of the robot are simply ordered to hold their initial angle and the simulation determines that the robot can indeed stand upright without any active stabilization.
 
