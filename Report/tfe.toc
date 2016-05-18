@@ -27,14 +27,14 @@
 \contentsline {section}{\numberline {4.3}Simulation settings}{9}{section.4.3}
 \contentsline {chapter}{\numberline {5}Physical validation}{11}{chapter.5}
 \contentsline {section}{\numberline {5.1}Experimental set-up}{11}{section.5.1}
-\contentsline {section}{\numberline {5.2}Experiment 1}{11}{section.5.2}
+\contentsline {section}{\numberline {5.2}Experiment 1 }{11}{section.5.2}
 \contentsline {section}{\numberline {5.3}Experiment 2}{12}{section.5.3}
 \contentsline {section}{\numberline {5.4}Conclusion}{12}{section.5.4}
 \contentsline {chapter}{\numberline {6}Simulation}{13}{chapter.6}
 \contentsline {section}{\numberline {6.1}Simulation setup}{13}{section.6.1}
 \contentsline {section}{\numberline {6.2}Applications}{13}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Static stability}{13}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Standing up routines}{14}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.2}Standing up routines}{15}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Walking}{15}{subsection.6.2.3}
 \contentsline {section}{\numberline {6.3}Influence on robot's design}{15}{section.6.3}
 \contentsline {chapter}{\numberline {7}Conclusion}{18}{chapter.7}
@@ -43,3 +43,4 @@
 \contentsline {subsection}{\numberline {7.2.1}Modelling}{18}{subsection.7.2.1}
 \contentsline {chapter}{Bibliography}{19}{chapter*.20}
 \contentsline {chapter}{\numberline {A}Rules}{20}{appendix.A}
+\contentsline {chapter}{\numberline {B}Design guidelines}{21}{appendix.B}

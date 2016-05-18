@@ -1,3 +1,4 @@
+\chapter{Rules}
 The robots that participate in the kidsize competition must respect the following characteristics\cite{robocup_rules}:\begin{enumerate}
 \item $40cm \leq H_{top} \leq 90cm$.
 
@@ -22,3 +23,12 @@ joint at the shoulder to the top of the head.
 
 \item The leg length is measured while the robot is standing up straight. The length is measured from the first rotating joint where its axis lies in the plane parallel to the standing ground to the tip of the foot.
 \end{enumerate}
+
+\chapter{Design guidelines}
+For a dynamic simulation several design restrictions must be considered : \begin{itemize}
+\item use pure convex as much as possible, they are much more stable and faster to simulate. When a more complex shape is used, approximate it with several convex shapes.
+
+\item use reasonable sizes, neither not too small nor too big. Thin shapes may behave strangely.
+
+\item when using joints, keep the ratio of the masses below 10. Otherwise, the joint may have large orientation/position errors.
+\end{itemize}

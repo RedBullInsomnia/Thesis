@@ -31,8 +31,9 @@ The torque of the servos is computed from the maximal torque of the DC motor and
 \begin{align*}
 Torque &= TorqueMotor \times ReductionRatio\\
 &= 3.67e^{-3} \times 193\\
-&= 0.7083 Nm
-\end{align*} 
+&= 0.7083Nm
+\end{align*}
+In \cref{sec:exp1} we determined that the maximum torque the servo was actually able to produce was $1.7Nm$ so to represent this we choose to set the maximum torque of the servos to $1Nm$.
 
 In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.6$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
 
