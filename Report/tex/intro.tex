@@ -1,20 +1,22 @@
 \section{Context}
-This thesis is the product of the participation of a team of students to a robotic contest named RoboCup. 
+For the last ten years, Montefiore has been participating in a robotic contest named \emph{Eurobot}, where wheeled robots battle each other for points in various play environments. After some success, it was decided to move on to a more difficult contest, \emph{Robocup}.
 
 This contest is quite vast and divided into several categories :
 \begin{itemize}
+\item Robocup Rescue : a category where rescue robots are challenged in benchmark environments.
 \item RoboCup Industrial : a category for more industrially focused contests.
 \item RoboCup@Home : a league for domestic robots that support elder people and stuff.
-\item RoboCupJunior : more of an initiative that aims to foster robotics interest in children, it helps organize various events for younger minds.
+\item RoboCupJunior : more of an initiative that aims to foster robotics interest in children rather than a contest, it helps organize various events for younger minds.
 \item RoboCup Soccer : historically the first category, centered about humanoid robots playing football in small teams. This is the league we will compete in.
 \end{itemize}
 The Robocup Soccer category is further subdivided into :\begin{itemize}
+\item Standard platform, where the teams all use the same robot(Nao).
 \item Adultsize, for the taller robots
 \item Teensize, for middle sized robots
 \item Kidsize, for the smaller robots.
 \end{itemize}
 
-The team will participate to Kidsize subcategory of the Robocup Soccer category. 2016's edition will take place in Leipzing, Germany.
+This year's team is preparing to participate to the Kidsize subcategory of the Robocup Soccer category. This master thesis is the by-product of that team's activity.
 
 \begin{figure}[htp]
 \center
@@ -23,19 +25,22 @@ The team will participate to Kidsize subcategory of the Robocup Soccer category.
 \label{fig:intro_robocup}
 \end{figure}
 
-Our participation means that for the first time at the Montefiore Institute, a humanoid robot will be built. We thus need a reliable simulation tool to :
+Since Montefiore is participating for the first time we are nearly starting from scratch and we don't really know how to build a good humanoid robot. In order to not spend countless hours building and testing different designs we need a tool able of simulating the physics
+of a robot model. 
+
+In particular, we want to use it to :
 \begin{enumerate}
 \item Test different robot designs and choose the best one, faster than it would be done by building the designs in real life.
 \item At a later stage, be able to test control algorithms faster because the real robot is not needed.
 \end{enumerate}
 
 \section{Goals of the project}
-The goal of this thesis is to provide the team with a simulation tool and a model able of :
+The goal of this thesis is to provide the team with a simulation tool that provides the following features :
 \begin{itemize}
-\item realistically simulating the dynamics of the robot including springs and dampers
-\item receiving orders at approximately 300Hz (not necessarily in real-time)
-\item receiving exactly the same orders as the real robot would.
-\item visualizing the results of the simulation.
+\item realistically simulate the physics of objects including inertias, frictions, collisions and more.
+\item receive and process orders incoming at a relatively high frequency. The processing need not be in real-time.
+\item we want to use this simulator to test the code that would run on the real robot. That is, the simulator should provide the same interface to the code as the robot would.
+\item visualize the results of the simulation.
 \end{itemize}
 
 \section{Structure of the report}

@@ -1,54 +1,64 @@
-This chapter covers the tools used in order to create a model of the robot, from the placement of the servos and joints to the incorporation of accelerometers.
+This chapter covers the the modelization of the building blocks of the robot.
 
-\section{Blender}
-Blender is a free and open source 3D creation software suite. It features modelling, animation, rendering tools and integrates the bullet physics engine. 
+\section{Problem statement}
+Our robot will be mainly made of servos connected together. We thus need to model the behaviour of a servo. Optionally, it could use springs to store energy when walking. 
 
-\begin{itemize}
-\item simplify the servos, hinges into simple convex shapes that behave better in a physical simulation.
-\item place all the elements of the robot at their position.
-\item place position markers for the joints, springs to be added in V-Rep.
-\end{itemize}
-An example of the state the model is in after this stage is present on \cref{fig:modelling_blender}. When done with this, the model exported in the COLLADA format.
+\section{Basic Modelling}
+\subsection{Convex elements}
+A convex element is an element which has a convex shape, that is, all its interior angles are less or equal to $180\degree$. Our humanoid robot will have some number of them since a lot of elements can be approximated as cubes, which are convex.
 
-\begin{figure}[htp]
-\center
-\includegraphics[width=0.6\textwidth]{figures/modelling_blender}
-\caption[Front view of the robot's model at the end of the modelling in Blender]{Front view of the robot's model at the end of the modelling in Blender. The grey boxes represent the servos, the red pieces are standard Dynamixel frames, the blue are non-standard, the green cylinders are the hands.}
-\label{fig:modelling_blender}
-\end{figure}
+The modelling consists in creating a mesh with the right dimensions, setting the mass and setting the inertia (V-Rep does not feature matrix inertias, only principal axes inertias). Friction of the material can also be set and will influence how much an object will slide.
 
-\section{V-REP}
-The model is finalized by :
-\begin{itemize}
-\item defining the mass and inertia of each piece(compiled in \cref{table:weights}) and enabling them for dynamic simulation.
-\item adding joints between servos. For 2DOF joints, frame are used as intermediates.
-\item adding vision sensors to simulate cameras.
-\item adding scripts to simulate sensors (COG, accelerometers).
-\item adding springs on the legs through the use of prismatic and spheric joints.
-\end{itemize}
+\subsection{Concave elements}
+A shape is concave if it is not convex. It is not recommended to use concave shapes in a simulation as they make collision detection more expensive and the simulation is generally more unstable. 
+
+Therefore, the modelling consists in approximating such a shape by several convex shapes, linked together.
+
+\section{Applied to the building of a humanoid robot}
+\subsection{Feet}
+The shape of the feet is not fixed yet but it is safe to approximate them by a convex shape with high friction. 
 
 \subsection{Servos}
-Servos are simulated by joints.
+The robot will mainly be made from MX-28R servos, manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation.
 
-\subsection{Joints}
-Spherical joint : 3DOF angular.
+The MX-28R outer shape is convex so we can create a convex mesh to model its appearance. Its mass and inertias can be set to $77g$ and 
+\begin{align*}
+Ixx Iyy Izz = (
+\end{align*}
 
-Prismatic joint : 1DOF linear.
+\begin{table}[htp]
+\center
+\begin{tabularx}{\textwidth}{@{} l l l @{}}
+\toprule
+& \textbf{Data} & \textbf{Unit}\\ 
+\midrule
+Weight & $77$ & $g$\\
+Dimension & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
+Inertia tensor & $\left(\begin{array}{c c c}
+2.26e^4 & 3.68e^1 & -2.13e^2\\
+3.68e^1 & 1.29ee^4 & -1.15e^3\\
+-2.13e^2 & -1.15e^3 & 1.78e^4\\
+\end{array}\right)$ & $g \times mm^4$ \\
+Stall torque & $2.5$ & $Nm$\\
+Nominal torque & $0.7$ & $Nm$\\
+\bottomrule
+\end{tabularx}
+\caption{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual}}
+\label{table:specs}
+\end{table}
 
-Revolute joint : 1DOF angular.
+The torque of the servos is computed from the maximal torque of the DC motor and the reduction ratio of the gears. 
+\begin{align*}
+Torque &= TorqueMotor \times ReductionRatio\\
+&= 3.67e^{-3} \times 193\\
+&= 0.7083Nm
+\end{align*} 
 
-\subsection{Sensors (accel, cog)}
-The COG is computed through a script inside V-Rep, attached to a piece of the model and made available through the remote interface\cite{vrep_manual}.
+\subsection{Frames}
+The frames in use, FR07-H101 are convex and are thus decomposed into into convex shapes that are linked together. 
+
+\subsection{Cameras}
+Cameras are modelled as cubes. Their function is performed by vision sensors handled by V-Rep.
 
 \subsection{Springs}
-Springs are simulated by prismatic and spherical joints.
 
-An example of what the model looks like at the end of this process is visible on \cref{fig:modelling_vrep}.
-\begin{figure}[htp]
-\center
-    \includegraphics[width = 0.6\textwidth]{figures/modelling_vrep}
-    \caption[View of the robot's model at the end of the modelling in V-REP]{View of the robot's model at the end of the modelling in V-REP.}
-    \label{fig:modelling_vrep}
-\end{figure}
-
-\section{Simulation settings}
