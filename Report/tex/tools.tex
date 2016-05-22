@@ -1,7 +1,11 @@
-This chapter covers the the modelization of the building blocks of the robot.
+This chapter covers the modelling of the building blocks of the robot.
 
 \section{Problem statement}
-Our robot will be mainly made of servos connected together. We thus need to model the behaviour of a servo. Optionally, it could use springs to store energy when walking. 
+Our robot will be made from a number of elements that all need to be represented in the simulation :\begin{itemize}
+\item cameras
+\item hands, feet, electronics
+\item servos
+\end{itemize}
 
 \section{Basic Modelling}
 \subsection{Convex elements}
@@ -18,7 +22,40 @@ Therefore, the modelling consists in approximating such a shape by several conve
 \subsection{Feet}
 The shape of the feet is not fixed yet but it is safe to approximate them by a convex shape with high friction. 
 
+\subsection{Frames}
+The frames in use, FR07-H101 are convex and are thus decomposed into into convex shapes 
+that are linked together. 
+
+\subsection{Eletronics}
+Electronics 
+
+\subsection{Cameras}
+Cameras are modelled as cubes. Their function is performed by vision sensors handled by V-Rep.
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.3\textwidth]{figures/li_cam}
+    \caption{LI-USB30-M021C camera, to be used in the robot.}
+    \label{fig:camera}
+\end{figure}
+
 \subsection{Servos}
+\begin{figure}[htp]
+\center
+\begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width = \textwidth]{figures/mx28}
+    \caption{MX-28R servo.}
+    \label{fig:mx28}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width = \textwidth]{figures/mx28_model}
+    \caption{Model of the MX-28R.}
+    \label{fig:mx28_model}
+\end{subfigure}
+\caption{Side by side of a MX-28R servo and its 3D model. The shape has been simplified but retains outer appearance of the servo. The axis is used as a position marker and will be removed once the joints are in place.}
+\label{fig:servo}
+\end{figure}
+
 The robot will mainly be made from MX-28R servos, manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation.
 
 The MX-28R outer shape is convex so we can create a convex mesh to model its appearance. Its mass and inertias can be set to $77g$ and 
@@ -34,11 +71,9 @@ Ixx Iyy Izz = (
 \midrule
 Weight & $77$ & $g$\\
 Dimension & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
-Inertia tensor & $\left(\begin{array}{c c c}
-2.26e^4 & 3.68e^1 & -2.13e^2\\
-3.68e^1 & 1.29ee^4 & -1.15e^3\\
--2.13e^2 & -1.15e^3 & 1.78e^4\\
-\end{array}\right)$ & $g \times mm^4$ \\
+Inertia around main axes & $(\begin{array}{c c c}
+33,765 & 12,900 & 28,821
+\end{array})$ & $g \times mm^4$ \\
 Stall torque & $2.5$ & $Nm$\\
 Nominal torque & $0.7$ & $Nm$\\
 \bottomrule
@@ -53,12 +88,6 @@ Torque &= TorqueMotor \times ReductionRatio\\
 &= 3.67e^{-3} \times 193\\
 &= 0.7083Nm
 \end{align*} 
-
-\subsection{Frames}
-The frames in use, FR07-H101 are convex and are thus decomposed into into convex shapes that are linked together. 
-
-\subsection{Cameras}
-Cameras are modelled as cubes. Their function is performed by vision sensors handled by V-Rep.
 
 \subsection{Springs}
 

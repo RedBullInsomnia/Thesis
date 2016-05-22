@@ -43,4 +43,15 @@ Thumbs.db
 #######################
 *.asv
 
+# Latex backup files #
+#######################
+*.aux
+*.toc
+*.lof
+*.blg
+*.lot
+*.out
+*.bbl
+
+
 /Debug
