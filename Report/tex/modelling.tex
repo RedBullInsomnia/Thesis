@@ -89,5 +89,55 @@ Torque &= TorqueMotor \times ReductionRatio\\
 &= 0.7083Nm
 \end{align*} 
 
+\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=leftline, keywordstyle=\color{blue}, float, caption=Control code of the servo, captionpos = b ]
+-- init: true when this callback is called for the first time (if the joint is dynamically reset during the simulation, this might be true more often)
+-- revolute: true if the joint is revolute
+-- cyclic: true if the joint is revolute and cyclic (i.e. no lower/upper limits)
+-- currentPos: the current position of the joint
+-- targetPos: the desired position of the joint
+-- errorValue: targetPos-currentPos (with revolute cyclic joints we take the shortest cyclic distance)
+-- effort: the last force or torque that acted on this joint along/around its axis. With Bullet, torques from joint limits are not taken into account
+-- dynStepSize: the step size used for the dynamics calculations (by default 5ms)
+-- lowLimit: the joint lower limit
+-- highLimit: the joint upper limit
+-- targetVel: the joint target velocity (as set in the user interface)
+-- maxForceTorque: the joint maximum force/torque (as set in the user interface)
+-- velUpperLimit: the joint velocity upper limit (as set in the user interface)
+
+if not PID_P then
+    PID_P=0.1
+    PID_I=0
+    PID_D=0
+end
+
+if init then
+    pidCumulativeErrorForIntegralParam=0
+end
+ctrl = errorValue*PID_P
+
+if PID_I ~=0 then
+    pidCumulativeError = pidCumulativeError+errorValue*dynStepSize
+else
+    pidCumulativeErrorForIntegralParam=0
+end
+
+ctrl=ctrl+pidCumulativeError*PID_I
+if not init then
+    ctrl=ctrl+(errorValue-pidLastError)*PID_D/dynStepSize
+end
+pidLastError=errorValue
+
+velocityToApply=ctrl/dynStepSize
+if (velocityToApply>velUpperLimit) then
+    velocityToApply=velUpperLimit
+end
+if (velocityToApply<-velUpperLimit) then
+    velocityToApply=-velUpperLimit
+end
+forceOrTorqueToApply=maxForceTorque
+
+return forceOrTorqueToApply,velocityToApply
+\end{lstlisting}
+
 \subsection{Springs}
 

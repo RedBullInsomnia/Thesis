@@ -15,8 +15,27 @@ The section is heavily inspired by \cite{bender2014interactive}. The simulation 
 
 \begin{figure}[htp]
 \center
-\includegraphics[width=0.3\textwidth]{figures/star_simul_loop2}
-\caption[Simulation loop]{Simulation loop}
-\label{fig:star_simul_loop}
+\begin{subfigure}[b]{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/star_simul_loop2}
+	\caption[Simulation loop]{Modular description of the simulation loop of a physics engine}
+	\label{fig:star_simul_loop}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.47\textwidth}
+	\includegraphics[width=\textwidth]{figures/STAR_collision}
+	\caption[Collision detection]{Modular description of the collision detection in a physics engine.}
+	\label{fig:star_collision}
+\end{subfigure}
+\caption[Modular phase description of the sub tasks of a rigid body simulator]{Modular phase description of the sub tasks of a rigid body simulator. The mid phase and narrow phase are grouped together because they are often combined for performance reasons}
+\label{fig:phase_simul}
 \end{figure}
 
+\section{Collision detection}
+Collision detect is broken into three phases called the broad phase, the mid phase and the narrow phase. 
+
+During the broad phase, objects are approximated by simple geometric primitives. Distances between such geometric shapes are easy to compute. Spheres are usually used. If such spheres do not overlap, then neither do the actual objects.
+
+When an object has a complex shape, an additional phase called the mid phase separates the object into several simpler shapes to detect collisions. Finally the narrow phase uses the exact geometries of the object to find the contact points.
+
+\section{A quick primer}
+Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding)
