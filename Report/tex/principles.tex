@@ -38,4 +38,7 @@ During the broad phase, objects are approximated by simple geometric primitives.
 When an object has a complex shape, an additional phase called the mid phase separates the object into several simpler shapes to detect collisions. Finally the narrow phase uses the exact geometries of the object to find the contact points.
 
 \section{A quick primer}
-Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding)
+Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding).
+
+This yields a differential nonlinear complementarity problem (dNCP) tha cannot be solved in closed form. It is discretized in time producing a series of NCPs whose solutions are an approximation of the state of the system.  This discrete solution is usually found by linearizing the NCP into a LCP to take advantage of the rich background for that type of problems.
+
