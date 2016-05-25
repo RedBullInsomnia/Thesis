@@ -1,7 +1,7 @@
-In this section we explain how to use the simulator and how some simulations influenced the design of the robot.
+In this chapter we explain how to use the simulator and it influenced the design of our humanoid robot.
 
-\section{Simulation setup}
-The basic idea is to use V-Rep as a simulation platform and use TCP/IP to have another program control the simulation from outside. This gives us great implementation flexibility and we can substitute the real robot by the simulation model easily. This is represented on \cref{fig:simulation_principles}. For this thesis, the control code will be written in MATLAB. 
+\section{Overview of the simulation setup}
+V-Rep is used to simulate the physics of the robot but the control code runs alongside and not inside V-Rep. This is possible because V-Rep runs a server thread which can process specific instructions\footnote{An alphabetical list of those instructions can be found on \url{http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionListAlphabetical.htm}} sent by a client thread. This gives us great implementation flexibility and we can substitute the real robot by the simulation model easily. This is represented on \cref{fig:simulation_principles}.
 
 \begin{figure}[htp]
 \center
@@ -19,7 +19,15 @@ Furthermore, the simulation will operate in the synchronous operation mode. That
 \label{fig:remoteApi}
 \end{figure}
 
-\lstinputlisting[style=Matlab-editor, float]{codes/simulation_client_vrep.m}
+The instructions available can execute a number of different actions. The following proved most useful for this project :\begin{itemize}
+\item simxGetObjectHandle : this function is used to retrieve a handle on an object. A handle is necessary if a user wants to perform operations on an object.
+\item simxSetJointTargetPosition : this function sets a target position for a joint.
+\item simxSetFloatSignal : this function gives the possibility of setting the value of a signal inside V-Rep. This is useful if we want to extend the interface that V-Rep provides.
+\item simxGetFloatSignal : this function retrieves the value of a float signal. 
+\end{itemize}
+
+
+\lstinputlisting[style=Matlab-editor, float, captionpos=b, caption={Minimal example code that connects to the server, gets the handles and implements a basic control loop}]{codes/simulation_client_vrep.m}
 
 \section{Applications}
 \subsection{Static stability}
