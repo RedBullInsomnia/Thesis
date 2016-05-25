@@ -1,20 +1,23 @@
 This chapter briefly introduces the basic concepts of physics engines. We restrict ourselves to the simulation of rigid bodies, which is a significant simplification of the problem since rigid bodies are idealized solid objects which never change shape.
 
 \section{Problem statement}
-We need to model the physical 
+Physics engine trouble themselves with the simulation of classical mechanics in a computer. They model how objects accelerate, move and react to collisions with other objects. They also model how objects can be constrained to each other, for example with a hinge and how that influences them.
 
-\section{Definitions}
-A \textbf{mesh} is a 3D object made of vertices, edges and faces. 
-
-A \textbf{convex mesh} is a mesh whose internal angles are all less or equal to $180\degree$.
-
-\section{Kinematics}
-The position of an object in a 3D space is given by a vector $p \in R^3$ from the origin of an inertial frame to the body fixed frame.
-
-The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions.
+\subsection{Notations and definitions}
+\begin{itemize}
+\item $a\cdot b$ denotes the product of scalars $a$ and $b$.
+\item $\mathbf{a}\cdot \mathbf{b}$ denotes the product of vectors $\mathbf{a}$ and $\mathbf{b}$.
+\item $\mathbf{a}\times\mathbf{b}$ denotes the cross product of vectors $\mathbf{a}$ and $\mathbf{b}$.
+\item A \textbf{mesh} is a 3D object made of vertices, edges and faces. 
+\item A \textbf{convex mesh} is a mesh whose internal angles are all less or equal to $180\degree$.
+\end{itemize}
 
 \section{Principles of rigid body dynamics simulation}
-The section is heavily inspired by \cite{bender2014interactive}. The simulation of rigid body dynamics is usually built around the loop presented in \cref{fig:star_simul_loop}. The simulator begins by finding the collision points between objects (Collision detection). These points are used to derive motion laws which are solved to determine the forces that act on the objects and prevent them from inter-penetrating (Contact handling). Newly found contact points imply collisions, which generate infinite impulse forces, which are handled by collision resolution. When all the contact forces have been computed, the position and velocities of the bodies are integrated forward in time before a new iteration starts.
+The section is heavily inspired by Bender's \cite{bender2014interactive} state of the art paper on rigid body simulation. The simulation of rigid body dynamics is usually built around the loop presented in \cref{fig:star_simul_loop}. The simulator begins by finding the collision points between objects (Collision detection). These points are used to derive motion laws which are solved to determine the forces that act on the objects and prevent them from inter-penetrating (Contact handling). Newly found contact points imply collisions, which generate infinite impulse forces, which are handled by collision resolution. When all the contact forces have been computed, the position and velocities of the bodies are integrated forward in time before a new iteration starts.
+
+Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding).
+
+This yields a differential nonlinear complementarity problem (dNCP) that cannot be solved in closed form. It is discretized in time producing a series of NCPs whose solutions are an approximation of the state of the system.  This discrete solution is usually found by linearizing the NCP into a LCP to take advantage of the rich background for that type of problems.
 
 \begin{figure}[htp]
 \center
@@ -40,10 +43,40 @@ During the broad phase, objects are approximated by simple geometric primitives.
 
 When an object has a complex shape, an additional phase called the mid phase separates the object into several simpler shapes to detect collisions. Finally the narrow phase uses the exact geometries of the object to find the contact points. These are then returned to the simulation model.
 
-\section{A quick primer}
-Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding).
 
-This yields a differential nonlinear complementarity problem (dNCP) tha cannot be solved in closed form. It is discretized in time producing a series of NCPs whose solutions are an approximation of the state of the system.  This discrete solution is usually found by linearizing the NCP into a LCP to take advantage of the rich background for that type of problems.
+\section{Kinematics}
+The position of an object in a 3D space is given by a vector $p \in R^3$ from the origin of an inertial frame to the body fixed frame.
+
+The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$)
+
+The translational velocity is usually noted $\mathbf{v} \in \mathcal{R}^3$. The rotational velocity $\mathbf{w} \in \mathcal{R}^3$ describes the rate at which the body rotates.
+
+If $\mathbf{q} = (p, Q)^T$ the differential equation of motion can be written as 
+\begin{align*}
+\dot{\mathbf{q}} &= \left(\begin{array}{c c c c c c}
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & -Q_x & -Q_y & -Q_z\\
+0 & 0 & 0 & Q_s & Q_z & -Q_y\\
+0 & 0 & 0 & -Q_z & Q_s & Q_x\\
+0 & 0 & 0 & Q_y & -Q_x & Q_s
+\end{array}\right)
+\left(\begin{array}{c}
+v_x\\
+v_y\\
+v_z\\
+\omega_x\\
+\omega_y\\
+\omega_z
+\end{array}\right)
+\end{align*}
 
 \section{Newton-Euler}
+The Newton-Euler equations describe how forces and moments modify the velocities of an object.
+
+\begin{align}
+m\dot{\mathbf{v}} &= \mathbf{f}\\
+\mathbf{I}\dot{\mathbf{\omega}} + \mathbf{\omega} \times \mathbf{I}\omega &= \mathbf{\tau}
+\end{align}
 
