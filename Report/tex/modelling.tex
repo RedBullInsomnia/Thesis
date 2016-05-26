@@ -6,8 +6,8 @@ Our robot will be made from a number of elements that all need to be represented
 \item hands, feet, electronics
 \item servos
 \end{itemize}
+We will first model the inactive elements such as the feet or the electronics before modelling the active elements, servos and cameras.
 
-\section{Basic Modelling}
 \subsection{Convex elements}
 A convex element is an element which has a convex shape, that is, all its interior angles are less or equal to $180\degree$. Our humanoid robot will have some number of them since a lot of elements can be approximated as cubes, which are convex.
 
@@ -18,17 +18,29 @@ A shape is concave if it is not convex. It is not recommended to use concave sha
 
 Therefore, the modelling consists in approximating such a shape by several convex shapes, linked together.
 
-\section{Applied to the building of a humanoid robot}
+\section{Modelling the inactive elements}
+
+\subsection{Electronics, batteries and hands}
+The electronics inside the robot should be limited to the CPU motherboard (\cref{fig:electronics}) and some power electronics to power the servo-motors. As of the writing of this master thesis these elements are not totally defined but it can be assumed a simple cubic shape model will suffice.
+
+\begin{figure}[htp]
+\center
+\includegraphics[width=0.3\textwidth]{figures/odroid-c2}
+\caption{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
+\label{fig:electronics}
+\end{figure}
+
+The dimensions and weight of the electronics are in \cref{table:weights}.
+
 \subsection{Feet}
-The shape of the feet is not fixed yet but it is safe to approximate them by a convex shape with high friction. 
+At the moment of writing this report, the drawings of the feet are not completed. Nevertheless we can assume that approximating them as cube will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
+
+The choice of the material to use for the feet is rather important. The friction will have some influence on the behaviour of the robot. According to the material chosen, we can modify the friction parameter of the feet.
 
 \subsection{Frames}
-The frames in use, FR07-H101 are convex and are thus decomposed into into convex shapes 
-that are linked together. 
+The frames in use, FR07-H101 are concave and are thus decomposed into into convex shapes that are linked together. 
 
-\subsection{Eletronics}
-Electronics 
-
+\section{Modelling the active elements}
 \subsection{Cameras}
 Cameras are modelled as cubes. Their function is performed by vision sensors handled by V-Rep.
 \begin{figure}[htp]
@@ -58,7 +70,7 @@ Cameras are modelled as cubes. Their function is performed by vision sensors han
 
 The robot will mainly be made from MX-28R servos, manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation.
 
-The MX-28R outer shape is convex so we can create a convex mesh to model its appearance. Its mass and inertias can be set to $77g$ and 
+The MX-28R outer shape is convex so we create a convex mesh to model its appearance. Its mass and inertias are set to $77g$ and 
 \begin{align*}
 Ixx Iyy Izz = (
 \end{align*}

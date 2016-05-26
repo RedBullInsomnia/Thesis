@@ -43,7 +43,7 @@ Thumbs.db
 #######################
 *.asv
 
-# Latex backup files #
+# Latex auxfiles #
 #######################
 *.aux
 *.toc
@@ -52,6 +52,7 @@ Thumbs.db
 *.lot
 *.out
 *.bbl
+*.dvi
 
 
 /Debug
