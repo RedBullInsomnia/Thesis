@@ -30,11 +30,7 @@ The instructions available can execute a number of different actions. The follow
 
 \section{Applications}
 \subsection{Static stability}
-The first application is simply to build a model of the robot and test if it is able to stand upright on its own.
-
-The modelling begins in Blender where pieces are simplified/made convex and placed to create the structure of the robot. The model is then exported (in COLLADA) and imported into V-Rep. 
-
-The feet are approximated by a thicker block in order to help with the collision detection. They are also given a high friction.
+The first application is simply to build a model of the robot and test if it is able to stand upright on its own, using the servos.
 
 The torque of the servos is computed from the maximal torque of the DC motor and the reduction ratio of the gears. 
 \begin{align*}
@@ -45,24 +41,6 @@ Torque &= TorqueMotor \times ReductionRatio\\
 In \cref{sec:exp1} we determined that the maximum torque the servo was actually able to produce was $1.7Nm$ so to represent this we choose to set the maximum torque of the servos to $1Nm$.
 
 In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.6$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
-
-\begin{table}[htp]
-\center
-\begin{tabularx}{\textwidth}{@{} l X X l @{}}
-\toprule
-\textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
-\midrule
-Odroid C-2 & 40 &  & 85.0 x 56.0 x 10.0\\
-Li-Po battery & 188 & 2304 & 103.0 x 33.0 x 24.0\\
-Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
-LI-USB30-M021C & 22 & 2200 & 26.0 x 26.0 x 14.7\\
-Frame Fr-07 & & 1200 & \\
-Frame Fr-101-H3 & 7 & 1200 & \\
-\bottomrule
-\end{tabularx}
-\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
-\label{table:weights}
-\end{table}
 
 The springs on the leg are simulated by two spherical joints and one prismatic joint set to spring-damper mode.
 

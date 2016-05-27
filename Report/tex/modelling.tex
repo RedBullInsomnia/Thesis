@@ -20,8 +20,28 @@ Therefore, the modelling consists in approximating such a shape by several conve
 
 \section{Modelling the inactive elements}
 
-\subsection{Electronics, batteries and hands}
-The electronics inside the robot should be limited to the CPU motherboard (\cref{fig:electronics}) and some power electronics to power the servo-motors. As of the writing of this master thesis these elements are not totally defined but it can be assumed a simple cubic shape model will suffice.
+\begin{table}[htp]
+\center
+\begin{tabularx}{\textwidth}{@{} l X X l @{}}
+\toprule
+\textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
+\midrule
+Odroid C-2 & 40 &  & 85.0 x 56.0 x 10.0\\
+Li-Po battery & 188 & 2304 & 103.0 x 33.0 x 24.0\\
+Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
+LI-USB30-M021C & 22 & 2200 & 26.0 x 26.0 x 14.7\\
+Frame Fr-07 & & 1200 & \\
+Frame Fr-101-H3 & 7 & 1200 & \\
+Hand & & & 70.0 x 31.0 x 31.0\\
+Feet & & & \\
+\bottomrule
+\end{tabularx}
+\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
+\label{table:weights}
+\end{table}
+
+\subsection{Electronics}
+By electronics we mean the motherboard and the power electronics. The motherboard is an Odroid C-2, shown in \cref{fig:electronics}. It is intended to be the sole CPU onboard the robot. The role of the power electronics will be to convey the energy stored in the batteries to the servo motors. 
 
 \begin{figure}[htp]
 \center
@@ -30,7 +50,12 @@ The electronics inside the robot should be limited to the CPU motherboard (\cref
 \label{fig:electronics}
 \end{figure}
 
-The dimensions and weight of the electronics are in \cref{table:weights}.
+As of now, only the size of the motherboard is known to us, as the power electronics are not yet ready. Nevertheless, a rough guess can be made : we will assume that the electronics will take twice the volume of the Odroid C-2. That volume is represented as a cube, of dimensions and size compiled in \cref{table:weights}.
+
+\subsection{Hands}
+We call \emph{hands} the elements that will mimic human hands. As the Robocup competition does not require to manipulate objects, the hands may well be simple tubes or cubes. However, in an effort to make the robot more versatile, grippers of some kind may be used instead.
+
+We chose to model the hands as cylinders, of dimensions and size as presented in \cref{table:weights}.
 
 \subsection{Feet}
 At the moment of writing this report, the drawings of the feet are not completed. Nevertheless we can assume that approximating them as cube will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
