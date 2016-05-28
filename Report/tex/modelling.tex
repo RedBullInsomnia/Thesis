@@ -87,6 +87,8 @@ That image sensor can be reached through the remote API of V-Rep in a number of 
 \item Oneshot : we can request one image from the simulator. This is less expensive and will probably be preferred.
 \end{itemize} 
 
+All the characteristics of the model of a camera are compiled in \cref{table:cam_specs}.
+
 \begin{table}[htp]
 \center
 \begin{tabularx}{\textwidth}{@{}X X X @{}}
@@ -97,7 +99,7 @@ Weight & 22 & $g$\\
 Dimensions & 26.0 x 26.0 x 14.7 & $mm^3$\\
 Inertia & & $gmm^3$\\
 Resolution & & $px^2$\\
-Field of view & & $\deg$\\
+Field of view & & $\degree$\\
 \bottomrule
 \end{tabularx}
 \caption{Characteristics of the model of the LI-USB30-M021C camera}
@@ -124,12 +126,16 @@ Field of view & & $\deg$\\
 
 The robot will mainly be made from MX-28R servos, manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation.
 
-The MX-28R outer shape is convex so we create a convex mesh to model its appearance. Its mass and inertias are set to $77g$ and 
+The MX-28R outer shape is convex so we create a convex mesh to model its appearance. As the manual \cite{mx_28_manual} does not provide the actual continuous torque, we compute from the maximal torque of the DC motor and the reduction ratio of the gears. 
 \begin{align*}
-Ixx Iyy Izz = (
+Torque &= TorqueMotor \times ReductionRatio\\
+&= 3.67e^{-3} \times 193\\
+&= 0.7083Nm
 \end{align*}
 
 \begin{table}[htp]
+
+The servo uses a PID controller to reach and hold a desired position. The model inside V-Rep also uses a PID and the code is in \cref{lst:servo}.
 \center
 \begin{tabularx}{\textwidth}{@{} l l X @{}}
 \toprule
@@ -146,30 +152,9 @@ Nominal torque & $0.7$ & $Nm$\\
 \end{tabularx}
 \caption{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual}}
 \label{table:specs}
-\end{table}
+\end{table} 
 
-The torque of the servos is computed from the maximal torque of the DC motor and the reduction ratio of the gears. 
-\begin{align*}
-Torque &= TorqueMotor \times ReductionRatio\\
-&= 3.67e^{-3} \times 193\\
-&= 0.7083Nm
-\end{align*} 
-
-\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, float, caption=Control code of the servo, captionpos = b ]
--- init: true when this callback is called for the first time
--- revolute: true if the joint is revolute
--- cyclic: true if the joint is revolute and cyclic (i.e. no lower/upper limits)
--- currentPos: the current position of the joint
--- targetPos: the desired position of the joint
--- errorValue
--- effort: the last force or torque that acted on this joint along/around its axis
--- dynStepSize: the step size used for the dynamics calculations
--- lowLimit: the joint lower limit
--- highLimit: the joint upper limit
--- targetVel: the joint target velocity 
--- maxForceTorque: the joint maximum force/torque
--- velUpperLimit: the joint velocity upper limit
-
+\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, float, caption={Control code of the servo}, label={lst:servo}, captionpos = b]
 if not PID_P then
     PID_P=0.1
     PID_I=0
