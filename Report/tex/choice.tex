@@ -3,21 +3,20 @@ In this chapter we present the reasons for choosing V-Rep as the simulator and B
 \section{Problem statement} 
 We want to find a simulation tool able of simulating physics elements such as inertias, frictions, collisions, joints (hinge, spring-dampers). We also want to get some feedback from the simulation, like acceleration of the objects and their position. Simulation of vision sensors would be a plus, but is not the primary selection criterion. We also want to keep the control code separated from the simulation.
 
-\section{Available tools}
-\subsection{Barebone physics engines}
+\section{Barebone physics engines}
 The physics engine is the cornerstone of a physics simulation tool. There exist a quantity of them, we present here the most popular ones that have the the following features' set :  multi rigid body dynamics, collision detection, joints (hinge, spring-dampers, generic 6DOF\footnote{DOF : degree of freedom}). 
 
 \begin{enumerate}
-\item \textbf{Bullet:} As of now, it is the most popular open source physics engine. Primarily used for games\footnote{Most notably in the Grand Theft Auto(GTA) games series} it is also used in more serious applications such as Blender, V-Rep or NASA's tensegrity robotics toolkit. 
+\item \textbf{Bullet\footnote{\url{http://bulletphysics.org/wordpress/}}:} As of now, the most popular open source physics engine. Although primarily used in video games it is also used in applications such as Blender, V-Rep or NASA's tensegrity robotics toolkit. 
 
-\item \textbf{ODE:} Open source, a little older that Bullet. As it was already mature when simulators started to be developed, it is present in a lot of robotics simulation tools (V-Rep, Webots, Gazebo...). It was also designed with games in mind but was influenced by its success in more serious applications.
+\item \textbf{Newton\footnote{\url{http://newtondynamics.com/forum/newton.php}}:} Another open source engine, not quite as popular as Bullet and ODE but nevertheless used for commercial games and simulation. 
 
-\item \textbf{Newton:} Another open source engine, not quite as popular as Bullet and ODE but nevertheless used for commercial games and simulation. What makes it stand out in the crowd is its deterministic constraint solver, as opposed to iterative solvers used by Bullet and ODE.
+\item \textbf{ODE\footnote{\url{https://bitbucket.org/odedevs/ode/}}:} Open source, a little older that Bullet. As it was already mature when simulators started to be developed, it is present in a lot of robotics simulation tools (V-Rep, Webots, Gazebo...). It was also designed with games in mind but was influenced by its success in more serious applications.
 
 \item \textbf{PhysX \& Havok:} Both are proprietary engines used primarily for games. They won't be further discussed because their focus is on speed rather than accurateness and as such they cannot be used in a simulation that aims to be realistic, as stated by Erez \textit{et al} in \cite{engines_comparison}.
 \end{enumerate}
 
-\subsection{Simulators}
+\section{Simulators}
 In this section we will speak of software that provides a higher level interface to the physics engines we presented earlier. That interface usually adds a visualization and some other useful features.
 \begin{enumerate}
 
@@ -25,7 +24,7 @@ In this section we will speak of software that provides a higher level interface
 
 It is open source and cross platform.
 
-\item \textbf{Gazebo\footnote{\url{http://gazebosim.org/} [Accessed 21/05/2016]}} is the official simulator for the DARPA Atlas challenge. It features multiple physics engines (Bullet ,Simbody, Dart and ODE), allows custom plugins and uses the SDF format for its models. 
+\item \textbf{Gazebo\footnote{\url{http://gazebosim.org/} [Accessed 21/05/2016]}} was the official simulator of DARPA's Robotics challenge. It features multiple physics engines (Bullet ,Simbody, Dart and ODE), allows custom plugins and uses the SDF format for its models. 
 
 It is open source and runs natively on Linux systems but needs to be compiled in order to run on Windows or OSX.
 
@@ -115,6 +114,7 @@ V-Rep also has multiple physics engines available and has a user-friendly interf
 \end{itemize}
 
 \section{Choice}
+\subsection{Simulator}
 The first choice to be made is whether we go for a barebone physics engines or a simulator: the former has the advantage of being a highly customizable solution but a simulator provides features a physics engines does not :\begin{itemize}
 \item 3D visualization
 \item code handling the import of models
@@ -127,3 +127,5 @@ From the available simulators(Blender, Gazebo and V-Rep) the best seems to be V-
 Inside V-Rep, we chose Newton Dynamics as the physics engine because simple tests showed it to be the most stable with a high number of joints\footnote{with the exception of Vortex but it requires a license to run more than $10s$}. That choice is further confirmed by Hummel \textit{et al} in \cite{hummel2012evaluation} where Newton Dynamics is stated to be the best engine when it comes to handling a high number of constraints.
 
 Although Blender was not chosen as the primary simulation tool for the project, it shall be used as a modelling tool for the robot, as a complement for V-Rep.
+
+\subsection{Modeller}

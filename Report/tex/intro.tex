@@ -1,53 +1,60 @@
 \section{Context}
-For the last ten years, Montefiore has been participating in a robotic contest named \emph{Eurobot}, where wheeled robots battle each other for points in various play environments. After some success, it was decided to move on to a more difficult contest, \emph{Robocup}.
-
-This contest is quite vast and divided into several categories :
-\begin{itemize}
-\item Robocup Rescue : a category where robots are must perform various rescue operations in diverse scenarios.
-\item RoboCup Industrial : a category with industrially oriented competitions.
-\item RoboCup@Home : a league for domestic robots. This category has a social aspect to it.
-\item RoboCupJunior : more of an initiative that aims to foster robotics interest in children rather than a contest, it helps organize various robotics events for younger minds.
-\item RoboCup Soccer : historically the first category, centred about humanoid robots playing football in small teams. The objective of this category is to have a team of robots beat the world champions by 2050. This is the league we will compete in.
-\end{itemize}
-Robocup Soccer is further subdivided into 4 sub-categories :\begin{itemize}
-\item Standard platform, where the teams all use the same robot(Nao).
-\item Adultsize, for the taller robots
-\item Teensize, for middle sized robots
-\item Kidsize, for the smaller robots.
-\end{itemize}
-
-This year's team is preparing to participate to the Kidsize subcategory of the Robocup Soccer category. This master thesis is the by-product of that team's activity.
+For the last ten years, students from the Montefiore institute have been participating in a robotic contest named \emph{Eurobot}, a competition where wheeled robots battle each other for points in various play environments. After some success and following a thirst for new challenges, it was decided to move on to another contest, \emph{RoboCup}.
 
 \begin{figure}[htp]
 \center
-\includegraphics[width=0.5\textwidth]{figures/robocup}
-\caption[Robocup Soccer standard platform]{Two teams of Nao robots playing against each other in the 2014 edition of RoboCup Soccer standard platform league\textit{[Photo courtesy of RoboCup]}}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{figures/robocup}
+\caption[Robocup Soccer standard platform]{Two teams of Nao robots playing against each other in the 2014 edition of RoboCup Soccer standard platform league. \textit{[Photo courtesy of RoboCup]}}
 \label{fig:intro_robocup}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{figures/intro_ks}
+\caption[Robocup Soccer standard platform]{Two robots of opposing teams looking at the ball, in the 2013 edition of RoboCup Soccer kidsize league. \textit{[Photo courtesy of RoboCup]}}
+\label{fig:intro_ks}
+\end{subfigure}
+\caption{}
+\label{fig:}
 \end{figure}
 
-Since Montefiore is participating for the first time we are nearly starting from scratch and we don't really know how to build a good humanoid robot. In order to not spend countless hours building and testing different designs we need a tool able of simulating the physics
-of a robot model. 
-
-In particular, we want to use it to :
-\begin{enumerate}
-\item Test different robot designs and choose the best one, faster than it would be done by building the designs in real life.
-\item At a later stage, be able to test control algorithms faster because the real robot is not needed.
-\end{enumerate}
-
-\section{Goals of the project}
-The goal of this thesis is to provide the team with a simulation tool that provides the following features :
+This contest is quite vast and, as of 2016, is divided into several categories (called domains in RoboCup jargon):
 \begin{itemize}
-\item realistically simulate the physics of objects including inertias, frictions, collisions and more.
-\item receive and process orders incoming at a relatively high frequency. The processing need not be in real-time.
-\item we want to use this simulator to test the code that would run on the real robot. That is, the simulator should provide the same interface to the code as the robot would.
-\item visualize the results of the simulation.
+\item RoboCup Rescue : as the name suggests, a domain where robots must perform various rescue operations in diverse scenarios.
+\item RoboCup Industrial : a category with industrially oriented competitions, 
+\item RoboCup@Home : centred around domestic robots, such as robotics helpers for the elderly or robotic butlers.
+\item RoboCupJunior : more of an initiative that aims to foster robotics interest in children rather than a contest, it helps organize various robotics events for younger minds.
+\item RoboCup Soccer : historically the first category, centred about humanoid robots playing football. The objective of this category is to have a team of robots beat the world champions by 2050. This is the league we will compete in.
 \end{itemize}
 
+RoboCup Soccer is further subdivided into 4 sub-categories called leagues :\begin{itemize}
+\item Standard platform, where the teams all use the same robot, \emph{Nao}, as illustrated on \cref{fig:intro_robocup}.
+\item Simulation, a league that does not feature physical robots but focuses on team strategies and artificial intelligence. The matches take place in 2D or 3D simulators.
+\item Adultsize, for the taller robots.
+\item Teensize, for middle sized robots.
+\item Kidsize, for the smaller robots.
+\end{itemize}
+
+This year's team is preparing to participate to the Kidsize league and this master thesis, along with two others, is the by-product of that team's activity. Since this is our first time participating we have no experience regarding humanoids robots. To avoid spending countless hours building and testing different designs we need a tool able of simulating the physics of a robot model. 
+
+\section{Goals of the project}
+The goal of this thesis is to provide the team with a physics simulating tool with the following features :
+\begin{itemize}
+\item realistic simulation of the physics of rigid bodies. This means that the tool should handle inertias, collisions, friction and constraints between objects. Simulation of springs is an interesting bonus.
+\item receive and process orders incoming at a relatively high frequency. The processing need not be in real-time.
+\item the model of our robot should receive the same orders as the real robot would. That is, the simulator should provide the same interface to the control code as the real robot would. 
+\item 3D visualization of the simulation.
+\end{itemize}
+
+That simulator will be used to :
+\begin{enumerate}
+\item Test different robot designs and choose the best one, faster than it would be done by building the designs in real life.
+\item Speed up development and testing of the control code because multiple teams will be able to work in parallel. 
+\end{enumerate}
+
 \section{Structure of the report}
-This report begins with an overview of the basics of physics simulation on computers before moving to the chapter that motivates the choice of V-Rep as the main simulation tool for this project.
+This report begins with an overview of the basic concepts behind physics simulation on computers in \cref{chap:principles}. We then move on to the chapter that motivates the choice of V-Rep as the main simulation tool for this project.
 
-Then, an in-depth presentation of V-Rep and Blender will be made in \cref{tools}, before detailing some experiments that were made to verify and improve the accurateness of the model.
+\Cref{chap:modelling} will be about the modelling of the build blocks of our humanoid robot. The verification and the tuning of the results of some basic simulations will be made in \cref{chap:physical_val}.
 
-\Cref{simulation} goes into the core of the subject with some simulations that influenced the design of the robot before being used to explore control strategies.
-
-The last chapter will conclude the work by summing up and laying out future prospects.
+\Cref{chap:simulation} goes into the core of the subject with some simulations that influenced the design of the robot before being used to explore control strategies. The last chapter will conclude the work by summing up and laying out future prospects.

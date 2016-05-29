@@ -2,21 +2,22 @@ This chapter covers the modelling of the building blocks of the robot.
 
 \section{Problem statement}
 Our robot will be made from a number of elements that all need to be represented in the simulation :\begin{itemize}
-\item cameras
-\item hands, feet, electronics
 \item servos
+\item cameras
+\item hands, feet
+\item electronics
 \end{itemize}
 We will first model the inactive elements such as the feet or the electronics before modelling the active elements, servos and cameras.
 
 \subsection{Convex elements}
-A convex element is an element which has a convex shape, that is, all its interior angles are less or equal to $180\degree$. Our humanoid robot will have some number of them since a lot of elements can be approximated as cubes, which are convex.
+A convex element is an element whose interior angles are all less or equal to $180\degree$. Our humanoid robot will have some number of them since a lot of elements can be approximated as cubes, which are convex.
 
 The modelling consists in creating a mesh with the right dimensions, setting the mass and setting the inertia (V-Rep does not feature matrix inertias, only principal axes inertias). Friction of the material can also be set and will influence how much an object will slide.
 
 \subsection{Concave elements}
 A shape is concave if it is not convex. It is not recommended to use concave shapes in a simulation as they make collision detection more expensive and the simulation is generally more unstable. 
 
-Therefore, the modelling consists in approximating such a shape by several convex shapes, linked together.
+Therefore, it is best to approximate such a shape by a convex mesh whenever possible. If not, then we separate it into several convex shapes that we group together with constraints.
 
 \section{Modelling the inactive elements}
 
@@ -26,11 +27,9 @@ Therefore, the modelling consists in approximating such a shape by several conve
 \toprule
 \textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
 \midrule
-Odroid C-2 & 40 &  & 85.0 x 56.0 x 10.0\\
+Odroid C-2 & 40 & 840 & 85.0 x 56.0 x 10.0\\
 Li-Po battery & 188 & 2304 & 103.0 x 33.0 x 24.0\\
 Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
-Frame Fr-07 & & 1200 & \\
-Frame Fr-101-H3 & 7 & 1200 & \\
 Hand & & & 70.0 x 31.0 x 31.0\\
 Feet & & & \\
 \bottomrule
@@ -60,6 +59,9 @@ We chose to model the hands as cylinders, of dimensions and size as presented in
 At the moment of writing this report, the drawings of the feet are not completed. Nevertheless we can assume that approximating them as cube will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
 
 The choice of the material to use for the feet is rather important. The friction will have some influence on the behaviour of the robot. According to the material chosen, we can modify the friction parameter of the feet.
+
+\subsection{Central plate}
+The central plate will be the main body of the robot. It will support the electronics, the batteries and the arms and legs will be attached to it.
 
 \subsection{Frames}
 In an effort to make the simulation as fast and stable as possible, frames are not physically active in the simulation. They are present, but only for visualisation purpose and do not influence the outcome of the simulation.
@@ -124,7 +126,7 @@ Field of view & & $\degree$\\
 \label{fig:servo}
 \end{figure}
 
-The robot will mainly be made from MX-28R servos, manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation.
+The robot will mainly be made from MX-28R servos (\cref{fig:mx28}) manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation. 
 
 The MX-28R outer shape is convex so we create a convex mesh to model its appearance. As the manual \cite{mx_28_manual} does not provide the actual continuous torque, we compute from the maximal torque of the DC motor and the reduction ratio of the gears. 
 \begin{align*}
