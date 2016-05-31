@@ -44,7 +44,7 @@ By electronics we mean the motherboard and the power electronics. The motherboar
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.3\textwidth]{figures/odroid-c2}
-\caption{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
+\caption[Odroid C-2 motherboard]{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
 \label{fig:electronics}
 \end{figure}
 
@@ -100,7 +100,7 @@ All the characteristics of the model of a camera are compiled in \cref{table:cam
 Weight & 22 & $g$\\
 Dimensions & 26.0 x 26.0 x 14.7 & $mm^3$\\
 Inertia & & $gmm^3$\\
-Resolution & & $px^2$\\
+Resolution &  & $px^2$\\
 Field of view & & $\degree$\\
 \bottomrule
 \end{tabularx}
@@ -122,7 +122,7 @@ Field of view & & $\degree$\\
     \caption{Model of the MX-28R.}
     \label{fig:mx28_model}
 \end{subfigure}
-\caption{Side by side of a MX-28R servo and its 3D model. The shape has been simplified but retains outer appearance of the servo. The axis is used as a position marker and will be removed once the joints are in place.}
+\caption[Side by side of a MX-28R servo and its 3D model]{Side by side of a MX-28R servo and its 3D model. The shape has been simplified but retains outer appearance of the servo. The axis is used as a position marker and will be removed once the joints are in place.}
 \label{fig:servo}
 \end{figure}
 
@@ -138,16 +138,16 @@ Torque &= TorqueMotor \times ReductionRatio\\
 \begin{table}[htp]
 
 The servo uses a PID controller to reach and hold a desired position. The model inside V-Rep also uses a PID and the code is in \cref{lst:servo}.
-\center
+
 \begin{tabularx}{\textwidth}{@{} l l X @{}}
 \toprule
 & \textbf{Data} & \textbf{Unit}\\ 
 \midrule
 Weight & $77$ & $g$\\
 Dimension & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
-Inertia around main axes & $(\begin{array}{c c c}
+Inertia around main axes & $\begin{array}{c c c}
 33,765 & 12,900 & 28,821
-\end{array})$ & $g \times mm^4$ \\
+\end{array}$ & $g \times mm^4$ \\
 Stall torque & $2.5$ & $Nm$\\
 Nominal torque & $0.7$ & $Nm$\\
 \bottomrule
@@ -156,38 +156,4 @@ Nominal torque & $0.7$ & $Nm$\\
 \label{table:specs}
 \end{table} 
 
-\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, float, caption={Control code of the servo}, label={lst:servo}, captionpos = b]
-if not PID_P then
-    PID_P=0.1
-    PID_I=0
-    PID_D=0
-end
-
-if init then
-    pidCumulativeErrorForIntegralParam=0
-end
-ctrl = errorValue*PID_P
-
-if PID_I ~=0 then
-    pidCumulativeError = pidCumulativeError+errorValue*dynStepSize
-else
-    pidCumulativeErrorForIntegralParam=0
-end
-
-ctrl=ctrl+pidCumulativeError*PID_I
-if not init then
-    ctrl=ctrl+(errorValue-pidLastError)*PID_D/dynStepSize
-end
-pidLastError=errorValue
-
-velocityToApply=ctrl/dynStepSize
-if (velocityToApply>velUpperLimit) then
-    velocityToApply=velUpperLimit
-end
-if (velocityToApply<-velUpperLimit) then
-    velocityToApply=-velUpperLimit
-end
-forceOrTorqueToApply=maxForceTorque
-
-return forceOrTorqueToApply,velocityToApply
-\end{lstlisting}
+The original MX-28R servo does not have any accelerometry, but a master thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 

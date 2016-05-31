@@ -44,8 +44,8 @@ During the broad phase, objects are approximated by simple geometric primitives.
 
 When an object has a complex shape, an additional phase called the mid phase separates the object into several simpler shapes to detect collisions. Finally the narrow phase uses the exact geometries of the object to find the contact points. These are then returned to the simulation model.
 
-
-\section{Kinematics}
+\section{Formulating the nonlinear complementarity problem (physics model)}
+\subsection{Kinematics}
 The position of an object in a 3D space is given by a vector $p \in R^3$ from the origin of an inertial frame to the body fixed frame.
 
 The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$)
@@ -73,7 +73,7 @@ v_z\\
 \end{array}\right)
 \end{align*}
 
-\section{Newton-Euler}
+\subsection{Newton-Euler}
 The Newton-Euler equations describe how forces and moments modify the velocities of an object.
 
 \begin{align}
