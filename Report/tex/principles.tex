@@ -28,7 +28,7 @@ This yields a differential nonlinear complementarity problem (dNCP) that cannot 
 \section{Collision detection}
 \begin{figure}
 \center
-\includegraphics[width=0.5\textwidth]{figures/STAR_collision}
+\includegraphics[width=0.9\textwidth]{figures/STAR_collision_v2}
 \caption[Collision detection]{Modular description of the collision detection in a physics engine.}
 \label{fig:star_collision}
 \end{figure}
@@ -54,35 +54,12 @@ where $\mathbf{v}_n^+$ is the relative normal velocity after impact, $\mathbf{v}
 
 \section{Formulating the nonlinear complementarity problem (physics model)}
 \subsection{Kinematics}
-The position of an object in a 3D space is given by a vector $p \in R^3$ from the origin of an inertial frame to the body fixed frame.
-
-The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$)
+The position of an object in a 3D space is given by a vector $\mathbf{p} \in R^3$ from the origin of an inertial frame to the body fixed frame. The orientation of an object in a 3D space can be represented in different ways. Usually it is represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$)
 
 The translational velocity is usually noted $\mathbf{v} \in \mathcal{R}^3$. The rotational velocity $\mathbf{w} \in \mathcal{R}^3$ describes the rate at which the body rotates.
 
-If $\mathbf{q} = (p, Q)^T$ the differential equation of motion can be written as 
-\begin{align*}
-\dot{\mathbf{q}} &= \left(\begin{array}{c c c c c c}
-1 & 0 & 0 & 0 & 0 & 0\\
-0 & 1 & 0 & 0 & 0 & 0\\
-0 & 0 & 1 & 0 & 0 & 0\\
-0 & 0 & 0 & -Q_x & -Q_y & -Q_z\\
-0 & 0 & 0 & Q_s & Q_z & -Q_y\\
-0 & 0 & 0 & -Q_z & Q_s & Q_x\\
-0 & 0 & 0 & Q_y & -Q_x & Q_s
-\end{array}\right)
-\left(\begin{array}{c}
-v_x\\
-v_y\\
-v_z\\
-\omega_x\\
-\omega_y\\
-\omega_z
-\end{array}\right)
-\end{align*}
-
 \subsection{Newton-Euler}
-The Newton-Euler equations describe how forces and moments modify the velocities of an object.
+The Newton-Euler equations describe how forces and moments modify the velocities of an object through acceleration.
 
 \begin{align}
 m\dot{\mathbf{v}} &= \mathbf{f} \label{eq:newton1}\\
@@ -106,3 +83,7 @@ m\dot{\mathbf{v}} &= \mathbf{f} \label{eq:newton1}\\
 \caption[Friction cone and relative velocities]{Friction cone of a contact and decomposition of the contact force and relative velocity}
 \label{fig:ph}
 \end{figure}
+
+Friction is the most complex type of force a physics engine must deal with. 
+
+\subsection{Constraints}
