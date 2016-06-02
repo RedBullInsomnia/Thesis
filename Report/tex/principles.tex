@@ -53,10 +53,16 @@ Several collision rules exist. Newton's Hypothesis states that
 where $\mathbf{v}_n^+$ is the relative normal velocity after impact, $\mathbf{v}_n^-$ is the relative normal velocity before impact and $e \in [0, 1]$ is called the coefficient of restitution. When $e=1$ the collision is perfectly elastic and when $e=0$ all the energy is lost.
 
 \section{Formulating the nonlinear complementarity problem (physics model)}
+The model is based on the three laws of Newton :\begin{itemize}
+\item The velocity of an object remains unchanged if no force act upon it.
+\item The rate of change of the momentum of an object is equal to the force acting on it.
+\item For every force there is an equal and opposite force.
+\end{itemize}
+
 \subsection{Kinematics}
 The position of an object in a 3D space is given by a vector $p \in R^3$ from the origin of an inertial frame to the body fixed frame.
 
-The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$)
+The orientation of an object in a 3D space can be represented in different ways. Usually it represented by either Euler angles or unit quaternions ($Q_s, Q_x, Q_y, Q_z$). While Euler angles are easier to interpret, they have the disadvantage of the gimbal lock, so quaternions are usually preferred.
 
 The translational velocity is usually noted $\mathbf{v} \in \mathcal{R}^3$. The rotational velocity $\mathbf{w} \in \mathcal{R}^3$ describes the rate at which the body rotates.
 
@@ -106,3 +112,5 @@ m\dot{\mathbf{v}} &= \mathbf{f} \label{eq:newton1}\\
 \caption[Friction cone and relative velocities]{Friction cone of a contact and decomposition of the contact force and relative velocity}
 \label{fig:ph}
 \end{figure}
+
+\subsection{Constraints}
