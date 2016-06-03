@@ -95,13 +95,28 @@ elseif t < 1.8
     % Feet
     instructions(7,:) = [double(h.right_leg_joints(5)), degtorad(-14)];
     instructions(8,:) = [double(h.left_leg_joints(5)), degtorad(-14)];
-else
+    
+elseif t < 2.4
     % Phase 4 Stand up
     instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(-80)];
     instructions(2,:) = [double(h.left_leg_joints(3)), degtorad(-80)];
     
-    instructions(3,:) = [double(h.right_leg_joints(4)), degtorad(70)];
-    instructions(4,:) = [double(h.left_leg_joints(4)), degtorad(70)];
+    instructions(3,:) = [double(h.right_leg_joints(4)), degtorad(60)];
+    instructions(4,:) = [double(h.left_leg_joints(4)), degtorad(60)];
+    
+    % Feet
+    instructions(5,:) = [double(h.right_leg_joints(5)), degtorad(-10)];
+    instructions(6,:) = [double(h.left_leg_joints(5)), degtorad(-10)];
+    
+    % Arms
+    instructions(7,:) = [double(h.right_arm_joints(1)), degtorad(-30)];
+    instructions(8,:) = [double(h.left_arm_joints(1)), degtorad(-30)];
+else
+    instructions(1,:) = [double(h.right_leg_joints(3)), degtorad(-20)];
+    instructions(2,:) = [double(h.left_leg_joints(3)), degtorad(-20)];
+    
+    instructions(3,:) = [double(h.right_leg_joints(4)), degtorad(20)];
+    instructions(4,:) = [double(h.left_leg_joints(4)), degtorad(20)];
     
     % Feet
     instructions(5,:) = [double(h.right_leg_joints(5)), degtorad(-10)];

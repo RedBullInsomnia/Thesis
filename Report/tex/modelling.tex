@@ -50,15 +50,20 @@ By electronics we mean the motherboard and the power electronics. The motherboar
 
 As of now, only the size of the motherboard is known to us, as the power electronics are not yet ready. Nevertheless, a rough guess can be made : we will assume that the electronics will take twice the volume of the Odroid C-2. That volume is represented as a cube, of dimensions and size compiled in \cref{table:weights}.
 
+\subsection{Batteries}
+We choose to use two 4-cells lithium-polymer batteries of approximately $2000mAh$.
+
 \subsection{Hands}
 We call \emph{hands} the elements that will mimic human hands. As the Robocup competition does not require to manipulate objects, the hands may well be simple tubes or cubes. However, in an effort to make the robot more versatile, grippers of some kind may be used instead.
 
 We chose to model the hands as cylinders, of dimensions and size as presented in \cref{table:weights}.
 
 \subsection{Feet}
-At the moment of writing this report, the drawings of the feet are not completed. Nevertheless we can assume that approximating them as cube will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
+At the moment of writing this report, the drawings of the feet are not completed yet. Nevertheless we can assume that approximating them as cubes will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
 
 The choice of the material to use for the feet is rather important. The friction will have some influence on the behaviour of the robot. According to the material chosen, we can modify the friction parameter of the feet.
+
+For the needs of the simulation, the width has been doubled, to deal with unwanted collision behaviour in the simulator. 
 
 \subsection{Central plate}
 The central plate will be the main body of the robot. It will support the electronics, the batteries and the arms and legs will be attached to it.
@@ -99,6 +104,7 @@ All the characteristics of the model of a camera are compiled in \cref{table:cam
 \midrule
 Weight & 22 & $g$\\
 Dimensions & 26.0 x 26.0 x 14.7 & $mm^3$\\
+Density & 2213 & $kg/m^3$\\
 Inertia & & $gmm^3$\\
 Resolution &  & $px^2$\\
 Field of view & & $\degree$\\
