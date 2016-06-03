@@ -143,16 +143,21 @@ void setSpeedLimit(int speed_limit)
 {
     if (speed_limit > 1023)
 		{
-        speed_limit = 1023;
-				cout << "Limit set to max" << endl;
+			speed_limit = 1023;
+			cout << "Limit set to max" << endl;
 		}
     else if (speed_limit < 0)
 		{
-        speed_limit = 0;
-				cout << "No speed limit set" << endl;
+			speed_limit = 0;
+			cout << "No speed limit set" << endl;
 		}
 
     dxl_write_word(DEFAULT_ID, P_MOVING_SPEED_L, speed_limit);
+}
+
+void changeTestType(int order)
+{
+	
 }
 
 void resetServo()
@@ -164,9 +169,9 @@ void resetServo()
     dxl_write_byte(DEFAULT_ID, P_ALARM_SHUTDOWN, 0);
 }
 
-void testCycleMode(int index)
+void testCycleMode(int index, int *goal_pos)
 {
-		int goal_pos[2] = { 1700, 2000 };
+	    //int goal_pos[2] = { 1700, 2000 };
 		int present_pos, comm_status, moving;
 
     dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos[index]);
