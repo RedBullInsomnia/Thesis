@@ -30,9 +30,12 @@ void PrintErrorCode();
 int selectMode();
 
 void manualMode();
-void testCycleMode(int index);
+
+void testCycleMode(int index, int *range);
 
 void setSpeedLimit(int speed_limit);
+
+void changeTestType(int order);
 
 void resetServo();
 

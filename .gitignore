@@ -53,6 +53,6 @@ Thumbs.db
 *.out
 *.bbl
 *.dvi
-
+tfe.pdf
 
 /Debug
