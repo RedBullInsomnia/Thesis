@@ -46,12 +46,39 @@ The springs on the leg are simulated by two spherical joints and one prismatic j
 
 The servos of the robot are simply ordered to hold their initial angle and the simulation determines that the robot can indeed stand upright without any active stabilization.
 
-\subsection{Standing up routines}
+\subsection{Going from a supine to a prone lying position}
+The main motivation for a routine that makes the robot move from a supine lying position to a prone one is that it allows us to only have one standing up routine. 
+
+The routine is defined as follows :\begin{enumerate}
+\item The robot brings his right arm above his head while preparing the left to lift its body from the left side. The legs are twisted towards the right side in preparation for the next step.
+
+\item The left arm starts pushing upwards while the left left swings towards the right side. In the meantime, the right leg swings towards the left side. 
+
+\item 
+
+\item When the left leg touches the ground, the robot relaxes all its limb.
+\end{enumerate}
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = \textwidth]{figures/sup2proneArms}
+    \caption[]{}
+    \label{fig:sup2proneArms}
+\end{figure}
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = \textwidth]{figures/sup2proneLegs}
+    \caption[]{}
+    \label{fig:sup2proneLegs}
+\end{figure}
+
+\subsection{Standing up from a prone lying position}
 This section is heavily inspired by \cite{Stuckler06}
 
 \subsection{Walking}
 
-\section{Influence on robot's design}
+\section{Influence of the simulations on the final design of the robot}
 The simulator helped shape the robot through simulations that unveiled serious design problems (inability to stand after a fall, inability to walk).
 
 The first design is visible on \cref{fig:first_robot}. It was plagued by stability problems, overcomplicated arms and simulation difficulties. 
@@ -77,4 +104,5 @@ The final dimensions of the robot respect the rules of the contest:
 \item Height of legs : $cm$
 \item Height max is $< 1.5 \times 61.3$.
 \item Foot area is $ cm^2$.
+\item Weight : $2.726kg$
 \end{itemize}

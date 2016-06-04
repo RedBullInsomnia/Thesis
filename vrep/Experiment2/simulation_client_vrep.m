@@ -36,7 +36,7 @@ end
 vrep.simxGetPingTime(clientID);
 
 % Now close the connection to V-REP:
-%vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
+vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 vrep.simxFinish(clientID);
 vrep.delete(); % call the destructor!
 disp('Program ended');
@@ -45,7 +45,11 @@ end
 function inst = movement_test(h, t)
     if t < 0.5
         inst = [double(h.joint), degtorad(-90)];
-    elseif t < 1
+    elseif t < 1.5
         inst = [double(h.joint), degtorad(90)];
+    elseif t < 2.5
+        inst = [double(h.joint), degtorad(-90)];
+    else
+        inst = [double(h.joint), degtorad(-90)];
     end
 end

@@ -23,15 +23,16 @@ Therefore, it is best to approximate such a shape by a convex mesh whenever poss
 
 \begin{table}[htp]
 \center
-\begin{tabularx}{\textwidth}{@{} l X X l @{}}
+\begin{tabularx}{\textwidth}{@{} l X X X p{3.5cm} @{}}
 \toprule
-\textbf{Module} & \textbf{Weight [$g$]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
+\textbf{Module} & \textbf{Weight [$g$]} & \textbf{Material [-]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
 \midrule
-Odroid C-2 & 40 & 840 & 85.0 x 56.0 x 10.0\\
-Li-Po battery & 188 & 2304 & 103.0 x 33.0 x 24.0\\
-Mx-28R & 72 & 1150 & 35.6 x 50.6 x 35.5\\
-Hand & & & 70.0 x 31.0 x 31.0\\
-Feet & & & \\
+Odroid C-2 & 40 & & 840 & 85.0 x 56.0 x 10.0\\
+Li-Po battery & 188 & Li-Po & 2304 & 103.0 x 33.0 x 24.0\\
+Mx-28R & 72 & & 1150 & 35.6 x 50.6 x 35.5\\
+Hand & & & & 70.0 x 31.0 x 31.0\\
+Feet & & & & \\
+Central plate & & Aluminium & & \\
 \bottomrule
 \end{tabularx}
 \caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
@@ -44,14 +45,14 @@ By electronics we mean the motherboard and the power electronics. The motherboar
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.3\textwidth]{figures/odroid-c2}
-\caption[Odroid C-2 motherboard]{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
+\caption[Odroid C-2]{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
 \label{fig:electronics}
 \end{figure}
 
 As of now, only the size of the motherboard is known to us, as the power electronics are not yet ready. Nevertheless, a rough guess can be made : we will assume that the electronics will take twice the volume of the Odroid C-2. That volume is represented as a cube, of dimensions and size compiled in \cref{table:weights}.
 
 \subsection{Batteries}
-We choose to use two 4-cells lithium-polymer batteries of approximately $2000mAh$.
+We choose to use two 4-cells lithium-polymer batteries of approximately $2000mAh$. They are modelled as cube of dimensions and weight specified in \cref{table:weights}.
 
 \subsection{Hands}
 We call \emph{hands} the elements that will mimic human hands. As the Robocup competition does not require to manipulate objects, the hands may well be simple tubes or cubes. However, in an effort to make the robot more versatile, grippers of some kind may be used instead.
@@ -63,13 +64,15 @@ At the moment of writing this report, the drawings of the feet are not completed
 
 The choice of the material to use for the feet is rather important. The friction will have some influence on the behaviour of the robot. According to the material chosen, we can modify the friction parameter of the feet.
 
-For the needs of the simulation, the width has been doubled, to deal with unwanted collision behaviour in the simulator. 
+For the needs of the simulation, the width has been exaggerated, to deal with unwanted collision behaviour during simulation (sinking into the floor). 
 
 \subsection{Central plate}
-The central plate will be the main body of the robot. It will support the electronics, the batteries and the arms and legs will be attached to it.
+The corpus of the robot will be a metallic plate which will support the batteries and the electronics. The chains of servos constituting the head, legs and arms will be attached to it too.
+
+The central plate 
 
 \subsection{Frames}
-In an effort to make the simulation as fast and stable as possible, frames are not physically active in the simulation. They are present, but only for visualisation purpose and do not influence the outcome of the simulation.
+In an effort to make the simulation as fast and stable as possible, frames are not physically active in the simulation. They are present, but only for visualisation purpose and do not influence the outcome of the simulation. Their role as a link between servo is fulfilled by joints.
 
 \subsection{Springs}
 It is planned to have springs on the legs of the robot, to try and make walking more energy efficient. 
@@ -83,7 +86,7 @@ The robot will be equipped with two small cameras, of the type illustrated in \c
 \begin{figure}[htp]
 \center
     \includegraphics[width = 0.3\textwidth]{figures/li_cam}
-    \caption{LI-USB30-M021C camera.}
+    \caption[LI-USB30-M021C]{LI-USB30-M021C.}
     \label{fig:camera}
 \end{figure}
 
@@ -141,25 +144,31 @@ Torque &= TorqueMotor \times ReductionRatio\\
 &= 0.7083Nm
 \end{align*}
 
-\begin{table}[htp]
-
 The servo uses a PID controller to reach and hold a desired position. The model inside V-Rep also uses a PID and the code is in \cref{lst:servo}.
 
+\begin{table}[htp]
 \begin{tabularx}{\textwidth}{@{} l l X @{}}
 \toprule
 & \textbf{Data} & \textbf{Unit}\\ 
 \midrule
 Weight & $77$ & $g$\\
 Dimension & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
-Inertia around main axes & $\begin{array}{c c c}
-33,765 & 12,900 & 28,821
-\end{array}$ & $g \times mm^4$ \\
+Ixx & $22,649$ & $g \times mm^4$\\
+Iyy & $12,868$ & $g \times mm^4$\\
+Izz & $17,733$ & $g \times mm^4$ \\
 Stall torque & $2.5$ & $Nm$\\
-Nominal torque & $0.7$ & $Nm$\\
+Nominal continuous torque & $0.7$ & $Nm$\\
 \bottomrule
 \end{tabularx}
-\caption{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual}}
+\caption[]{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual} and from \url{http://www.robotis.com/view/DXL-INERTIA/RX-28_INERTIA.pdf}[Accessed 4/6/2016]. The inertia is not exactly accurate as it is the inertia of a RX-28 servo. Nevertheless, it should be really close as the RX-28 and MX-28 closely resemble each other}
 \label{table:specs}
 \end{table} 
 
 The original MX-28R servo does not have any accelerometry, but a master thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.8\textwidth]{figures/pidcontrol}
+    \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}}
+    \label{fig:mx28_pid}
+\end{figure}

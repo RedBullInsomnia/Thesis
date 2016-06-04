@@ -38,35 +38,35 @@ handles.center = center;
 
 j = 1;
 
-left_arm_joints = [-1, -1, -1];
-right_arm_joints = [-1, -1, -1];
+left_arm = [-1, -1, -1];
+right_arm = [-1, -1, -1];
 for i = 1:3
-    [~, left_arm_joints(i)] = vrep.simxGetObjectHandle(clientID,...
+    [~, left_arm(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('left_arm%d', i), vrep.simx_opmode_oneshot_wait);
-    [~, right_arm_joints(i)] = vrep.simxGetObjectHandle(clientID,...
+    [~, right_arm(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('right_arm%d', i), vrep.simx_opmode_oneshot_wait);
     
     % Reset instructions
-    instructions(j, :) = [double(left_arm_joints(i)), 0]; j = j + 1;
-    instructions(j, :) = [double(right_arm_joints(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(left_arm(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(right_arm(i)), 0]; j = j + 1;
 end
 
-left_leg_joints = [-1, -1, -1, -1, -1, -1];
-right_leg_joints = [-1, -1, -1, -1, -1, -1];
+left_leg = [-1, -1, -1, -1, -1, -1];
+right_leg = [-1, -1, -1, -1, -1, -1];
 for i = 1:6
-    [~, left_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
+    [~, left_leg(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('left_leg%d', i), vrep.simx_opmode_oneshot_wait);
-    [~, right_leg_joints(i)] = vrep.simxGetObjectHandle(clientID,...
+    [~, right_leg(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('right_leg%d', i), vrep.simx_opmode_oneshot_wait);
     
-    instructions(j, :) = [double(left_leg_joints(i)), 0]; j = j + 1;
-    instructions(j, :) = [double(right_leg_joints(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(left_leg(i)), 0]; j = j + 1;
+    instructions(j, :) = [double(right_leg(i)), 0]; j = j + 1;
 end
 
-handles.left_leg_joints = left_leg_joints;
-handles.right_leg_joints = right_leg_joints;
-handles.left_arm_joints = left_arm_joints;
-handles.right_arm_joints = right_arm_joints;
+handles.left_leg = left_leg;
+handles.right_leg = right_leg;
+handles.left_arm = left_arm;
+handles.right_arm = right_arm;
 
 %% Retrieve cameras' handles
 

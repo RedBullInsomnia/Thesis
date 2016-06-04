@@ -5,6 +5,8 @@ A master thesis is a major endeavour and these are rarely devoid of obstacles. D
 This drawback is generalized amongst all the simulators that we surveyed at the beginning of this report and we feel it should be addressed quickly by their creators. Nevertheless, we understand that a modelling tool such as Blender took years to create so we would not expect simulators to catch up any time soon.
 
 \item We also learned of the importance of studying mechanisms carefully before using them. Though things might appear simple at first, subtle implementation details might change everything. A fine example of that is us melting the core of the motor inside a MX-28R servo during our tests because of our trust in the announced safety mechanisms. Needless to say, they proved insufficient and we should have examined the documentation more closely.
+
+\item Choosing a physics engine was difficult because the field is quite fragmented. On one hand there exist well established commercial solutions, but they are focused on games and make some significant shortcuts whenever possible in order to be as fast as possible. On the other hand there exist a quantity of open-source physics engine but they are usually the work of one man and development is erratic. It was hard to motivate the choice of Newton on any other basis than 'it worked best'.
 \end{itemize}
 
 
@@ -15,6 +17,9 @@ As of now it is still uncertain if Blender shall continue to support the COLLADA
 The springs also need some work, as of now they are just there as a proof of concept but their parameters will need to be tuned.
 
 As of now, the model uses simplified inertias, in the belief that a controller should be able to correct minor differences in behaviour between the model and the actual robot. In the case, theses inertias need to be more accurate, we suggest to use Meshlab\footnote{\url{http://meshlab.sourceforge.net/}} to compute the inertias of those objects.
+
+\subsection{Applications}
+In the immediate future work is needed on a standing up routine from a supine position.
 
 \section{Conclusion}
 This is the conclusion to my work.
