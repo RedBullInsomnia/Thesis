@@ -22,16 +22,16 @@ vrep.simxSynchronous(id, true);
 
 % retrieve handles to servos, joints
 h = robot_init(vrep, id);
-reset_robot_position(vrep, id, h, 'supine');
+reset_robot_position(vrep, id, h, 'prone');
 
 vrep.simxStartSimulation(id, vrep.simx_opmode_oneshot_wait);
 
 % display points
 t = 0;
 i = 1;
-while true && t < 3
-    %instructions = standup_prone(h, t);
-    instructions = go_prone(h, t);
+while t < 4
+    instructions = standup_prone(h, t);
+    %instructions = go_prone(h, t);
     positions(:, i) = get_joint_positions(vrep, id, h);
     
     %COM(i,:) = getCOM(vrep, clientID);
@@ -44,7 +44,7 @@ end
 % sent out had time to arrive.
 vrep.simxGetPingTime(id);
 
-t = 0:dt:3;
+t = 0:dt:4;
 positions = rad2deg(positions);
 plot_results(t, positions);
 
@@ -124,9 +124,9 @@ end
 
 function instructions = standup_prone(h, t)
 
-if t < 0.4
-    % Phase 1 Lift the trunk;
-    %hips
+if t < 0.2
+    
+    % hips
     instructions(1,:) = [double(h.right_leg(3)), degtorad(30)];
     instructions(2,:) = [double(h.left_leg(3)), degtorad(30)];
     
@@ -134,25 +134,43 @@ if t < 0.4
     instructions(3,:) = [double(h.right_leg(5)), degtorad(-75)];
     instructions(4,:) = [double(h.left_leg(5)), degtorad(-75)];
     
-    instructions(5,:) = [double(h.right_arm(1)), degtorad(-90)];
-    instructions(6,:) = [double(h.left_arm(1)), degtorad(-90)];
+    % right shoulder 
+    instructions(5,:) = [double(h.right_arm(1)), degtorad(-100)];
     
-    instructions(7,:) = [double(h.right_arm(2)), degtorad(90)];
-    instructions(8,:) = [double(h.left_arm(2)), degtorad(-90)];
+    % left shoulder
+    instructions(6,:) = [double(h.left_arm(1)), degtorad(-100)];
     
-elseif t < 0.8
-    % Phase 2 Faire le dos rond
-    instructions(1,:) = [double(h.right_leg(3)), degtorad(-40)];
-    instructions(2,:) = [double(h.left_leg(3)), degtorad(-40)];
+elseif t < 0.5
     
-    instructions(3,:) = [double(h.right_arm(1)), degtorad(-90)];
-    instructions(4,:) = [double(h.left_arm(1)), degtorad(-90)];
+    % right shoulder 
+    instructions(1,:) = [double(h.right_arm(2)), degtorad(70)];
+    instructions(2,:) = [double(h.right_arm(3)), degtorad(70)];
     
-    % Feet
-    instructions(5,:) = [double(h.right_leg(5)), degtorad(-60)];
-    instructions(6,:) = [double(h.left_leg(5)), degtorad(-60)];
-elseif t < 1.8
-    % Phase 3 Bring the knees in
+    % left shoulder
+    instructions(3,:) = [double(h.left_arm(2)), degtorad(-70)];
+    instructions(4,:) = [double(h.left_arm(3)), degtorad(-70)];
+    
+elseif t < 0.9
+    
+    % right arm
+    instructions(1,:) = [double(h.right_arm(2)), degtorad(80)];
+    instructions(2,:) = [double(h.right_arm(3)), degtorad(40)];
+    
+    % left arm
+    instructions(3,:) = [double(h.left_arm(2)), degtorad(-80)];
+    instructions(4,:) = [double(h.left_arm(3)), degtorad(-40)];
+    
+    % Right leg
+    instructions(5,:) = [double(h.right_leg(3)), degtorad(-40)];
+    instructions(6,:) = [double(h.right_leg(5)), degtorad(-50)];
+    
+    % Left leg
+    instructions(7,:) = [double(h.left_leg(3)), degtorad(-40)];
+    instructions(8,:) = [double(h.left_leg(5)), degtorad(-50)];
+    
+elseif t < 1.4
+    
+    % Bring the knees in
     instructions(1,:) = [double(h.right_leg(4)), degtorad(80)];
     instructions(2,:) = [double(h.left_leg(4)), degtorad(80)];
     
@@ -160,43 +178,81 @@ elseif t < 1.8
     instructions(4,:) = [double(h.left_leg(3)), degtorad(-140)];
     
     % Use arms to lift trunk up
-    instructions(5,:) = [double(h.right_arm(1)), degtorad(-85)];
-    instructions(6,:) = [double(h.left_arm(1)), degtorad(-85)];
+    % right arm
+    instructions(5,:) = [double(h.right_arm(3)), degtorad(0)];
+    
+    % left arm
+    instructions(6,:) = [double(h.left_arm(3)), degtorad(0)];
     
     % Feet
-    instructions(7,:) = [double(h.right_leg(5)), degtorad(-14)];
-    instructions(8,:) = [double(h.left_leg(5)), degtorad(-14)];
+    instructions(7,:) = [double(h.right_leg(5)), degtorad(-30)];
+    instructions(8,:) = [double(h.left_leg(5)), degtorad(-30)];
     
-elseif t < 2.6
-    % Phase 4 Stand up
-    instructions(1,:) = [double(h.right_leg(3)), degtorad(-80)];
-    instructions(2,:) = [double(h.left_leg(3)), degtorad(-80)];
-    
-    instructions(3,:) = [double(h.right_leg(4)), degtorad(60)];
-    instructions(4,:) = [double(h.left_leg(4)), degtorad(60)];
+elseif t < 2%2.6
     
     % Feet
-    instructions(5,:) = [double(h.right_leg(5)), degtorad(-10)];
+    instructions(1,:) = [double(h.right_leg(5)), degtorad(-14)];
+    instructions(2,:) = [double(h.left_leg(5)), degtorad(-14)];
+    
+    % right arm
+    instructions(3,:) = [double(h.right_arm(2)), degtorad(80)];
+    instructions(4,:) = [double(h.right_arm(3)), degtorad(0)];
+    
+    % left arm 
+    instructions(5,:) = [double(h.left_arm(2)), degtorad(-80)];
+    instructions(6,:) = [double(h.left_arm(3)), degtorad(0)];
+
+    % head
+    instructions(7,:) = [double(h.head(1)), degtorad(-70)];
+    
+elseif t < 2.8
+    
+    % Time to stand
+    % right leg
+    instructions(1,:) = [double(h.right_leg(3)), degtorad(-90)]; %-80
+    instructions(2,:) = [double(h.right_leg(4)), degtorad(60)]; %60
+    instructions(3,:) = [double(h.right_leg(5)), degtorad(-10)]; %-10
+    
+    % left leg
+    instructions(4,:) = [double(h.left_leg(3)), degtorad(-90)];
+    instructions(5,:) = [double(h.left_leg(4)), degtorad(60)];
     instructions(6,:) = [double(h.left_leg(5)), degtorad(-10)];
     
-    % Arms
-    instructions(7,:) = [double(h.right_arm(1)), degtorad(-30)];
-    instructions(8,:) = [double(h.left_arm(1)), degtorad(-30)];
+    % right arm
+    instructions(7,:) = [double(h.right_arm(1)), degtorad(-15)];
+    
+    % left arm
+    instructions(8,:) = [double(h.left_arm(1)), degtorad(-15)];
+    
+    % head
+    instructions(9,:) = [double(h.head(1)), degtorad(0)];
+    
+elseif t < 3.2
+    
+    % right leg
+    instructions(1,:) = [double(h.right_leg(3)), degtorad(-70)]; %-80
+    instructions(2,:) = [double(h.right_leg(4)), degtorad(50)]; %60
+    instructions(3,:) = [double(h.right_leg(5)), degtorad(-10)]; %-10
+    
+    % left leg
+    instructions(4,:) = [double(h.left_leg(3)), degtorad(-70)];
+    instructions(5,:) = [double(h.left_leg(4)), degtorad(50)];
+    instructions(6,:) = [double(h.left_leg(5)), degtorad(-10)];
+    
 else
-    instructions(1,:) = [double(h.right_leg(3)), degtorad(-20)];
-    instructions(2,:) = [double(h.left_leg(3)), degtorad(-20)];
     
-    instructions(3,:) = [double(h.right_leg(4)), degtorad(20)];
-    instructions(4,:) = [double(h.left_leg(4)), degtorad(20)];
+    % right leg
+    instructions(1,:) = [double(h.right_leg(3)), degtorad(-50)]; %-80
+    instructions(2,:) = [double(h.right_leg(4)), degtorad(40)]; %60
+    instructions(3,:) = [double(h.right_leg(5)), degtorad(-8)]; %-10
     
-    % Feet
-    instructions(5,:) = [double(h.right_leg(5)), degtorad(-10)];
-    instructions(6,:) = [double(h.left_leg(5)), degtorad(-10)];
+    % left leg
+    instructions(4,:) = [double(h.left_leg(3)), degtorad(-50)];
+    instructions(5,:) = [double(h.left_leg(4)), degtorad(40)];
+    instructions(6,:) = [double(h.left_leg(5)), degtorad(-8)];
     
-    % Arms
-    instructions(7,:) = [double(h.right_arm(1)), degtorad(-30)];
-    instructions(8,:) = [double(h.left_arm(1)), degtorad(-30)];
 end
+
 end
 
 function instructions = walk(h, t)

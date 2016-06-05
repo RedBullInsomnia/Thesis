@@ -70,13 +70,13 @@ handles.right_arm = right_arm;
 
 %% Retrieve cameras' handles
 
-cameras = [-1, -1];
+head = [-1, -1];
 for i = 1:2
-    [~, cameras(i)] = vrep.simxGetObjectHandle(clientID,...
+    [~, head(i)] = vrep.simxGetObjectHandle(clientID,...
         sprintf('head%d', (i)), vrep.simx_opmode_oneshot_wait);
 end
 
-handles.cameras = cameras;
+handles.head = head;
 
 % Clear old instructions
 send_instructions(vrep, clientID, instructions);

@@ -168,7 +168,7 @@ The original MX-28R servo does not have any accelerometry, but a master thesis i
 
 \begin{figure}[htp]
 \center
-    \includegraphics[width = 0.8\textwidth]{figures/pidcontrol}
-    \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}}
+    \includegraphics[width = \textwidth]{figures/pidcontrol}
+    \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction Torque in the allowed interval $[-1Nm, 1Nm]$. }
     \label{fig:mx28_pid}
 \end{figure}
