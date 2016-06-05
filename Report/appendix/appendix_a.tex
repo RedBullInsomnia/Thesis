@@ -1,4 +1,4 @@
-\chapter{Rules}
+\chapter{Rules \label{appendix:rules}}
 The robots that participate in the kidsize competition must respect the following characteristics\cite{robocup_rules}:\begin{enumerate}
 \item $40cm \leq H_{top} \leq 90cm$.
 
@@ -11,8 +11,7 @@ $(2.2 \cdot H_{com})^2/32$.
 
 \item The robot must fit into a cylinder of diameter $0.55 \cdot H_{top}$.
 
-\item The sum of the lengths of the two arms and the width of the tor
-so at the shoulder must be less than $1.2\cdot H_{top}$. The length of an arm is defined as the sum of the maximum length of any link that forms part of the arm. Both arms must be the same length.
+\item The sum of the lengths of the two arms and the width of the torso at the shoulder must be less than $1.2\cdot H_{top}$. The length of an arm is defined as the sum of the maximum length of any link that forms part of the arm. Both arms must be the same length.
 
 \item The robot does not possess a configuration where it is extended longer than $1.5 \cdot H_{top}$.
 
@@ -34,7 +33,7 @@ For a dynamic simulation several design restrictions must be considered : \begin
 \end{itemize}
 
 \chapter{Control code of the servo}
-\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, float, label={lst:servo}, captionpos = b]
+\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, label={lst:servo}, captionpos = b]
 if not PID_P then
     PID_P=0.1
     PID_I=0

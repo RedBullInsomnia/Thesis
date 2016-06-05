@@ -1,4 +1,5 @@
-In this chapter experiments with real servos will be conducted in order to, firstly, tune the parameters of the simulation (servo's characteristics) and, secondly, verify that the simulation correctly predicts the behaviour of a real-life configuration.
+\section*{Summary}
+In this chapter we experiment with real servos in order to tune the parameters of the simulation.
 
 \section{Problem statement}
 Before using our simulator to test control algorithms it is useful to first verify that it gives physically accurate results. It would be a waste of time to conduct tests on a model that does not behave in the same way as the original does.
@@ -35,20 +36,20 @@ In our case, $d$ was equal to $22.5cm$ and we could reach a weight $w$ of $740g$
 \center
 \begin{tabularx}{\textwidth}{@{}l X X X @{}}
 \toprule
-& \textbf{Stall torque @11.1V $[N.m]$} & \textbf{Stall torque @12V $[N.m]$} & \textbf{Stall torque @14.8V $[N.m]$}\\ 
+\textbf{Stall torque} & \textbf{@11.1V $[N.m]$} & \textbf{@12V $[N.m]$} & \textbf{@14.8V $[N.m]$}\\ 
 \midrule
-\textbf{Theoretical} & 2.1 & 2.5 & 3.1\\ 
-\textbf{Experimental} &  &  & 1.6\\ 
+\textbf{Announced} & 2.1 & 2.5 & 3.1\\ 
+\textbf{Experimental} & 1 & 1.2 & 1.6\\ 
 \bottomrule
 \end{tabularx}
-\caption[Results of experiment 1]{Experimental stall torques at different tested voltages. Theoretical values taken from \cite{mx_28_manual}}.
+\caption[Results of experiment 1]{Comparison of announced and experimental stall torques at different tested voltages. Announced values taken from \cite{mx_28_manual}}
 \label{table:exp1_results}
 \end{table}
 
 \section{Experiment 2}
 In this experiment we will test some simple dynamics. The setup is shown in \cref{fig:exp2}. The goal is to tune the P parameter of the PID controller inside V-Rep. In order to achieve this, we film the real servo going from $0\degree$ to $180\degree$ and measure the time it takes. 
 
-Executing this  this manoeuvre at $12V$ with no speed limit imposed takes x sec.
+Executing this manoeuvre at $12V$ with no speed limit imposed takes $x$ sec.
 
 We then reproduce the same manoeuvre inside V-Rep, measuring the time through code. We modify the proportional gain of the PID controller until we get the same time.
 
@@ -58,6 +59,3 @@ We then reproduce the same manoeuvre inside V-Rep, measuring the time through co
     \caption[Experimental setup dynamics testing]{Experimental setup for dynamics testing. One servo lifts the other one. The goal is the measure the time it takes to swing the arm from $0\degree$ to $180\degree$.}
     \label{fig:exp2}
 \end{figure}
-
-
-\section{Conclusion}

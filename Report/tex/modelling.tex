@@ -1,3 +1,4 @@
+\section*{Summary}
 This chapter covers the modelling of the building blocks of the robot.
 
 \section{Problem statement}
@@ -23,24 +24,24 @@ Therefore, it is best to approximate such a shape by a convex mesh whenever poss
 
 \begin{table}[htp]
 \center
-\begin{tabularx}{\textwidth}{@{} l X X X p{3.5cm} @{}}
+\begin{tabularx}{\textwidth}{@{} l l X X p{4.1cm} @{}}
 \toprule
-\textbf{Module} & \textbf{Weight [$g$]} & \textbf{Material [-]} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions [$mm \times mm \times mm$]}\\ 
+\textbf{Module} & \textbf{Weight [$g$]} & \textbf{Material} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions $x[mm] \cdot y[mm] \cdot z[mm]$}\\ 
 \midrule
-Odroid C-2 & 40 & & 840 & 85.0 x 56.0 x 10.0\\
-Li-Po battery & 188 & Li-Po & 2304 & 103.0 x 33.0 x 24.0\\
-Mx-28R & 72 & & 1150 & 35.6 x 50.6 x 35.5\\
-Hand & & & & 70.0 x 31.0 x 31.0\\
-Feet & & & & \\
-Central plate & & Aluminium & & \\
+Odroid C-2 & 40 & [-] & 840 & $85.0 \cdot 56.0 \cdot 10.0$\\
+Li-Po battery & 188 & Li-Po & 2304 & $103.0 \cdot 33.0 \cdot 24.0$\\
+Mx-28R & 72 & [-] & 1150 & $35.6 \cdot 50.6 \cdot 35.5$\\
+Hand & 30 & Aluminium & 3000 & $70.0 \cdot 31.0 \cdot 31.0$\\
+Feet & 52 & Polymer & 1000 & $70.0 \cdot 125.0 \cdot 6.0$\\
+Central plate & 209 & Aluminium & 4000 & \\
 \bottomrule
 \end{tabularx}
-\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP.}
+\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP. The differences in density between different pieces made of the same material represent the differences in geometry, i.e pieces with holes in them that are not modelled but taken into account by making the piece lighter.}
 \label{table:weights}
 \end{table}
 
 \subsection{Electronics}
-By electronics we mean the motherboard and the power electronics. The motherboard is an Odroid C-2, shown in \cref{fig:electronics}. It is intended to be the sole CPU onboard the robot. The role of the power electronics will be to convey the energy stored in the batteries to the servo motors. 
+By electronics we mean the motherboard and the power electronics. The motherboard is an Odroid C-2, shown in \cref{fig:electronics}. It is intended to be the \emph{brains} of the robot. The role of the power electronics will be to convey the energy stored in the batteries to the servo motors. 
 
 \begin{figure}[htp]
 \center
@@ -68,8 +69,6 @@ For the needs of the simulation, the width has been exaggerated, to deal with un
 
 \subsection{Central plate}
 The corpus of the robot will be a metallic plate which will support the batteries and the electronics. The chains of servos constituting the head, legs and arms will be attached to it too.
-
-The central plate 
 
 \subsection{Frames}
 In an effort to make the simulation as fast and stable as possible, frames are not physically active in the simulation. They are present, but only for visualisation purpose and do not influence the outcome of the simulation. Their role as a link between servo is fulfilled by joints.
@@ -172,3 +171,6 @@ The original MX-28R servo does not have any accelerometry, but a master thesis i
     \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction Torque in the allowed interval $[-1Nm, 1Nm]$. }
     \label{fig:mx28_pid}
 \end{figure}
+
+
+In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.6$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 

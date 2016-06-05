@@ -32,7 +32,7 @@ i = 1;
 while t < 4
     instructions = standup_prone(h, t);
     %instructions = go_prone(h, t);
-    positions(:, i) = get_joint_positions(vrep, id, h);
+    %positions(:, i) = get_joint_positions(vrep, id, h);
     
     %COM(i,:) = getCOM(vrep, clientID);
     %isInsideSupportArea(vrep, clientID, COM(i,:), h)
@@ -44,9 +44,9 @@ end
 % sent out had time to arrive.
 vrep.simxGetPingTime(id);
 
-t = 0:dt:4;
-positions = rad2deg(positions);
-plot_results(t, positions);
+%t = 0:dt:4;
+%positions = rad2deg(positions);
+%plot_results(t, positions);
 
 % Now close the connection to V-REP:
 vrep.simxStopSimulation(id, vrep.simx_opmode_oneshot_wait);
@@ -188,7 +188,7 @@ elseif t < 1.4
     instructions(7,:) = [double(h.right_leg(5)), degtorad(-30)];
     instructions(8,:) = [double(h.left_leg(5)), degtorad(-30)];
     
-elseif t < 2%2.6
+elseif t < 2
     
     % Feet
     instructions(1,:) = [double(h.right_leg(5)), degtorad(-14)];
@@ -196,14 +196,12 @@ elseif t < 2%2.6
     
     % right arm
     instructions(3,:) = [double(h.right_arm(2)), degtorad(80)];
-    instructions(4,:) = [double(h.right_arm(3)), degtorad(0)];
     
     % left arm 
-    instructions(5,:) = [double(h.left_arm(2)), degtorad(-80)];
-    instructions(6,:) = [double(h.left_arm(3)), degtorad(0)];
+    instructions(4,:) = [double(h.left_arm(2)), degtorad(-80)];
 
     % head
-    instructions(7,:) = [double(h.head(1)), degtorad(-70)];
+    instructions(5,:) = [double(h.head(1)), degtorad(-70)];
     
 elseif t < 2.8
     
