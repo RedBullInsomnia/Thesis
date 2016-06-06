@@ -34,13 +34,13 @@ The first application is simply to build a model of the robot and test if it is 
 
 \begin{figure}[htp]
 \center
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{subfigure}[b]{0.8\textwidth}
     \includegraphics[width = \textwidth]{figures/robot_v7_front}
     \caption[]{Front view of the robot}
     \label{fig:robotv7_front}
 \end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
+
+\begin{subfigure}[b]{0.8\textwidth}
 \center
     \includegraphics[width = \textwidth]{figures/robot_v7_side}
     \caption[]{Side view of the robot}
@@ -56,7 +56,7 @@ The servos of the robot are simply ordered to hold their initial angle and the s
 The main motivation for a routine that makes the robot move from a supine\footnote{lying on the back} lying position to a prone\footnote{lying on the belly} one is that it allows us to only have one standing up routine. 
 
 The routine is defined as follows :\begin{enumerate}
-\item From $0$ to $0.39sec$ : the robot brings his right arm above his head while preparing the left to lift its body from the left side. Both legs are twisted towards the right side at the hips.
+\item From $0$ to $0.39sec$ : the robot brings his right arm above his head while preparing the left one to lift its body from the left side. Both legs are twisted towards the right side at the hips.
 
 \item From $0.40$ to $0.99sec$ : the left leg swings towards the right side while the right leg swings towards the left side. The left elbow prepares to push.
 
@@ -82,7 +82,7 @@ The evolution of the angles held by the joints during the routine is presented i
 \end{figure}
 
 \subsection{Standing up from a prone lying position}
-This routine was inspired by Stückler \emph{et co.} in \cite{Stuckler06}. It is defined as follows:\begin{enumerate}
+This routine was inspired by Jörg Stückler, Johannes Schwenk, and Sven Behnke in \cite{Stuckler06}. It is defined as follows:\begin{enumerate}
 \item From $0.00$ to $0.19sec$ : in preparation for the arms to lift the body in the next step we adjust the roll of the shoulders.
 
 \item From $0.20$ to $0.49sec$ : in order to reduce the stress on the servos of the arm, we bend the arms a little before the next step.

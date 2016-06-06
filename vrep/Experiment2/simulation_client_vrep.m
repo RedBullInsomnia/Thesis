@@ -26,10 +26,17 @@ h = robot_init(vrep, clientID);
 vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 
 t = 0;
-while true && t < 3
-    instructions = movement_test(h, t);
-    send_instructions(vrep, clientID, instructions);
-    t = t + dt
+instructions = [double(h.joint), degtorad(0)];
+send_instructions(vrep, clientID, instructions)
+i = 0;
+while i < 32
+    %instructions = movement_test(h, t);
+    %send_instructions(vrep, clientID, instructions);
+    i = i + 1; t = t + dt
+    
+    
+    vrep.simxGetPingTime(clientID);
+    vrep.simxSynchronousTrigger(clientID);
 end
 
 % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):

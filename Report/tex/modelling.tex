@@ -1,25 +1,64 @@
-This chapter covers the modelling of the building blocks of the robot.
+This chapter focuses on the modelling of the atomic elements of the robot. We begin by explaining how to create the model of an object inside V-Rep. We then show how to use to model simple elements such as frames or electronics who are not active during the simulation i.e they do not perform any function. Those can be represented strictly mechanically. We finally show how to model active pieces such as the cameras of the servos.
 
 \section{Problem statement}
 Our robot will be made from a number of elements that all need to be represented in the simulation :\begin{itemize}
-\item servos
-\item cameras
-\item hands, feet
-\item electronics
+\item \textbf{Miscellaneous mechanics and electronics:} A type of element that must be included in the model are the frames, \Cref{fig:fr07-h101} shows the FR07-H101 frame. On the actual robot, they will link the servos together. Other mechanical elements are the hands, the feet and the plate that will act as the trunk of the robot. 
+
+In addition to all the aforementioned elements we plan to equip the legs of the robot with springs. Their purpose will be to 
+
+The robot will also have some an array of electronic elements. A motherboard (\Cref{fig:odroid}) to give orders to the servos, batteries to stock the energy necessary to power them and the electronics to convey that energy through the robot.
+
+\item \textbf{Cameras:} The robot will be equipped with two cameras of the type shown in \Cref{fig:li_cam}. They will be used by the robot to locate itself in the play arena. As we may test some machine vision algorithms during our (future) simulations we need to have the ability of retrieving the image a camera captures.
+
+\item \textbf{Servos:} We will be using the MX-28R servo, shown in \Cref{fig:mx28}, as the driving element of the joints of the robot. We need to represent it as a rigid body as well as a mechanical device that can generate torque on its axle and hold a position that is ordered to hold.
 \end{itemize}
-We will first model the inactive elements such as the feet or the electronics before modelling the active elements, servos and cameras.
 
-\subsection{Convex elements}
-A convex element is an element whose interior angles are all less or equal to $180\degree$. Our humanoid robot will have some number of them since a lot of elements can be approximated as cubes, which are convex.
+\begin{figure}[htp]
+\center
+    \begin{subfigure}[b]{0.4\textwidth}
+    \center
+    \includegraphics[width = \textwidth]{figures/mx28}
+    \caption{MX-28R servo. \label{fig:mx28}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+    \center
+    \includegraphics[width = \textwidth]{figures/fr07-h101}
+    \caption{FR07-H101 hinge type frame. \label{fig:fr07-h101}}
+    \end{subfigure}
 
-The modelling consists in creating a mesh with the right dimensions, setting the mass and setting the inertia (V-Rep does not feature matrix inertias, only principal axes inertias). Friction of the material can also be set and will influence how much an object will slide.
+    \begin{subfigure}[b]{0.4\textwidth}
+    \center
+    \includegraphics[width = \textwidth]{figures/li_cam}
+    \caption{LI-USB30-M021C camera. \label{fig:li_cam}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+    \center
+    \includegraphics[width = \textwidth]{figures/odroid-c2}
+    \caption{Odroid C-2 motherboard. \label{fig:odroid}}
+    \end{subfigure}
+    \caption[Atomic elements of our robot]{Atomic elements of our robot. The MX-28R and the camera are more complex to model as they each perform a function in the simulation. On the other hand, the frame and the motherboard are only dead weight.}
+    \label{fig:modelling_problem}
+\end{figure}
 
-\subsection{Concave elements}
-A shape is concave if it is not convex. It is not recommended to use concave shapes in a simulation as they make collision detection more expensive and the simulation is generally more unstable. 
+\section{Modelling in V-Rep \label{sec:modelling}}
+The creation of a model inside V-Rep starts with the creation of a mesh\footnote{an ensemble of vertices and faces that represent an object} in a modelling tool, Blender in our case. It is preferred to have a convex mesh, i.e one that whose all interior meshes are less or equal to $180\degree$, as they are easier for the simulator to handle. When it is absolutely necessary to keep the mesh concave, a solution is to separate it into several convex meshes that will be grouped together once in V-Rep. Once saved in a file format recognized by V-Rep the mesh can be imported into the latter. 
 
-Therefore, it is best to approximate such a shape by a convex mesh whenever possible. If not, then we separate it into several convex shapes that we group together with constraints.
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.6\textwidth]{figures/v-rep_modelling}
+    \caption[Rigid body dynamic properties]{Configuration window of the dynamic properties of the selected rigid body. We can make it \emph{respondable}, i.e it should collide with other objects. We can also make it \emph{dynamic} in which case it will be dynamically active in the simulation and react to forces. When dynamically active, the movement of this body will be influenced by its \emph{mass} and its \emph{inertia}. It is also possible to set what is called \emph{Material} by V-Rep.}
+    \label{fig:vrep_modelling}
+\end{figure}
 
-\section{Modelling the inactive elements}
+When in V-Rep all that is left is marking the body as dynamic, respondable (if necessary) and setting the mass and the inertia. It is possible to have V-Rep compute it automatically from the geometry and the density but it can also be set manually.
+
+\section{Modelling the miscellaneous mechanics and electronics}
+The modelling of most of the mechanical elements and electronics is rather straightforward but there are some where the process is more troublesome. This is the case of the feet, frames and springs and those will be detailed hereunder after a short explanation of the modelling process of the remaining pieces.
+
+\subsection{Modelling the electronics, batteries, hands and the central plate}
+The modelling of these elements consists in following the procedure explained in \Cref{sec:modelling}. All the necessary informations are contained in \Cref{table:weights}.
 
 \begin{table}[htp]
 \center
@@ -29,64 +68,46 @@ Therefore, it is best to approximate such a shape by a convex mesh whenever poss
 \midrule
 Odroid C-2 & 40 & [-] & 840 & $85.0 \cdot 56.0 \cdot 10.0$\\
 Li-Po battery & 188 & Li-Po & 2304 & $103.0 \cdot 33.0 \cdot 24.0$\\
-Mx-28R & 72 & [-] & 1150 & $35.6 \cdot 50.6 \cdot 35.5$\\
 Hand & 30 & Aluminium & 3000 & $70.0 \cdot 31.0 \cdot 31.0$\\
 Feet & 52 & Polymer & 1000 & $70.0 \cdot 125.0 \cdot 6.0$\\
-Central plate & 209 & Aluminium & 4000 & \\
+Central plate & 209 & Aluminium & 4000 & $140.0 \cdot 30.0 \cdot 124.5$\\
 \bottomrule
 \end{tabularx}
 \caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP. The differences in density between different pieces made of the same material represent the differences in geometry, i.e pieces with holes in them that are not modelled but taken into account by making the piece lighter.}
 \label{table:weights}
 \end{table}
 
-\subsection{Electronics}
-By electronics we mean the motherboard and the power electronics. The motherboard is an Odroid C-2, shown in \cref{fig:electronics}. It is intended to be the \emph{brains} of the robot. The role of the power electronics will be to convey the energy stored in the batteries to the servo motors. 
+\subsection{Modelling the feet}
+In essence, the feet of our robot will be plates that will be fixed to the last servos of the legs. Contrary to other elements, feet \emph{must} be respondable as they come into contact with the floor. It follows that the friction parameter will be important too and it will have to be chosen in accordance to the friction parameter of the material they will be made of.
 
-\begin{figure}[htp]
-\center
-\includegraphics[width=0.3\textwidth]{figures/odroid-c2}
-\caption[Odroid C-2]{Odroid C-2 motherboard. Equipped with an ARM 2GHz quadcore CPU and 2GB of DDR3 RAM.}
-\label{fig:electronics}
-\end{figure}
-
-As of now, only the size of the motherboard is known to us, as the power electronics are not yet ready. Nevertheless, a rough guess can be made : we will assume that the electronics will take twice the volume of the Odroid C-2. That volume is represented as a cube, of dimensions and size compiled in \cref{table:weights}.
-
-\subsection{Batteries}
-We choose to use two 4-cells lithium-polymer batteries of approximately $2000mAh$. They are modelled as cube of dimensions and weight specified in \cref{table:weights}.
-
-\subsection{Hands}
-We call \emph{hands} the elements that will mimic human hands. As the Robocup competition does not require to manipulate objects, the hands may well be simple tubes or cubes. However, in an effort to make the robot more versatile, grippers of some kind may be used instead.
-
-We chose to model the hands as cylinders, of dimensions and size as presented in \cref{table:weights}.
-
-\subsection{Feet}
-At the moment of writing this report, the drawings of the feet are not completed yet. Nevertheless we can assume that approximating them as cubes will not be too far from reality. The exact dimensions and weight are shown in \cref{table:weights}.
-
-The choice of the material to use for the feet is rather important. The friction will have some influence on the behaviour of the robot. According to the material chosen, we can modify the friction parameter of the feet.
-
-For the needs of the simulation, the width has been exaggerated, to deal with unwanted collision behaviour during simulation (sinking into the floor). 
-
-\subsection{Central plate}
-The corpus of the robot will be a metallic plate which will support the batteries and the electronics. The chains of servos constituting the head, legs and arms will be attached to it too.
+It should be noted that for the needs of the simulation, their z dimension has been exaggerated up to $6mm$ because of collision problems (sometimes, the contact point was on the upper side of the feet while it should have been on the down side) that disturbed the course of the simulation. Therefore, the z dimension reported in \Cref{table:weights} is the double of the actual one and the density has been halved to keep the same mass.
 
 \subsection{Frames}
-In an effort to make the simulation as fast and stable as possible, frames are not physically active in the simulation. They are present, but only for visualisation purpose and do not influence the outcome of the simulation. Their role as a link between servo is fulfilled by joints.
+Frames are a special case: in the actual robot they are essential in connecting the servos together but they are not necessary in the simulation. Indeed the link between servos can be made directly through the joints without the intermediary of a frame. 
+
+This reduces the accuracy of the model but not by much and we gain in speed and stability by reducing the number of constraints and not having to integrate a convex shape into the model.
 
 \subsection{Springs}
-It is planned to have springs on the legs of the robot, to try and make walking more energy efficient. 
+By itself a spring can be modelled by a prismatic joint linking two dynamic objects together. The prismatic joint is then set to \emph{spring-damper} mode and the stiffness and damping can be specified.
 
-V-Rep provides an object that can represent a spring, the \emph{prismatic joint}.
-
-\section{Modelling the active elements}
-\subsection{Cameras}
-The robot will be equipped with two small cameras, of the type illustrated in \cref{fig:camera}, used to locate the robot on the field\footnote{This is the subject of another master thesis this year.}. 
-
+However, if we want to add it to a leg we have to somehow create a loop in a top down hierarchy. Moreover, we need to take into account displacements of the anchors. 
 \begin{figure}[htp]
 \center
-    \includegraphics[width = 0.3\textwidth]{figures/li_cam}
-    \caption[LI-USB30-M021C]{LI-USB30-M021C.}
-    \label{fig:camera}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \center
+    \includegraphics[height = 0.5\textwidth]{figures/springs}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+    \center
+    \includegraphics[height = 0.5\textwidth]{figures/springs_hierarchy}
+    \end{subfigure}
+\caption[Model of a spring inside V-Rep]{How to model a spring inside V-Rep. }
+\label{fig:springs}
 \end{figure}
+
+\section{Modelling the cameras}
+The robot will be equipped with two small cameras, of the type illustrated in \cref{fig:camera}, used to locate the robot on the field\footnote{This is the subject of another master's thesis this year.}. 
 
 We model the hull of the camera as cube. The dimensions and weight are in \cref{table:weights}. We model the active part of the camera as a \emph{vision sensor}, a V-Rep object that simulates cameras. It can be customized to have the desired resolution, field-of-view, ...
 
@@ -111,17 +132,99 @@ Resolution &  & $px^2$\\
 Field of view & & $\degree$\\
 \bottomrule
 \end{tabularx}
-\caption{Characteristics of the model of the LI-USB30-M021C camera}
+\caption[Characteristics of the LI-USB30-M021C camera]{Characteristics of the model of the LI-USB30-M021C camera}
 \label{table:cam_specs}
 \end{table}
 
-\subsection{Servos}
+\section{Modelling the MX-28R}
+This section explains how the MX-28R is characterized and modelled.
+
+\subsection{Determining the continuous torque}
+The primary parameter we must know the value of to properly model the MX-28R is the torque it generates. The manual (\cite{mx_28_manual}) provides the value of the stall torque ($2.5Nm$ @$12V$) and a graph showing the efficiency of the servo at different torques and speeds but it does not provide a value of the actual continuous torque. We thus compute it from the maximal torque of the DC motor (référence à mettre !) and the reduction ratio of the gears. 
+\begin{align*}
+ContinuousTorque &= TorqueMotor \times ReductionRatio\\
+&= 3.67e^{-3} \times 193\\
+&= 0.7083Nm
+\end{align*}
+The continuous torque is thus equal to $0.7Nm$.
+
+\subsection{Determining the stall torque}
+The stall torque is determined through a small experiment with a real MX-28R. The experimental setup is explained in \Cref{fig:exp_setup} and \Cref{fig:usb2dyn}. The experiment itself is presented in \Cref{fig:exp1}.
+
+\begin{figure}[htp]
+\center
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{figures/exp_setup}
+    \caption[Experimental setup]{The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device.}
+    \label{fig:dc_chain}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width = \textwidth]{figures/u2d}
+    \caption[USB2DYNAMIXEL]{A USB2DYNAMIXEL. It turns an USB port into a serial port (RS485, TTL or classic serial connector) that can be used to control Dynamixel manufactured servos. [Photo from \cite{usb2dyn_manual}]}
+    \label{fig:usb2dyn}
+    \end{subfigure}
+    \caption{Experimental setup \label{fig:exp_setup}}
+\end{figure}
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.5\textwidth]{figures/exp1}
+    \caption[Experimental setup for torque testing]{Experimental setup for torque testing. A weight $w$ of is suspended at a distance $d$ from the servo, resulting in a applied torque of $w \times g \times d$. The goal is to find the weight $w$ for which the servo is unable to lift the arm.}
+    \label{fig:exp1}
+\end{figure}
+
+\begin{figure}[htp]
+\center
+    \includegraphics[width = 0.3\textwidth]{figures/exp2}
+    \caption[Experimental setup dynamics testing]{Experimental setup for dynamics testing. One servo lifts the other. The goal is the measure the time it takes to swing the arm from $0\degree$ to $180\degree$.}
+    \label{fig:exp2}
+\end{figure}
+
+In our case, $d$ was equal to $22.5cm$ and we could reach a weight $w$ of $740g$ at $14.8V$. This equals to a torque of $1.64Nm$. The complete results are listed in \Cref{table:mx28-specs}.
+
+\subsection{Determining the rotation speed}
+In this experiment we will test some simple dynamics. The setup is shown in \cref{fig:exp2}. The goal is to tune the P parameter of the PID controller inside V-Rep. In order to achieve this, we film the real servo going from $0\degree$ to $180\degree$ and measure the time it takes. 
+
+Executing this manoeuvre at $12V$ with no speed limit imposed takes $620msec$.
+
+We then reproduce the same manoeuvre inside V-Rep, measuring the time through code. We modify the proportional gain of the PID controller until we get the same time.
+
+
+
+\subsection{Results}
+\begin{table}[htp]
+\begin{tabularx}{\textwidth}{@{} l X X @{}}
+\toprule
+& \textbf{Data} & \textbf{Unit}\\ 
+\midrule
+Weight & $77$ & $g$\\
+Dimensions & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
+Ixx & $22,649$ & $g \cdot mm^4$\\
+Iyy & $12,868$ & $g \cdot mm^4$\\
+Izz & $17,733$ & $g \cdot mm^4$ \\
+Announced stall torque @11.1V & $2.1$ & $Nm$\\
+Experimental stall torque @11.1V & $1$ & $Nm$\\
+Announced stall torque @12V & $2.5$ & $Nm$\\
+Experimental stall torque @14.8V & $1.2$ & $Nm$\\
+Announced stall torque @14.8V & $3.1$ & $Nm$\\
+Experimental stall torque @12V & $1.6$ & $Nm$\\
+Nominal continuous torque @12V & $0.7$ & $Nm$\\
+Announced unloaded rotation speed @12V & $55.00$ & $Rpm$\\
+Experimental unloaded rotation speed @12V & $48.33$ & $Rpm$\\
+\bottomrule
+\end{tabularx}
+\caption[]{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual} and from \url{http://www.robotis.com/view/DXL-INERTIA/RX-28_INERTIA.pdf}[Accessed 4/6/2016].}
+\label{table:mx28-specs}
+\end{table} 
+
+\subsection{Modelling the MX-28R}
 \begin{figure}[htp]
 \center
 \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width = \textwidth]{figures/mx28}
     \caption{MX-28R servo.}
-    \label{fig:mx28}
+    \label{fig:mx28_real}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.3\textwidth}
@@ -133,42 +236,13 @@ Field of view & & $\degree$\\
 \label{fig:servo}
 \end{figure}
 
-The robot will mainly be made from MX-28R servos (\cref{fig:mx28}) manufactured by Dynamixel. Their size and power make them an good choice for a humanoid robot. The goal of this section is thus to reproduce as accurately as possible the behaviour of this servo in our simulation. 
+In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.2$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
 
-The MX-28R outer shape is convex so we create a convex mesh to model its appearance. As the manual \cite{mx_28_manual} does not provide the actual continuous torque, we compute from the maximal torque of the DC motor and the reduction ratio of the gears. 
-\begin{align*}
-Torque &= TorqueMotor \times ReductionRatio\\
-&= 3.67e^{-3} \times 193\\
-&= 0.7083Nm
-\end{align*}
-
-The servo uses a PID controller to reach and hold a desired position. The model inside V-Rep also uses a PID and the code is in \cref{lst:servo}.
-
-\begin{table}[htp]
-\begin{tabularx}{\textwidth}{@{} l l X @{}}
-\toprule
-& \textbf{Data} & \textbf{Unit}\\ 
-\midrule
-Weight & $77$ & $g$\\
-Dimension & $35.6 \times 50.6 \times 35.5$ & $mm^3$\\
-Ixx & $22,649$ & $g \times mm^4$\\
-Iyy & $12,868$ & $g \times mm^4$\\
-Izz & $17,733$ & $g \times mm^4$ \\
-Stall torque & $2.5$ & $Nm$\\
-Nominal continuous torque & $0.7$ & $Nm$\\
-\bottomrule
-\end{tabularx}
-\caption[]{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual} and from \url{http://www.robotis.com/view/DXL-INERTIA/RX-28_INERTIA.pdf}[Accessed 4/6/2016].}
-\label{table:specs}
-\end{table} 
-
-The original MX-28R servo does not have any accelerometer, but a master thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 
+The original MX-28R servo does not have any accelerometer, but a master's thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 
 
 \begin{figure}[htp]
 \center
     \includegraphics[width = \textwidth]{figures/pidcontrol}
-    \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction Torque in the allowed interval $[-1Nm, 1Nm]$. }
+    \caption[MX-28 PID controller]{MX-28 PID controller, as represented in \cite{mx_28_manual}. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction torque in the allowed interval whereas the \emph{system model} block is a simulink representation of the MX-28R and does not exist in the actual implementation inside the latter.}
     \label{fig:mx28_pid}
 \end{figure}
-
-In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.2$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
