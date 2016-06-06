@@ -1,4 +1,3 @@
-\section*{Summary}
 This chapter covers the modelling of the building blocks of the robot.
 
 \section{Problem statement}
@@ -80,7 +79,7 @@ V-Rep provides an object that can represent a spring, the \emph{prismatic joint}
 
 \section{Modelling the active elements}
 \subsection{Cameras}
-The robot will be equipped with two small cameras, of the type illustrated in \cref{fig:camera}, used to locate the robot on the field\footnote{This is the subject of another master thesis this year}. 
+The robot will be equipped with two small cameras, of the type illustrated in \cref{fig:camera}, used to locate the robot on the field\footnote{This is the subject of another master thesis this year.}. 
 
 \begin{figure}[htp]
 \center
@@ -159,11 +158,11 @@ Stall torque & $2.5$ & $Nm$\\
 Nominal continuous torque & $0.7$ & $Nm$\\
 \bottomrule
 \end{tabularx}
-\caption[]{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual} and from \url{http://www.robotis.com/view/DXL-INERTIA/RX-28_INERTIA.pdf}[Accessed 4/6/2016]. The inertia is not exactly accurate as it is the inertia of a RX-28 servo. Nevertheless, it should be really close as the RX-28 and MX-28 closely resemble each other}
+\caption[]{Characteristics of a MX-28R type servo. Data taken from \cite{mx_28_manual} and from \url{http://www.robotis.com/view/DXL-INERTIA/RX-28_INERTIA.pdf}[Accessed 4/6/2016].}
 \label{table:specs}
 \end{table} 
 
-The original MX-28R servo does not have any accelerometry, but a master thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 
+The original MX-28R servo does not have any accelerometer, but a master thesis in progress is going to change that. We can emulate it in the simulator by differentiating the position, obtained through \emph{simxGetObjectPosition}. 
 
 \begin{figure}[htp]
 \center
@@ -172,5 +171,4 @@ The original MX-28R servo does not have any accelerometry, but a master thesis i
     \label{fig:mx28_pid}
 \end{figure}
 
-
-In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.6$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 
+In V-Rep the different elements of the robot are dynamically enabled and given mass, accordingly to the values listed in \cref{table:weights}. Then, joints (motor controlled with control loop activated) are added to simulate the behaviour of the servos. Their maximal torque is set to $1.2$, the maximum torque developed my Mx-28 servos as shown by our earlier experiments (\cref{table:exp1_results}). 

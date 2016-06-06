@@ -1,4 +1,3 @@
-\section*{Summary}
 In this chapter we experiment with real servos in order to tune the parameters of the simulation.
 
 \section{Problem statement}
@@ -49,7 +48,7 @@ In our case, $d$ was equal to $22.5cm$ and we could reach a weight $w$ of $740g$
 \section{Experiment 2}
 In this experiment we will test some simple dynamics. The setup is shown in \cref{fig:exp2}. The goal is to tune the P parameter of the PID controller inside V-Rep. In order to achieve this, we film the real servo going from $0\degree$ to $180\degree$ and measure the time it takes. 
 
-Executing this manoeuvre at $12V$ with no speed limit imposed takes $x$ sec.
+Executing this manoeuvre at $12V$ with no speed limit imposed takes $620msec$.
 
 We then reproduce the same manoeuvre inside V-Rep, measuring the time through code. We modify the proportional gain of the PID controller until we get the same time.
 

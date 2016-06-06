@@ -32,18 +32,13 @@ int main()
 	while (go == 1)
 	{
         // Write goal position
-        cout << "What do you want to do ? (-1 to quit, -2 for help)" << endl;
+		printInfos();
         cin >> order;
         if (-1 == order)
             break;
         else if (-2 == order)
         {
-            cout << endl;
-            cout << "Enter -1 to quit" << endl;
-            cout << "Enter 1 for another test cycle" << endl;
-            cout << "Enter 2 to change the speed limit " << endl;
-			cout << "Enter 3 to change the test type" << endl;
-			cout << "Enter 4 to reset the servo after an overload" << endl;
+			printInfos();
         }
         else if (1 == order)
         {

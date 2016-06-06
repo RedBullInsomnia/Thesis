@@ -1,48 +1,49 @@
-\section*{Summary}
-This chapter briefly introduces the basic concepts of physics engines. We restrict ourselves to the simulation of rigid bodies, which is a significant simplification of the problem since rigid bodies are idealized solid objects which never change shape.
+This chapter briefly introduces the basic concepts relative to physics engines.
 
 \section{Problem statement}
-Physics engine trouble themselves with the simulation of classical mechanics in a computer. They model how objects accelerate, move and react to collisions with other objects. They also model how objects can be constrained to each other, for example with a hinge and how that influences them.
+Physics engine trouble themselves with the simulation of classical Newtonian mechanics in a computer. They model how objects accelerate, move and react to collisions with other objects. They also model how objects can be constrained to each other, for example with a hinge and how that influences them. In our case, we restrict ourselves to the simulation of rigid bodies, which is a significant simplification of the problem since rigid bodies are idealized solid objects which never change shape.
 
-\subsection{Notations and definitions}
-\begin{itemize}
-\item $a$ denotes a scalar.
-\item $\mathbf{b}$ denotes a vector.
-\item $\cdot$ denotes a product.
-\item $\times$ denotes a cross product.
-\end{itemize}
+%\subsection{Notations and definitions}
+%\begin{itemize}
+%\item $a$ denotes a scalar.
+%\item $\mathbf{b}$ denotes a vector.
+%\item $\cdot$ denotes a product.
+%\item $\times$ denotes a cross product.
+%\end{itemize}
 
-\section{Overview of the simulation components}
-The section is heavily inspired by Bender's work in \cite{BETC2012} state of the art paper on rigid body simulation. The simulation of rigid body dynamics is usually built around the loop presented in \cref{fig:star_simul_loop}. The simulator begins by finding the collision points between objects (Collision detection). These points are used to derive motion laws which are solved to determine the forces that act on the objects and prevent them from inter-penetrating (Contact handling). Newly found contact points imply collisions, which generate infinite impulse forces, which are handled by collision resolution. When all the contact forces have been computed, the position and velocities of the bodies are integrated forward in time before a new iteration starts.
+\section{Overview of the components of a simulator}
+The section is heavily inspired by Jan Bender, Kenny Erleben, Jeff Trinkle and Erwin Coumans' work in \cite{BETC2012}. Bender \emph{et al.} \cite{BETC2012} tells us that the simulation of rigid body dynamics is usually built around the loop presented in \cref{fig:phase_simul}. 
 
-Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding).
+The simulator begins by finding the collision points between objects (see \cref{sec:collision}). These points are then used to derive motion laws which are solved to determine the forces that act on the objects and prevent them from inter-penetrating (see \cref{sec:contact}). Newly found contact points imply collisions, which generate infinite impulse forces, which are handled by collision resolution. When all the contact forces have been computed, the position and velocities of the bodies are integrated forward in time before a new iteration starts.
 
-This yields a differential nonlinear complementarity problem (dNCP) that cannot be solved in closed form. It is discretized in time producing a series of NCPs whose solutions are an approximation of the state of the system.  This discrete solution is usually found by linearizing the NCP into a LCP to take advantage of the rich background for that type of problems.
+%Rigid body simulation is achieved through the expression of the Newton-Euler laws as differential equations which are then augmented with equations that express 3 conditions : nonpenetration of bodies, the friction model, and certain disjunctive relationships between variables (a contact force must become zero if two bodies separate, the friction forces acts in the direction that will most quickly stop the sliding).
+%
+%This yields a differential nonlinear complementarity problem (dNCP) that cannot be solved in closed form. It is discretized in time producing a series of NCPs whose solutions are an approximation of the state of the system.  This discrete solution is usually found by linearizing the NCP into a LCP to take advantage of the rich background for that type of problems.
 
 \begin{figure}[htp]
 \center
 \includegraphics[width=0.5\textwidth]{figures/star_simul_loop2}
-\caption[Modular phase description of the sub tasks of a rigid body simulator]{Modular phase description of the sub tasks of a rigid body simulator. The mid phase and narrow phase are grouped together because they are often combined for performance reasons}
+\caption[Modular phase description of the sub tasks of a rigid body simulator]{Modular phase description of the sub tasks of a rigid body simulator.}
 \label{fig:phase_simul}
 \end{figure}
 
-\section{Collision detection}
+\section{Collision detection \label{sec:collision}}
 \begin{figure}
 \center
 \includegraphics[width=0.9\textwidth]{figures/STAR_collision_v2}
-\caption[Collision detection]{Modular description of the collision detection in a physics engine.}
+\caption[Collision detection]{Modular description of the collision detection in a physics engine. The mid phase and narrow phase are grouped together because they are often combined for performance reasons.}
 \label{fig:star_collision}
 \end{figure}
 
 Collision detect is broken into three phases called the \emph{broad phase}, the \emph{mid phase} and the \emph{narrow phase}. 
 
-During the broad phase, objects are approximated by simple geometric primitives. Distances between such geometric shapes are easy to compute. Spheres are usually used. If such spheres do not overlap, then neither do the actual objects.
+During the broad phase, objects are approximated by simple geometric primitives as distances between such geometric shapes are easy to compute. Spheres are usually used. If such spheres do not overlap, then neither do the actual objects.
 
 When an object has a complex shape, an additional phase called the mid phase separates the object into several simpler shapes to detect collisions. Finally the narrow phase uses the exact geometries of the object to find the contact points. These are then used in the collision resolution part of the simulation loop.
 
 We won't discuss collision detection further. For our foreseen application it is sufficient to know that simpler shapes are easier to handle. For further discussion, different possible implementations are detailed in \cite{jimenez20013d}.
 
-\section{Collision resolution}
+\section{Collision resolution \label{sec:contact}}
 When bodies collide, high forces of very short duration are exerted. In the case of rigid bodies the duration is infinitesimal and the forces become infinite. This is problematic because we can see from \cref{eq:newton1} that infinite forces yield infinite accelerations which makes direct integration of that equation impossible and breaks the simulation loop.
 
 A solution to this was proposed by Mirtich in \cite{mirtich1996impulse}. The idea is to use the standard integration rule of the simulator up to the collision, use an impulse-momentum based collision rule to determine the velocities after impact and then resume the integration.
@@ -94,5 +95,3 @@ m\dot{\mathbf{v}} &= \mathbf{f} \label{eq:newton1}\\
 \end{figure}
 
 Friction is the most complex type of force a physics engine must deal with. 
-
-\subsection{Constraints}

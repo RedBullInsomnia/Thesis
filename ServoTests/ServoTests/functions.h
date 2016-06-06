@@ -39,4 +39,6 @@ void changeTestType(int order);
 
 void resetServo();
 
+void printInfos();
+
 #endif // !_FUNCTIONS_H_

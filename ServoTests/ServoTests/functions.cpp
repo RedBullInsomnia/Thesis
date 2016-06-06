@@ -2,8 +2,10 @@
 #include "dynamixel.h"
 #include <iostream>
 #include <conio.h>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 //Init device
 int initDevice()
@@ -171,9 +173,11 @@ void resetServo()
 
 void testCycleMode(int index, int *goal_pos)
 {
-	    //int goal_pos[2] = { 1700, 2000 };
-		int present_pos, comm_status, moving;
+	//int goal_pos[2] = { 1700, 2000 };
+	int present_pos, comm_status, moving;
 
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	
     dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos[index]);
     do
     {
@@ -182,7 +186,7 @@ void testCycleMode(int index, int *goal_pos)
         comm_status = dxl_get_result();
         if (comm_status == COMM_RXSUCCESS)
         {
-            cout << goal_pos[index] << " " << (int)present_pos << endl;
+            //cout << goal_pos[index] << " " << (int)present_pos << endl;
             PrintErrorCode();
         }
         else
@@ -197,12 +201,15 @@ void testCycleMode(int index, int *goal_pos)
         if (comm_status == COMM_RXSUCCESS)
         {
             if (moving == 0)
-            {
+            {	
+				high_resolution_clock::time_point t2 = high_resolution_clock::now();
+				auto duration = duration_cast<milliseconds>(t2 - t1).count();
+				cout << "Elapsed time: " << duration << endl;
+
                 // Change goal position
 				if (index == 0)
 				{
 					index = 1;
-					//moving = 1;
 				}
                 else
                     index = 0;
@@ -217,4 +224,14 @@ void testCycleMode(int index, int *goal_pos)
         }
 
     } while (moving == 1);
+}
+
+void printInfos()
+{
+	cout << endl;
+	cout << "Enter -1 to quit" << endl;
+	cout << "Enter 1 for another test cycle" << endl;
+	cout << "Enter 2 to change the speed limit" << endl;
+	cout << "Enter 3 to change the test type" << endl;
+	cout << "Enter 4 to reset the servo after an overload" << endl;
 }

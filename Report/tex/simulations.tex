@@ -1,4 +1,3 @@
-\section*{Summary}
 This chapter explains how we can use the simulator and the pieces we modelled in the preceding chapter to model a whole robot. We then showcase some simulations that were used to validate robot designs and finally present the influence these simulations had on the final design of the robot. 
 
 \section{Overview of the simulation setup}
@@ -6,7 +5,7 @@ V-Rep is used to simulate the physics of the robot but the control code runs alo
 
 \begin{figure}[htp]
 \center
-\includegraphics[width=0.6\textwidth]{figures/simulation_principles}
+\includegraphics[width=0.7\textwidth]{figures/simulation_principles}
 \caption[Simulation principles]{V-Rep simulates the robot while an external program sends order to the robot over TCP/IP thanks to the client/server thread provided by V-Rep.}
 \label{fig:simulation_principles}
 \end{figure}
@@ -15,15 +14,15 @@ Furthermore, the simulation will operate in the synchronous operation mode. That
 
 \begin{figure}[htp]
 \center
-\includegraphics[width=0.6\textwidth]{figures/remoteApiSynchronous}
-\caption[Simulation interaction]{Typical interaction between the simulator and the control code. The simulation runs on two threads : the simulation and the server thread. The server threads can receive orders from a client thread which is controlled by a custom application of our own. The simulator waits for a trigger before simulating the next timestep.}
+\includegraphics[width=0.8\textwidth]{figures/remoteApiSynchronous}
+\caption[Simulation interaction]{Typical interaction between the simulator and the control code. The simulation runs on two threads : the simulation and the server thread. The server threads can receive orders from a client thread which is controlled by a custom application of our own. The simulator waits for a trigger before simulating the next timestep.\cite{vrep_manual}}
 \label{fig:remoteApi}
 \end{figure}
 
 The instructions available can execute a number of different actions. The following proved most useful for this project :\begin{itemize}
 \item simxGetObjectHandle : this function is used to retrieve a handle on an object. A handle is necessary if a user wants to perform operations on an object.
 \item simxSetJointTargetPosition : this function sets a target position for a joint.
-\item simxSetFloatSignal : this function gives the possibility of setting the value of a signal inside V-Rep. This is useful if we want to extend the interface that V-Rep provides.
+\item simxSetFloatSignal : this function gives the possibility of setting the value of a signal inside V-Rep. A signal is a variable created during the simulation that is accessible both to the simulator and the external world. This is useful if we want to extend the interface that V-Rep provides.
 \item simxGetFloatSignal : this function retrieves the value of a float signal. 
 \end{itemize}
 
@@ -57,13 +56,13 @@ The servos of the robot are simply ordered to hold their initial angle and the s
 The main motivation for a routine that makes the robot move from a supine\footnote{lying on the back} lying position to a prone\footnote{lying on the belly} one is that it allows us to only have one standing up routine. 
 
 The routine is defined as follows :\begin{enumerate}
-\item The robot brings his right arm above his head while preparing the left to lift its body from the left side. The legs are twisted towards the right side.
+\item From $0$ to $0.39sec$ : the robot brings his right arm above his head while preparing the left to lift its body from the left side. Both legs are twisted towards the right side at the hips.
 
-\item The left left swings towards the right side while the right leg swings towards the left side. The left elbow prepares to push.
+\item From $0.40$ to $0.99sec$ : the left leg swings towards the right side while the right leg swings towards the left side. The left elbow prepares to push.
 
-\item The left elbow pushes the body up and the hips untwist.
+\item From $1.00$ to $1.59sec$ : the left elbow pushes the body up and the hips untwist. The left feet touches the ground on the right side.
 
-\item When the left leg touches the ground, the robot relaxes all its limb.
+\item At $1.6sec$ : The robot relaxes all its limbs and is now prone.
 \end{enumerate}
 
 The evolution of the angles held by the joints during the routine is presented in \cref{fig:sup2proneArms} and \cref{fig:sup2proneLegs}. 
@@ -71,7 +70,7 @@ The evolution of the angles held by the joints during the routine is presented i
 \begin{figure}[htp]
 \center
     \includegraphics[width = \textwidth]{figures/sup2proneArms}
-    \caption[Angles of the arms during \emph{supine} to prone manoeuvre]{Angles of the arms during \emph{supine} to prone manoeuvre}
+    \caption[Angles of the arms during \emph{supine} to prone manoeuvre]{Angles of the arms during \emph{supine} to prone manoeuvre. Predictably it is the left arm that is the most active as it is the one that is used to make the robot roll over. We notice that at times (around $0.7sec$) the left elbow does not generate enough torque to hold the desired angle.}
     \label{fig:sup2proneArms}
 \end{figure}
 
@@ -83,7 +82,7 @@ The evolution of the angles held by the joints during the routine is presented i
 \end{figure}
 
 \subsection{Standing up from a prone lying position}
-The routine for standing up was inspired by Stückler \emph{et co.} in \cite{Stuckler06}. The routine is defined as follows:\begin{enumerate}
+This routine was inspired by Stückler \emph{et co.} in \cite{Stuckler06}. It is defined as follows:\begin{enumerate}
 \item From $0.00$ to $0.19sec$ : in preparation for the arms to lift the body in the next step we adjust the roll of the shoulders.
 
 \item From $0.20$ to $0.49sec$ : in order to reduce the stress on the servos of the arm, we bend the arms a little before the next step.
@@ -94,7 +93,7 @@ The routine for standing up was inspired by Stückler \emph{et co.} in \cite{Stu
 
 \item From $1.40$ to $1.99sec$ :  we move the feet underneath the body by bending the knees and bringing the legs closer to the body. The objective is to bring the center of mass inside the support area of the feet.
 
-\item From $2.80$ to $4.00sec$ : the robot slowly redresses by unbending the knees and the hips. 
+\item From $2.80$ to $4.00sec$ : the robot slowly gets up by unbending the knees and the hips. 
 \end{enumerate}
 
 \begin{figure}[htp]
@@ -130,15 +129,15 @@ The final design, visible on \cref{fig:final_robot} has better stability, wider 
 \label{fig:final_robot}
 \end{figure}
 
-The final dimensions of the robot respect the rules of the contest (see \cref{appendix:rules}) :
+The final dimensions of the robot abide by the rules of the contest (see \cref{appendix:rules}) :
 \begin{enumerate}
 \item Height ($H_{top}$) :  $40 \leq 61.75 \leq 90cm$.
 \item Weight : $2.726kg$
 \item Height of COM ($H_{COM}$) : $34cm$. Foot area : $175 < cm^2$.
 \item Foot aspect ratio : $1.79 \leq 2.5$.
 \item Minimal width of the robot : $20 \leq 33.96cm$
-\item $69.72 \leq 74.1cm$
+\item $69.72 \leq 74.10cm$
 \item Maximal height : $75.52 < 92.63cm$.
 \item Leg length ($H_{leg}$) : $21.61 \leq 27.5 \leq 43.23cm$
-\item 
+\item Height of the head ($H_{Head}$) : $3.09 \leq 10.75 \leq 15.44cm$
 \end{enumerate}
