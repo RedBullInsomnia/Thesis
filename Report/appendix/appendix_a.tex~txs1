@@ -34,7 +34,37 @@ For a dynamic simulation several design restrictions must be considered: \begin{
 \item when using joints, keep the ratio of the masses below 10. Otherwise, the joint may have large orientation/position errors.
 \end{itemize}
 
-Source : \cite{vrep_manual}.
+\chapter{Control code of the servomotor inside V-Rep}
+\begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, label={lst:servo}, captionpos = b]
+if not PID_P then
+    PID_P=0.1
+    PID_I=0
+end
+
+if init then
+    pidCumulativeError=0
+end
+ctrl = errorValue*PID_P
+
+if PID_I ~=0 then
+    pidCumulativeError = pidCumulativeError+errorValue*dynStepSize
+else
+    pidCumulativeError=0
+end
+
+ctrl = ctrl + pidCumulativeError*PID_I
+
+velocityToApply = ctrl/dynStepSize
+if (velocityToApply > velUpperLimit) then
+    velocityToApply = velUpperLimit
+end
+if (velocityToApply < -velUpperLimit) then
+    velocityToApply = -velUpperLimit
+end
+forceOrTorqueToApply = maxForceTorque
+
+return forceOrTorqueToApply, velocityToApply
+\end{lstlisting}
 
 \chapter{Minimal simulation control code}
 \lstinputlisting[style=Matlab-editor, captionpos=b, caption={Minimal example code that connects to the server, gets the handles and implements a basic simulation control loop.}]{codes/simulation_client_vrep.m}
