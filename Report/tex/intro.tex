@@ -20,25 +20,25 @@ For the last ten years, students from the Montefiore institute have been partici
 
 This contest is quite vast and, as of 2016, is divided into several categories (called domains in RoboCup jargon):
 \begin{itemize}
-\item RoboCup Rescue : as the name suggests, a domain where robots must perform various rescue operations in diverse scenarios.
-\item RoboCup Industrial : a category with industrially oriented competitions, 
-\item RoboCup@Home : centred around domestic robots, such as robotics helpers for the elderly or robotic butlers.
-\item RoboCupJunior : more of an initiative that aims to foster robotics interest in children rather than a contest, it helps organize various robotics events for younger minds.
-\item RoboCup Soccer : historically the first category, centred about humanoid robots playing football. The objective of this category is to have a team of robots beat the world champions by 2050. This is the category we will compete in.
+\item RoboCup Rescue: as the name suggests, a domain where robots must perform various rescue operations in diverse scenarios.
+\item RoboCup Industrial: a category with industrially oriented competitions.
+\item RoboCup@Home: centred around domestic robots, such as robotics helpers for the elderly or robotic butlers.
+\item RoboCupJunior: more of an initiative that aims to foster robotics interest in children rather than a contest, it helps organize various robotics events for younger minds.
+\item RoboCup Soccer: historically the first category, centred about humanoid robots playing football. The objective of this category is to have a team of robots beat the world champions by 2050. This is the category we will compete in.
 \end{itemize}
 
-RoboCup Soccer is further subdivided into 4 sub-categories called leagues :\begin{itemize}
+RoboCup Soccer is further subdivided into 4 sub-categories called leagues:\begin{itemize}
 \item Standard platform, where the teams all use the same robot, \emph{Nao}, as illustrated in \Cref{fig:intro_standard}.
 \item Simulation, a league that does not feature physical robots but focuses on team strategies and artificial intelligence. The matches take place in 2D or 3D simulators.
 \item Adultsize, for the taller robots.
 \item Teensize, for middle sized robots.
-\item Kidsize, for the smaller robots. \Cref{fig:intro_ks} shows robots from that league.
+\item Kidsize, for the smaller robots. \Cref{fig:intro_ks} shows a match in progress from that league.
 \end{itemize}
 
-This year's team is preparing to participate to the Kidsize league and this master's thesis, along with two others, is the by-product of that team's activity. Since this is our first time participating we have no experience regarding humanoids robots. To avoid spending countless hours building and testing different designs we need a tool able of simulating the physics of a robot model. 
+This year's team is preparing to participate to the Kidsize league and this master's thesis, along with two others, is the by-product of that team's activity. Since this is our first time participating we have no experience regarding humanoids robots. To avoid spending countless hours building and testing different designs we need a tool able of simulating a robot model and its interactions with a physical world.  
 
 \section{Goals of the project}
-The goal of this thesis is to provide the team with a physics simulating tool with the following features :
+The goal of this thesis is to provide the team with a physics simulating tool with the following features:
 \begin{itemize}
 \item realistic simulation of the physics of rigid bodies. This means that the tool should handle inertia, collisions, friction and constraints between objects. Simulation of springs and dampers is an interesting bonus.
 \item receive and process orders incoming at a relatively high frequency. The processing need not be in real-time.
@@ -46,15 +46,15 @@ The goal of this thesis is to provide the team with a physics simulating tool wi
 \item 3D visualization of the simulation.
 \end{itemize}
 
-That simulator will be used to :
+That simulator will be used to:
 \begin{enumerate}
 \item Test different robot designs and choose the best one, in a more efficient way than it could be achieved by physically building the designs.
 \item Speed up development and testing of the control code because multiple teams will be able to work in parallel. 
 \end{enumerate}
 
 \section{Structure of the report}
-This report begins with an overview of the basic concepts behind physics simulation on computers in \cref{chap:principles}. We then move on to \cref{chap:choice} that explain the problem we want to solve and motivates the choice of V-Rep as the main simulation tool for this project.
+This report begins with an overview of the basic concepts behind physics simulation on computers in \cref{chap:principles}. We then move on to \cref{chap:choice} that explains the problem we want to solve and motivates the choice of V-Rep as the main simulation tool for this project.
 
-\Cref{chap:modelling} is about the modelling of the building blocks of our humanoid robot in preparation for \cref{chap:simulation} to go into the core of the subject with some simulations. This chapter also explains how our work influenced the design of the robot.
+\Cref{chap:modelling} is about the modelling of our humanoid robot in preparation for \cref{chap:simulation} to go into the core of the subject with some simulations. \Cref{chap:simulation} also explains how our work influenced the design of the robot.
 
 \Cref{chap:conclusion} concludes this work by summing up what is achieved and laying out future prospects.

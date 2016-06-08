@@ -1,14 +1,14 @@
-This chapter focuses on the modelling of the atomic elements of the robot. We begin by explaining how to create the model of an object inside V-Rep. We then show how to use to model simple elements such as frames or electronics who are not active during the simulation i.e they do not perform any function. Those can be represented strictly mechanically. We then show how to model active pieces such as the cameras of the servos before finally presenting a complete model of a robot.
+This chapter focuses on the modelling of the atomic elements of the robot. We begin by explaining how to create the model of an object inside V-Rep. We then show how to use to model simple elements such as frames or electronics who are not active during the simulation i.e. they do not perform any function. Those can be represented strictly mechanically. We then show how to model active pieces such as the cameras of the servos before finally presenting a complete model of a robot.
 
 \section{Problem statement}
-Our robot will be made from a number of elements that all need to be represented in the simulation :\begin{itemize}
+Our robot will be made from a number of elements that all need to be represented in the simulation:\begin{itemize}
 \item \textbf{Miscellaneous mechanics and electronics:} A type of element that must be included in the model are the frames, \Cref{fig:fr07-h101} shows the FR07-H101 frame. On the actual robot, they will link the servos together. Other mechanical elements are the hands, the feet and the plate that will act as the trunk of the robot. 
 
 In addition to all the aforementioned elements we plan to equip the legs of the robot with springs. Their purpose will be to make the robot walk more efficiently by storing energy in these springs when the foot hits the ground and releasing it when the leg takes another swing.
 
 The robot will also have an array of electronic elements. An Intel Atom processor (\Cref{fig:smarc}) to perform the high-level control (giving target angles to the servomotors, computing trajectories, processing the inputs from the cameras, etc),  batteries to stock the energy necessary to power them and the electronics to convey that energy through the robot.
 
-\item \textbf{Cameras:} The robot will be equipped with two cameras of the type shown in \Cref{fig:li_cam}. Situated at the top of the robot, it will them to locate itselft and points of interest in the play arena\footnote{This is the subject of an on-going master thesis at Montefiore.}. As we may test some machine vision algorithms during our (future) simulations we need to have the ability of retrieving the image or a video stream a camera captures.
+\item \textbf{Cameras:} The robot will be equipped with two cameras of the type shown in \Cref{fig:li_cam}. Situated at the top of the robot, it will use them to locate itself and points of interest in the play arena\footnote{This is the subject of an on-going master thesis at Montefiore.}. As we may test some machine vision algorithms during our (future) simulations we need to have the ability of retrieving the image or a video stream a camera captures.
 
 \item \textbf{Servomotors:} We will be using the MX-28R servo, shown in \Cref{fig:mx28}, as the driving element of the joints of the robot. We need to represent it as a rigid body as well as its function as a mechanical device that can generate torque on its axle to keep a targeted angle (hence the name \emph{servo}, from the Latin word for \emph{slave}).
 \end{itemize}
@@ -46,19 +46,19 @@ The robot will also have an array of electronic elements. An Intel Atom processo
 This section is a short introduction to the creation of a dynamic model of an object in V-Rep. We present how to set its mass, inertia and friction and how to make it collide with other models and respond to forces. Later, we present how to create constraints between models and explain why it is useful.
 
 \subsection{Creating the model of an object}
-The creation of a rigid body inside V-Rep begins with the creation of a mesh\footnote{an ensemble of vertices and faces that represent an object} in a modelling tool which in our case is Blender. It is preferred to have a convex mesh, i.e one that whose all interior meshes are less or equal to $180\degree$, as they are easier for the simulator to handle. When it is absolutely necessary to keep the mesh concave, a solution is to separate it into several convex meshes that will be grouped together once in V-Rep. Once saved in a file format recognized by V-Rep the mesh can be imported into the latter. 
+The creation of a rigid body inside V-Rep begins with the creation of a mesh\footnote{an ensemble of vertices and faces that represent an object} in a modelling tool which in our case is Blender. It is preferred to have a convex mesh, i.e. one that whose all interior meshes are less or equal to $180\degree$, as they are easier for the simulator to handle. When it is absolutely necessary to keep the mesh concave, a solution is to separate it into several convex meshes that will be grouped together in V-Rep. Once saved in a file format recognized by V-Rep the mesh can be imported into the latter. 
 
 \begin{figure}[htp]
 \center
     \includegraphics[width = 0.6\textwidth]{figures/v-rep_modelling}
-    \caption[Rigid body dynamic properties]{Configuration window of the dynamic properties of the selected rigid body. We can make it \emph{respondable}, i.e it should collide with other objects. We can also make it \emph{dynamic} in which case it will be dynamically active in the simulation and react to forces. When dynamically active, the movement of this body will be influenced by its \emph{mass} and its \emph{inertia}. It is also possible to set what is called \emph{Material} by V-Rep which is a set of parameters such as the friction of the material or its restitution parameter.}
+    \caption[Rigid body dynamic properties]{Configuration window of the dynamic properties of the selected rigid body. We can make it \emph{respondable}, i.e. it should collide with other objects. We can also make it \emph{dynamic} in which case it will be dynamically active in the simulation and react to forces. When dynamically active, the movement of this body will be influenced by its \emph{mass} and its \emph{inertia}. It is also possible to set what is called \emph{Material} by V-Rep which is a set of parameters such as the friction of the material or its restitution parameter.}
     \label{fig:vrep_modelling}
 \end{figure}
 
 In V-rep, we open the properties of the mesh (the window in \Cref{fig:vrep_modelling}) and mark it as dynamic, respondable (if necessary) and set the mass and the inertia. It is possible to have V-Rep compute it automatically from the geometry and the density but it can also be set manually.
 
 \subsection{Creating constraints between models \label{sec:joints}}
-In V-Rep the constraints exist under the form of \emph{joints}. There exist three types of joints :\begin{enumerate}
+In V-Rep the constraints exist under the form of \emph{joints}. There exist three types of joints:\begin{enumerate}
 \item \textbf{Revolute joints:} they have 1 degree of freedom (DOF) and enforce rotational movements between objects. The range of the rotation around the axis of the joint can be restricted. By default, it is passive but it can be set to \emph{torque/force mode} where it will try to hold a target angle, very much like a servomotor would.
 \item \textbf{Prismatic joints:} they have 1 DOF and enforce rotational translational movements between objects. As in the case of the revolute type of joint, the range can also be restricted. There also exist a torque/force mode setting but in the case of a prismatic joint its purpose is to represent a spring-damper. The stiffness and damping can be specified in the properties of the joint.
 \item \textbf{Spherical joints:} they have 3 DOF and enforce rotational translational movements between objects. Spherical joints do not have a torque/force mode and can only be passive. 
@@ -66,13 +66,13 @@ In V-Rep the constraints exist under the form of \emph{joints}. There exist thre
 A very important characteristic of joints is that they must link two dynamic objects together in order to work properly during the simulation. Two joints cannot be directly connected one to another.
 
 \section{Modelling the miscellaneous mechanical elements and electronics}
-The modelling of most of the mechanical elements and electronics is rather straightforward but there are some where the process is more troublesome. This is the case of the feet, frames and springs and those will be detailed hereunder after a short explanation of the modelling process of the remaining pieces.
+The modelling of most of the mechanical elements and electronics is rather straightforward but there are some where the process is more troublesome. This is the case of the feet, frames and springs, and those will be detailed hereunder after a short explanation of the modelling process of the simpler pieces.
 
 \subsection{Modelling the electronics, batteries, hands and the central plate}
-The modelling of electronics, batteries, hand and central plate is consists in applying the procedure explained in \Cref{sec:modelling}. These elements are already pretty simple in reality as they all have cuboid shapes. All their dimensions and weights are in \Cref{table:weights} along with a suggested material in the case of pieces that will have to be custom made.
+The modelling of electronics, batteries, hand and central plate consists in applying the procedure explained in \Cref{sec:modelling}. These elements are already pretty simple in reality as they all have cuboid shapes. All their dimensions and weights are in \Cref{table:weights} along with a suggested material in the case of pieces that will have to be custom made.
 
 \begin{table}[htp]
-\center
+\centering
 \begin{tabularx}{\textwidth}{@{} l l X X p{4.1cm} @{}}
 \toprule
 \textbf{Module} & \textbf{Weight [$g$]} & \textbf{Material} &  \textbf{Density [$kg/m^3$]}& \textbf{Dimensions $x[mm] \cdot y[mm] \cdot z[mm]$}\\ 
@@ -84,7 +84,7 @@ Feet & 52 & Polymer & 1000 & $70.0 \cdot 125.0 \cdot 6.0$\\
 Central plate & 209 & Aluminium & 4000 & $140.0 \cdot 30.0 \cdot 124.5$\\
 \bottomrule
 \end{tabularx}
-\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP. The differences in density between different pieces made of the same material represent the differences in geometry, i.e pieces with holes in them that are not modelled but taken into account by making the piece lighter.}
+\caption[Weights and dimensions of the pieces of the robot]{Weights and dimensions of the pieces of the robot. The density is useful for the automatic computation of the weight and inertia of the pieces in V-REP. The differences in density between different pieces made of the same material represent the differences in geometry, i.e. pieces with holes in them that are not modelled but taken into account by making the piece lighter.}
 \label{table:weights}
 \end{table}
 
@@ -142,9 +142,9 @@ Density & 2213 & $kg/m^3$\\
 \label{table:cam_specs}
 \end{table}
 
-The active part of the camera, the capture of videos and images, is simulated by a \emph{vision sensor}. As the name implies, this sensor captures what it sees. It has an array of properties, as shown in \Cref{fig:camera_model}, which influences what it can \emph{see exactly}. Some of them are rather performance related rather than modelling focused but we have access to the most essential parameters a camera has : the focal length and its resolution.
+The active part of the camera, capture of videos and images, is simulated by a \emph{vision sensor}. As the name implies, this sensor captures what it sees. It has an array of properties, as shown in \Cref{fig:camera_model}, which influences what it can \emph{see exactly}. Some of them are rather performance related but we have access to the most essential parameters a camera has: the focal length and its resolution.
 
-The possibility of embedding image processing is very interesting as by default the vision sensor captures the exact image of the world it sees. Therefore, a script can modify that image to be closer to what the actual camera would capture. For example, if the camera would capture blurry images, a blur filter could be embedded in the vision sensor.
+The possibility of embedding image processing is very interesting as by default the vision sensor captures the exact image of the world it sees. Therefore, a script can modify that image to be closer to what the actual camera would capture. For example, if the camera captured blurry images, a blur filter could be embedded in the vision sensor.
 
 \begin{figure}[htp]
 \center
@@ -170,7 +170,7 @@ The continuous torque is thus equal to $0.7Nm$.
 The stall torque is determined through a small experiment with a real MX-28R. The experimental setup is explained in \Cref{fig:exp_setup}. The experiment itself is presented in \Cref{fig:exp1}.
 
 \begin{figure}[htp]
-\center
+\centering
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{figures/exp_setup}
     \caption[Experimental setup]{The MX-28 servos are powered by a DC generator and controlled by a laptop equipped with a USB2DYNAMIXEL(USB-2-DYN) device.}
@@ -179,21 +179,21 @@ The stall torque is determined through a small experiment with a real MX-28R. Th
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width = \textwidth]{figures/u2d}
-    \caption[USB2DYNAMIXEL]{A USB2DYNAMIXEL. It turns an USB port into a serial port (RS485, TTL or classic serial connector) that can be used to control Dynamixel manufactured servos. Source :\cite{usb2dyn_manual}}
+    \caption[USB2DYNAMIXEL]{A USB2DYNAMIXEL. It turns an USB port into a serial port (RS485, TTL or classic serial connector) that can be used to control Dynamixel manufactured servos. Source: \cite{usb2dyn_manual}}
     \label{fig:usb2dyn}
     \end{subfigure}
     \caption{Experimental setup \label{fig:exp_setup}}
 \end{figure}
 
 \begin{figure}[htp]
-\center
+\centering
     \includegraphics[width = 0.5\textwidth]{figures/exp1}
-    \caption[Experimental setup for torque testing]{Experimental setup for torque testing. A weight $w$ of is suspended at a distance $d$ from the servo, resulting in a applied torque of $w \times g \times d$. The goal is to find the weight $w$ for which the servo is unable to lift the arm.}
+    \caption[Experimental setup for torque testing]{Experimental setup for torque testing. A weight $w$ is suspended at distance $d$ from the servo, resulting in an applied torque of $w \times g \times d$. $w$ is augmented until the servomotor is unable to lift the arm at which point we have determined the maximal torque it can generate.}
     \label{fig:exp1}
 \end{figure}
 
 \begin{figure}[htp]
-\center
+\centering
     \includegraphics[width = 0.3\textwidth]{figures/exp2}
     \caption[Experimental setup dynamics testing]{Experimental setup for dynamics testing. One servo lifts the other. The goal is the measure the time it takes to swing the arm from $0\degree$ to $180\degree$.}
     \label{fig:exp2}
@@ -202,7 +202,7 @@ The stall torque is determined through a small experiment with a real MX-28R. Th
 In our case, $d$ was equal to $22.5cm$ and we could reach a weight $w$ of $740g$ at $14.8V$. This equals to a torque of $1.64Nm$. The complete results are in \Cref{table:mx28-specs}.
 
 \subsection{Determining the rotation speed}
-The goal of this experiment is to determine the unloaded rotation speed of the MX-28R. The setup is shown in \cref{fig:exp2}. The measuring is done by taking advantage of the rotary encoder inside the servomotor : we can measure the time it takes for the servo to go from $0\degree$ to $180\degree$ through a program.
+The goal of this experiment is to determine the unloaded rotation speed of the MX-28R. The setup is shown in \cref{fig:exp2}. The measuring is done by taking advantage of the rotary encoder inside the servomotor: we can measure the time it takes for the servo to go from $0\degree$ to $180\degree$ through a program.
 
 The result is that executing this manoeuvre at $12V$ with no imposed speed limit takes $620msec$. This corresponds to a rotation speed of $48.33$ rotations per minute (Rpm).
 
@@ -235,10 +235,10 @@ Experimental unloaded rotation speed @12V & $48.33$ & $Rpm$\\
 
 \clearpage
 \subsection{Modelling the MX-28R servomotor}
-As before, the model creation begins with the creation of a mesh inside Blender but this time the mesh, in \Cref{fig:mx28_model}, is a bit more complex. It is actually made of two meshes : one for the hull of the servomotor and the other one for the axle. The purpose of that axle is to act as a position marker in V-Rep, where a joint is going to placed in the axis of that axle. 
+As before, the model creation begins with the drawing of a mesh inside Blender but this time the mesh, in \Cref{fig:mx28_model}, is a bit more complex. It is actually made of two meshes : one for the hull and the other one for the axle. Its purpose is to act as a position marker in V-Rep, where a joint is going to placed in the axis of that axle. 
 
 \begin{figure}[htp]
-\center
+\centering
 \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width = \textwidth]{figures/mx28}
     \caption{MX-28R servo.}
@@ -257,7 +257,7 @@ As before, the model creation begins with the creation of a mesh inside Blender 
 When the joint is in place, we edit its properties to set in torque/force mode and tick both the motor and control loop boxes of the joint dynamic properties window of \Cref{fig:joint}. The maximum torque is set to $1.2Nm$ and the maximum rotation speed to $(48.33 \cdot 360) / 60 = 290 \degree/s$. The MX-28R uses a PID controller to reach and hold the target positions so we do not need to write a custom control script and can content ourselves with modifying the proportional and integral parameters. 
 
 \begin{figure}[htp]
-\center
+\centering
     \includegraphics[width = 0.6\textwidth]{figures/joint}
     \caption[Dynamic properties of a revolute joint]{Dynamic properties of a revolute joint. When motor enabled we can set a target velocity along with a maximum torque and the joint acts as traditional motor. When the control loop is enabled the join acts as a servomotor and we can decide whether we use a PID controller or a custom control script.}
     \label{fig:joint}
@@ -266,9 +266,9 @@ When the joint is in place, we edit its properties to set in torque/force mode a
 A PID controller is a feedback based control loop that is quite common in the engineering industry. An example of such a controller is the one that is implemented in the control code of the MX-28R that can be seen in \Cref{fig:mx28_pid}. The current position is measured and compared to the target position. The difference between those two is called the \emph{error}. The error then follows three parallel paths. In the first one it is multiplied by a \emph{proportional gain $K_p$}, which accounts for the present error. In the second one, it is integrated and multiplied by an \emph{integral gain $K_i$} which accounts for the past errors. It is used to counter steady-state errors that are not countered by the proportional error. It will accumulate and the integral error will eventually be high enough to counter that offset. The last one is derived and multiplied by a \emph{derivative gain $K_d$}. This gain accounts for the possible future values of the error and influences how fast the controller reacts. For more information on PID controllers and their use we please refer to \cite{johnson2005pid}.
 
 \begin{figure}[htp]
-\center
+\centering
     \includegraphics[width = \textwidth]{figures/pidcontrol}
-    \caption[MX-28 PID controller]{Block diagram of the PID controller implemented in the MX-28R. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction torque in the allowed interval whereas the \emph{system model} block is a simulink representation of the MX-28R and does not exist in the actual implementation inside the latter. Source : \cite{mx_28_manual}}
+    \caption[MX-28 PID controller]{Block diagram of the PID controller implemented in the MX-28R. It is a standard PID controller although by default only the P parameter is non-zero. The function of the \textit{motor model} block is to clamp the computed correction torque in the allowed interval whereas the \emph{system model} block is a simulink representation of the MX-28R and does not exist in the actual implementation inside the latter. Source: \cite{mx_28_manual}}
     \label{fig:mx28_pid}
 \end{figure}
 
@@ -277,7 +277,7 @@ A PID controller is a feedback based control loop that is quite common in the en
 The elements we just modelled can be assembled together to create the robot model in \Cref{fig:robotv7}. The next chapter will focus on simulations involving this model.
  
 \begin{figure}[htp]
-\center
+\centering
 \begin{subfigure}[b]{0.64\textwidth}
     \includegraphics[width = \textwidth]{figures/robot_v7_front}
     \caption[]{Front view of the robot.}
@@ -285,7 +285,7 @@ The elements we just modelled can be assembled together to create the robot mode
 \end{subfigure}
 
 \begin{subfigure}[b]{0.64\textwidth}
-\center
+\centering
     \includegraphics[width = \textwidth]{figures/robot_v7_side}
     \caption[]{Side view of the robot.}
     \label{fig:robotv7_side}

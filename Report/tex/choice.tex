@@ -5,19 +5,19 @@ Our robot will consist in a a number of servos connected together through frames
 
 If we want to simulate it we thus need a tool that handles:\begin{itemize}
 \item inertia, to have physically accurate dynamics.
-\item joints to have constraints between objects.
+\item joints, to have constraints between objects.
 \item collision and friction, to accurately model the interaction of the feet with the ground.
-\item spring dampers.
+\item spring-dampers.
 \end{itemize}
 
 The servo used in the robot will have several sensors such as accelerometers, rotary position encoders. We want to model them in the simulator since they will be used by the control code. 
 
 We will also have cameras on the robot, therefore if we want to take a holistic approach we should try to model them as well but it is not a priority. 
 
-The final requirement is that we want to be able to control the robot from outside the simulator.
+The final requirement we have is the ability to control the robot from outside the simulator.
 
 \section{Barebone physics engines}
-The physics engine is the cornerstone of a physics simulation tool. There exist a quantity of them, we present here the most popular ones that have the the following features' set :  multi rigid body dynamics, collision detection, joints (hinge, spring-dampers, generic 6DOF\footnote{DOF : degree of freedom}). 
+The physics engine is the cornerstone of a physics simulation tool. There exist a quantity of them, we present here the most popular ones that have the following features' set:  multi rigid body dynamics, collision detection, joints (hinge, spring-dampers, generic 6DOF)
 
 \begin{enumerate}
 \item \textbf{Bullet\footnote{\url{http://bulletphysics.org/wordpress/}}:} As of now, the most popular open source physics engine. Although primarily used in video games it is also used in applications such as Blender, V-Rep or NASA's tensegrity robotics toolkit. 
@@ -30,14 +30,14 @@ The physics engine is the cornerstone of a physics simulation tool. There exist 
 \end{enumerate}
 
 \section{Simulators}
-In this section we will discuss software that provides a higher level interface to the physics engines we presented earlier. That interface usually adds a visualization and some other useful features.
+In this section we will discuss software that provide a higher level interface to the physics engines we presented earlier. Simulators integrate physics engines and add several higher level functionalities on top of them: visualization, modelling, scripting, etc. 
 \begin{enumerate}
 
 \item \textbf{Blender\footnote{\url{https://www.blender.org/} [Accessed 21/05/2016]}} is a 3D modelling software suite and as such has integrated the Bullet engine to help make more realistic animations. It features the ability to make Python scripts that use that engine to make games or physics simulations. 
 
 It is open source and cross platform.
 
-\item \textbf{Gazebo\footnote{\url{http://gazebosim.org/} [Accessed 21/05/2016]}} was the official simulator of DARPA's Robotics challenge. It features multiple physics engines (Bullet ,Simbody, Dart and ODE), allows custom plugins and uses the SDF format for its models. 
+\item \textbf{Gazebo\footnote{\url{http://gazebosim.org/} [Accessed 21/05/2016]}} was the official simulator of DARPA's Robotics challenge. It features multiple physics engines (Bullet, Simbody, Dart and ODE), allows custom plugins and uses the SDF format for its models. 
 
 It is open source but binaries are not provided for Windows and OSX.
 
@@ -81,30 +81,30 @@ In this section we try some of the proposals presented previously and give our t
 \subsection{Blender}
 Blender is convenient to use because the robot's model can be easily changed inside. Furthermore, the fact that the scripting language is Python make code development faster and the latter's support of TCP sockets allows an external program to control the simulation and the robot inside it. The internals of the physics are obscured and some interesting object properties, such as inertias, are hard to reach. It is also hard to change the simulation parameters making it difficult to obtain stable results when using a higher number of objects and constraints. Furthermore, support for the game engine, the basis of a simulation project, is uncertain, as stated in the development roadmap \cite{blender_roadmap}.
 
-\textbf{Pros :}
+\textbf{Pros:}
 \begin{itemize}
 \item Easy modelling of the elements.
 \item The Python API is well documented.
 \end{itemize}
 
-\textbf{Cons :}
+\textbf{Cons:}
 \begin{itemize}
-\item Bullet's simulation parameters are hidden behind an incomplete interface, making it impossible to modify the timestep or the number of iterations for constraint solving.
+\item Bullet's simulation parameters are hidden behind an incomplete interface, making it impossible to modify the timestep or number of iterations for constraint solving.
 \item Friction parameter not a physical value but a value between 0 and 1.
 \item Inertias are approximated by the principal values Ixx, Iyy and Izz.
 \end{itemize}
 
 \subsection{Gazebo}
-Gazebo is attractive because it has the support of DARPA and handles multiple physics engines. The main drawback lies in the modelling of the robot to be simulated. It does feature an internal modelling tool but it is too limited to be usable. That would not be a problem if it could import models easily but that is not the case: it uses an xml file to store the parameters of the robot and the only tool that can export models to that format is 3ds max, a commercial product. The team behind Gazebo seems to be well-aware that this is an issue since as of May 2015 it is focusing on developing an internal model editor.
+Gazebo is attractive because it has the support of DARPA and handles multiple physics engines. The main drawback lies in the modelling of the robot to be simulated. It does feature an internal modelling tool but it is too limited to be usable. That would not be a problem if it could import models easily but that is not the case: it uses an xml file to store the parameters of the robot and the only tool that can export models to that format is Solidworks\footnote{\url{http://www.solidworks.com/}}, a commercial product. The team behind Gazebo seems to be well-aware that this is an issue since as of may 2015 it is focusing on developing an internal model editor.
 
-\textbf{Pros :}
+\textbf{Pros:}
 \begin{itemize}
 \item Choice of the physics engine.
 \item Inertias definable as a matrix.
 \item Friction represented in physical values.
 \end{itemize}
 
-\textbf{Cons :}
+\textbf{Cons:}
 \begin{itemize}
 \item Internal model editor prohibitively limited, cannot be used to create a complicated model. It cannot import popular CAD formats.
 \item Uses the SDF\footnote{A XML file} format to store models, making it hard to iterate over robot designs.
@@ -113,7 +113,7 @@ Gazebo is attractive because it has the support of DARPA and handles multiple ph
 \subsection{V-Rep}
 V-Rep also has multiple physics engines available and has a user-friendly interface. It also has an internal modelling tool but there is not much use for it since it allows the import of models in the COLLADA format. Moreover, it supports TCP sockets and even provides code for a client thread in the custom application. The options of the physics engines are also pretty accessible and lots of sensor types are natively supported by the simulator.
 
-\textbf{Pros :}
+\textbf{Pros:}
 \begin{itemize}
 \item Choice of the physics engine.
 \item Inertias correctly definable.
@@ -121,26 +121,25 @@ V-Rep also has multiple physics engines available and has a user-friendly interf
 \item Already used at the university.
 \end{itemize}
 
-\textbf{Cons :}
+\textbf{Cons:}
 \begin{itemize}
 \item Limited internal editor, can hardly be used for modelling.
 \end{itemize}
 
 \section{Choice}
 \subsection{Simulator}
-We make the choice of using a simulator rather than just a physics engine for several reasons :\begin{itemize}
-\item The product of this master's thesis is expected to be used by another students next year and they would rather spend as little time as possible learning how to use it. Hence an established simulator rather than an in-house one is preferred.
+We make the choice of using a simulator rather than just a physics engine for several reasons:\begin{itemize}
+\item The product of this master's thesis is expected to be used by other students next year and they would rather spend as little time as possible learning how to use it. Hence an established simulator rather than an in-house one is preferred.
 \item A simulator eliminates the need of developing 3D visualization by ourselves.
 \item A simulator already provides much needed features as the import of 3D models or an interface to the settings of the simulations.
 \item Most simulators have an already defined API for remote control.
+\item By using an existing simulator we can request help from other users.
 \end{itemize}
 
-From the simulators we surveyed earlier in this chapter the best overall seems to be V-Rep.
-
-This choice is further confirmed by Ivaldi in \cite{ivaldi2014tools} who shows that V-Rep is amongst the highest rated tools amongst roboticists.
+From the simulators we surveyed earlier in this chapter the best overall seems to be V-Rep. This choice is further confirmed by Ivaldi in \cite{ivaldi2014tools} who shows that V-Rep is one of the highest rated tools amongst roboticists.
 
 \subsection{Physics engine}
-Inside V-Rep, we chose Newton Dynamics as the physics engine because simple tests showed it to be the most stable with a high number of joints\footnote{with the exception of Vortex but it requires a license to run more than $10s$}. That choice is further confirmed by Hummel \textit{et al.} in \cite{hummel2012evaluation} where Newton Dynamics is stated to be the best engine when it comes to handling a high number of constraints.
+Inside V-Rep, we chose Newton Dynamics as the physics engine because simple tests showed it to be the most stable with a high number of joints\footnote{with the exception of Vortex but it requires a license to run more than $10s$.}. That choice is further confirmed by Hummel \textit{et al.} in \cite{hummel2012evaluation} where Newton Dynamics is stated to be the best engine when it comes to handling a high number of constraints.
 
 \subsection{Modelling software}
 Although Blender was not chosen as the primary simulation tool for the project, it shall be used as a modelling tool for the robot. 

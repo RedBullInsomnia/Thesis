@@ -1,5 +1,5 @@
 \chapter{Rules \label{appendix:rules}}
-The robots that participate in the kidsize competition must respect the following characteristics\cite{robocup_rules}:\begin{enumerate}
+The robots that participate in the kidsize competition must respect the following characteristics:\begin{enumerate}
 \item $40cm \leq H_{top} \leq 90cm$.
 
 \item Maximum allowed weight is $20kg$.
@@ -23,8 +23,10 @@ joint at the shoulder to the top of the head.
 \item The leg length is measured while the robot is standing up straight. The length is measured from the first rotating joint where its axis lies in the plane parallel to the standing ground to the tip of the foot.
 \end{enumerate}
 
+Source: \cite{robocup_rules}.
+
 \chapter{Design guidelines}
-For a dynamic simulation several design restrictions must be considered : \begin{itemize}
+For a dynamic simulation several design restrictions must be considered: \begin{itemize}
 \item use pure convex as much as possible, they are much more stable and faster to simulate. When a more complex shape is used, approximate it with several convex shapes.
 
 \item use reasonable sizes, neither not too small nor too big. Thin shapes may behave strangely.
@@ -32,7 +34,7 @@ For a dynamic simulation several design restrictions must be considered : \begin
 \item when using joints, keep the ratio of the masses below 10. Otherwise, the joint may have large orientation/position errors.
 \end{itemize}
 
-\chapter{Control code of the servo}
+\chapter{Control code of the servomotor inside V-Rep}
 \begin{lstlisting}[language={[5.0]Lua}, numbers = left, tabsize = 4, frame=single,breaklines, keywordstyle=\color{blue}, label={lst:servo}, captionpos = b]
 if not PID_P then
     PID_P=0.1
@@ -64,5 +66,17 @@ forceOrTorqueToApply = maxForceTorque
 return forceOrTorqueToApply, velocityToApply
 \end{lstlisting}
 
-\chapter{Minimal example code}
-\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Minimal example code that connects to the server, gets the handles and implements a basic control loop}]{codes/simulation_client_vrep.m}
+\chapter{Minimal simulation control code}
+\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Minimal example code that connects to the server, gets the handles and implements a basic simulation control loop.}]{codes/simulation_client_vrep.m}
+\clearpage
+
+\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Function that handles the sending of target angles to joints.}]{codes/send_instructions.m}
+\clearpage
+
+\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Function that retrieves the handles to the joints and the cameras.}]{codes/robot_init.m}
+
+\chapter{Routines}
+\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Routine that flips the robot from a supine to a prone position.}, label={code:go_prone}]{codes/go_prone.m}
+\clearpage
+
+\lstinputlisting[style=Matlab-editor, captionpos=b, caption={Routine that makes the robot stand up from a prone position.}, label={code:stand_prone}]{codes/standup_prone.m}

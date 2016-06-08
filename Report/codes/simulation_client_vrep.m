@@ -6,13 +6,13 @@ vrep.simxFinish(-1); % close all opened connections
 clientID = vrep.simxStart('127.0.0.1', 19997, true, true, 5000, 5);
 
 if clientID < 0
-    disp('Failed connecting to remote API server. Exiting.');
+    disp('Failed connecting. Exiting.');
     vrep.delete();
     return;
 end
 disp('Connected to remote API server');
 
-% Make sure we close the connexion whenever the script is interrupted.
+% Close the connexion whenever the script is interrupted.
 cleanupObj = onCleanup(@() cleanup_vrep(vrep, clientID));
 
 % Set the remote mode to 'synchronous'
@@ -35,7 +35,7 @@ end
 % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive.
 vrep.simxGetPingTime(clientID);
 
-% Now close the connection to V-REP:
+% Close the connection to V-REP:
 vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait);
 vrep.simxFinish(clientID);
 vrep.delete(); % call the destructor!
