@@ -1,6 +1,7 @@
 #include "functions.h"
 #include "dynamixel.h"
 #include <iostream>
+#include <fstream>
 #include <conio.h>
 #include <chrono>
 
@@ -175,7 +176,7 @@ void testCycleMode(int index, int *goal_pos)
 {
 	//int goal_pos[2] = { 1700, 2000 };
 	int present_pos, comm_status, moving;
-
+	vector<int> positions;
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	
     dxl_write_word(DEFAULT_ID, P_GOAL_POSITION_L, goal_pos[index]);
@@ -186,7 +187,8 @@ void testCycleMode(int index, int *goal_pos)
         comm_status = dxl_get_result();
         if (comm_status == COMM_RXSUCCESS)
         {
-            //cout << goal_pos[index] << " " << (int)present_pos << endl;
+            cout << goal_pos[index] << " " << (int)present_pos << endl;
+			positions.push_back(present_pos);
             PrintErrorCode();
         }
         else
@@ -205,6 +207,7 @@ void testCycleMode(int index, int *goal_pos)
 				high_resolution_clock::time_point t2 = high_resolution_clock::now();
 				auto duration = duration_cast<milliseconds>(t2 - t1).count();
 				cout << "Elapsed time: " << duration << endl;
+				printInFile(positions, duration, "Test2");
 
                 // Change goal position
 				if (index == 0)
@@ -224,6 +227,20 @@ void testCycleMode(int index, int *goal_pos)
         }
 
     } while (moving == 1);
+}
+
+void printInFile(std::vector<int> v, int elapsed, std::string name)
+{
+	ofstream myfile;
+	string filename = name + ".txt";
+	myfile.open(filename);
+	myfile << "Angle of the servo." << endl;
+	myfile << "points = [";
+	for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+		myfile << *it << ", ";
+	myfile << "];" << endl;
+	myfile << "Elapsed time :" << elapsed;
+	myfile.close();
 }
 
 void printInfos()

@@ -18,6 +18,9 @@
 #define DEFAULT_BAUDNUM		1 // 1Mbps
 #define DEFAULT_ID			1
 
+#include <vector>
+#include <string>
+
 // Init communication with device
 int initDevice();
 
@@ -38,6 +41,8 @@ void setSpeedLimit(int speed_limit);
 void changeTestType(int order);
 
 void resetServo();
+
+void printInFile(std::vector<int> v, int elapsed, std::string name);
 
 void printInfos();
 
