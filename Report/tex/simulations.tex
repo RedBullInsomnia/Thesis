@@ -26,29 +26,9 @@ The instructions available can execute a number of different actions. The follow
 \item simxGetFloatSignal : this function retrieves the value of a float signal. 
 \end{itemize}
 
-%\lstinputlisting[style=Matlab-editor, float, captionpos=b, caption={Minimal example code that connects to the server, gets the handles and implements a basic control loop}]{codes/simulation_client_vrep.m}
-
 \section{Applications}
 \subsection{Static stability}
 The first application is simply to build a model of the robot and test if it is able to stand upright on its own, using the servos. That model is presented in \cref{fig:robotv7}
-
-\begin{figure}[htp]
-\center
-\begin{subfigure}[b]{0.8\textwidth}
-    \includegraphics[width = \textwidth]{figures/robot_v7_front}
-    \caption[]{Front view of the robot}
-    \label{fig:robotv7_front}
-\end{subfigure}
-
-\begin{subfigure}[b]{0.8\textwidth}
-\center
-    \includegraphics[width = \textwidth]{figures/robot_v7_side}
-    \caption[]{Side view of the robot}
-    \label{fig:robotv7_side}
-\end{subfigure}
-\caption[]{Front and side views of the final robot used in the simulations presented in this chapter. The grey servos are connected together through different types of frames. At the top, two cameras are discernible and at the centre, the electronics and batteries can be seen}
-\label{fig:robotv7}
-\end{figure}
 
 The servos of the robot are simply ordered to hold their initial angle and the simulation determines that the robot can indeed stand upright without any active stabilization. This is a simple test that can rule out bad designs quite easily.
 
@@ -77,7 +57,7 @@ The evolution of the angles held by the joints during the routine is presented i
 \begin{figure}[htp]
 \center
     \includegraphics[width = \textwidth]{figures/sup2proneLegs}
-    \caption[Angles of the legs during \emph{supine to prone} manoeuvre]{Angles of the legs during \emph{supine to prone} manoeuvre}
+    \caption[Angles of the legs during \emph{supine to prone} manoeuvre]{Angles of the legs during \emph{supine to prone} manoeuvre.}
     \label{fig:sup2proneLegs}
 \end{figure}
 
@@ -133,7 +113,7 @@ The final dimensions of the robot abide by the rules of the contest (see \cref{a
 \begin{enumerate}
 \item Height ($H_{top}$) :  $40 \leq 61.75 \leq 90cm$.
 \item Weight : $2.726kg$
-\item Height of COM ($H_{COM}$) : $34cm$. Foot area : $175 < cm^2$.
+\item Height of center of mass ($H_{COM}$) : $34cm$. Foot area : $175 < cm^2$.
 \item Foot aspect ratio : $1.79 \leq 2.5$.
 \item Minimal width of the robot : $20 \leq 33.96cm$
 \item $69.72 \leq 74.10cm$

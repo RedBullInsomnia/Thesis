@@ -1,4 +1,4 @@
-\section{Conclusion}
+\section{Contributions}
 In this work we applied rigid body simulation to the problem of designing a robust humanoid robot. Our work produced a model of a robot that respects the rules of the kidsize league of the RoboCup Soccer competition. Our simulations prove that it is able to stand up from a lying position, be it prone or supine. 
 
 \section{Problems encountered}
@@ -16,11 +16,13 @@ This drawback is generalized amongst all the simulators that we surveyed at the 
 \subsection{Modelling}
 While the model is in a usable state it could still be bettered and we suggest to begin with the items listed hereafter:
 \begin{itemize}
-\item \textbf{Springs.} Springs also need some work, as of now they are just there as a proof of concept but their parameters will need to be tuned.
+\item \textbf{Springs.} As of now our work with springs is just a proof of concept.
 
-\item \textbf{Inertias.} As of now, the model uses simplified inertias, in the belief that a controller should be able to correct minor differences in behaviour between the model and the actual robot. If these inertias need to be made more accurate, we suggest to use Meshlab\footnote{\url{http://meshlab.sourceforge.net/}} to compute the inertias of those objects.
+\item \textbf{Inertia.} As of now, the model uses a simplified representation of inertia, in the belief that a controller should be able to correct minor differences in behaviour between the model and the actual robot. If inertia needs to be made more accurate, we suggest to use Meshlab\footnote{\url{http://meshlab.sourceforge.net/}} to compute the inertia of objects.
 
-\item \textbf{Model format.} It is still uncertain if Blender shall continue to support the COLLADA format, as explained mentioned in the development roadmap (\cite{blender_roadmap}). In the negative the choice should be made whether to continue using the COLLADA format and find another modelling software that supports it or to move on to another format (URDF for example, now that the robot model is defined).
+\item \textbf{Model format.} It is still uncertain if Blender shall continue to support the Collaborative Design Activity (COLLADA) format, as explained mentioned in the development roadmap (\cite{blender_roadmap}). This format has been very useful throughout this master's thesis as it made possible to import a 3D model of the robot while keeping the distinct objects of the model separate. This is not the case with other mesh formats where the imported model is a single entity that we must separate into atomic elements. 
+
+Should the format for this format be dropped, a choice should be made whether to continue using the COLLADA format and find another modelling software that supports it or to move on to another format. In the case the latter is chosen we suggest to use the Unified Robot Description format (URDF), basically a xml file which is supported by most of the robotics simulator we surveyed.
 
 \end{itemize}
 

@@ -26,7 +26,7 @@
 % For hyperlinks and meta data
 \usepackage{hyperref}
 \hypersetup{
-    %bookmarks=true,         % show bookmarks bar?
+    bookmarks=true,         % show bookmarks bar?
     unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
@@ -59,46 +59,6 @@
 
 \begin{document}
 
-\input{tex/titlepage.tex}
-
-\tableofcontents
-
-\listoffigures
-
-\listoftables
-
-%% Intro
-\clearpage
-\setcounter{page}{1}
-\pagenumbering{arabic}
-\chapter{Introduction}
-\input{tex/intro.tex}
-
-%% Pre-work
-\chapter{Principles of interactive rigid body simulation}
-\label{chap:principles}
-\input{tex/principles.tex}
-
-\chapter{Choice of the simulation platform}
-\label{chap:choice}
-\input{tex/choice.tex}
-
-\chapter{Modelling a robot}
-\label{chap:modelling}
-\input{tex/modelling.tex}
-
-\chapter{Applications}
-\label{chap:simulation}
-\input{tex/simulations.tex}
-
-\chapter{Conclusions}
-\label{chap:conclusion}
-\input{tex/conclusion.tex}
-
-\bibliographystyle{alpha}
-\bibliography{bib}
-
-\appendix
-\input{appendix/appendix_a.tex}
+\input{titlepage.tex}
 
 \end{document}
