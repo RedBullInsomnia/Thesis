@@ -14,7 +14,7 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{color}
-\usepackage[bottom]{footmisc}
+%\usepackage[bottom]{footmisc}
 \usepackage[framed, numbered]{matlab-prettifier}
 
 % To have indentation
@@ -68,17 +68,20 @@
 \listoftables
 
 %% Intro
-\clearpage
+\newpage\null\thispagestyle{empty}\newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \chapter{Introduction}
 \input{tex/intro.tex}
 
 %% Pre-work
+\newpage\null\newpage
 \chapter{Principles of interactive rigid body simulation}
 \label{chap:principles}
 \input{tex/principles.tex}
 
+\clearpage
+\newpage
 \chapter{Choice of the simulation platform}
 \label{chap:choice}
 \input{tex/choice.tex}
@@ -87,6 +90,7 @@
 \label{chap:modelling}
 \input{tex/modelling.tex}
 
+\newpage\null\newpage
 \chapter{Applications}
 \label{chap:simulation}
 \input{tex/simulations.tex}
@@ -99,6 +103,7 @@
 \bibliography{bib}
 
 \appendix
+\newpage\null\newpage
 \input{appendix/appendix_a.tex}
 
 \end{document}
