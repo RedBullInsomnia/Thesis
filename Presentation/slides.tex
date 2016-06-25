@@ -5,13 +5,13 @@
 \usepackage{url}
 \usepackage[utf8]{inputenc}
 
-\AtBeginSection[]
-{
-	\begin{frame}
-		\frametitle{Table of Contents}
-		\tableofcontents[currentsection]
-	\end{frame}
-}
+%\AtBeginSection[]
+%{
+%	\begin{frame}
+%		\frametitle{Table of Contents}
+%		\tableofcontents[currentsection]
+%	\end{frame}
+%}
 
 \title{Master's thesis}
 \subtitle{Simulation of complex actuators}
@@ -29,30 +29,66 @@
 	\includegraphics[width=0.7\textwidth]{images/intro_roboSoccer}
 }
 
-\frame{\frametitle{Subject of work}
-	Required features:
+\frame{\frametitle{Problem statement}
+	Required simulation features:
 	\begin{itemize}
-		\item realistic physics simulation
-		\item ability to control the simulation from outside
-		\item the model of the robot should receive instructions at a relatively high frequency and be able to interpret the same instructions that the real robot will
+		\item realistic rigid bodies physics simulation
+		\item the model of the robot should be able to interpret the same instructions that the real robot will
+		\item the model of the robot should receive instructions at a relatively high frequency
 	\end{itemize}
 }
 
-\section{Choices}
-\frame{\frametitle{Choices}
+\section{Software solutions}
+\frame{\frametitle{Software choices}
 	\centering
 	\includegraphics[width=\textwidth]{images/overview}
 }
 
 
-\section{Modelling}
-\frame{\frametitle{Modelling}
-
+\section{Physics simulation}
+\frame{\frametitle{Modelling (1/2)}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{images/modelling}\\
+	\end{center}
+	Problems : \begin{itemize}
+		\item mass
+		\item inertia
+		\item volume
+		\item function
+	\end{itemize} 
 }
 
-\section{Simulation}
-\frame{\frametitle{Simulation modus operandi}
+\frame{\frametitle{Modelling (2/2)}
+	\begin{columns}[T] % align columns
+		\begin{column}{.48\textwidth}
+			Blender :\begin{itemize}
+				\item volume
+				\end{itemize}
+		\end{column}%
+		\hfill%
+		\begin{column}{.48\textwidth}
+			V-Rep : \begin{itemize}
+				\item mass
+				\item inertia
+				\item function
+			\end{itemize}
+		\end{column}%
+	\end{columns}
+}
 
+\section{Control}
+\frame{\frametitle{Control (1/2)}
+	Problems : \begin{itemize}
+		\item Same orders as real robot
+		\item High frequency
+	\end{itemize}
+}
+
+\frame{\frametitle{Control (2/2)}
+	Solutions : \begin{itemize}
+		\item Remote control through TCP socket
+		\item Synchronous operation
+	\end{itemize}
 }
 
 \section{Applications}
