@@ -30,11 +30,11 @@
 }
 
 \frame{\frametitle{Problem statement}
-	Required simulation features:
+	Required simulator features:
 	\begin{itemize}
 		\item realistic rigid bodies physics simulation
+		\item constraints
 		\item the model of the robot should be able to interpret the same instructions that the real robot will
-		\item the model of the robot should receive instructions at a relatively high frequency
 	\end{itemize}
 }
 
@@ -51,11 +51,11 @@
 		\includegraphics[width=0.6\textwidth]{images/modelling}\\
 	\end{center}
 	Problems : \begin{itemize}
-		\item mass
-		\item inertia
+		\item mass \& inertia
 		\item volume
 		\item function
-	\end{itemize} 
+		\item constraints
+	\end{itemize}
 }
 
 \frame{\frametitle{Modelling (2/2)}
@@ -71,6 +71,7 @@
 				\item mass
 				\item inertia
 				\item function
+				\item constraints
 			\end{itemize}
 		\end{column}%
 	\end{columns}
@@ -78,16 +79,20 @@
 
 \section{Control}
 \frame{\frametitle{Control (1/2)}
+	\begin{center}
+	\includegraphics[width=0.3\textwidth]{images/accel}
+	\end{center}
 	Problems : \begin{itemize}
-		\item Same orders as real robot
-		\item High frequency
+		\item same orders as real robot
+		\item retrieve state of simulation
 	\end{itemize}
 }
 
 \frame{\frametitle{Control (2/2)}
 	Solutions : \begin{itemize}
-		\item Remote control through TCP socket
-		\item Synchronous operation
+		\item remote control through TCP socket
+		\item synchronous operation
+		\item scripts
 	\end{itemize}
 }
 
@@ -100,6 +105,11 @@
 \frame{\frametitle{Applications (2/2)}
 \centering
 \movie[label=show3,width=0.8\textwidth, poster]{\includegraphics[width=0.8\textwidth]{images/intro_ks}}{prone.avi}
+}
+
+\frame{\frametitle{Conclusion}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/robot_ortho}
 }
 
 \end{document}
