@@ -1,9 +1,10 @@
-\documentclass[12pt, handout]{beamer}
+\documentclass[12pt]{beamer}
 \usetheme{default}
 \usepackage{multimedia}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage[utf8]{inputenc}
+\setbeamertemplate{footline}[frame number]
 
 %\AtBeginSection[]
 %{
@@ -20,12 +21,12 @@
 \date{Academic year 2015-2016}
 
 \begin{document}
-	
+\beamertemplatenavigationsymbolsempty
 \frame{\titlepage}
 
 \section{Introduction}
 \frame{\frametitle{Context \& Motivation}
-todo : -enlever le fond de l'image de conclusion\\
+todo :
 - modifier le schéma bloc\\
 - ajouter TCP/IP au dessus de la flèche entre simulator et Controller\\
 	\centering
@@ -33,7 +34,7 @@ todo : -enlever le fond de l'image de conclusion\\
 }
 
 \frame{\frametitle{Problem statement}
-	Goals
+	\alert{Goals}
 	\begin{itemize}
 		\item realistic rigid bodies physics simulation
 		\item constraints
@@ -53,7 +54,7 @@ todo : -enlever le fond de l'image de conclusion\\
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{images/modelling}\\
 	\end{center}
-	Problems : \begin{itemize}
+	\alert{Problems} \begin{itemize}
 		\item mass \& inertia
 		\item volume
 		\item function
@@ -62,23 +63,31 @@ todo : -enlever le fond de l'image de conclusion\\
 }
 
 \frame{\frametitle{Modelling (2/2)}
-	\centering
-	\includegraphics[width=\textwidth]{images/overview}
+	\begin{center}
+	\includegraphics[width=\textwidth]{images/overview_modelling}
+	\end{center}
+	
+	\begin{center}
 	\begin{columns}[T] % align columns
-		\begin{column}{.48\textwidth}
-			Blender :\begin{itemize}
+		\begin{column}{.32\textwidth}
+			\alert{Blender} \begin{itemize}
 				\item volume
 				\end{itemize}
 		\end{column}%
 		\hfill%
-		\begin{column}{.48\textwidth}
-			V-Rep : \begin{itemize}
-				\item mass \& inertia
+		\begin{column}{.32\textwidth}
+			\alert{V-Rep} \begin{itemize}
 				\item function
+			\end{itemize}
+		\end{column}%
+		\begin{column}{.32\textwidth}
+			\alert{Newton} \begin{itemize}
+				\item mass \& inertia
 				\item constraints
 			\end{itemize}
 		\end{column}%
 	\end{columns}
+	\end{center}
 }
 
 \section{Control}
@@ -86,17 +95,17 @@ todo : -enlever le fond de l'image de conclusion\\
 	\begin{center}
 	\includegraphics[width=0.3\textwidth]{images/accel}
 	\end{center}
-	Problems : \begin{itemize}
-		\item same orders as real robot
+	\alert{Problems} \begin{itemize}
+		\item use same orders as real robot
 		\item retrieve state of simulation
 	\end{itemize}
 }
 
 \frame{\frametitle{Control (2/2)}
 	\begin{center}
-	\includegraphics[width=\textwidth]{images/overview}
+	\includegraphics[width=\textwidth]{images/overview_control}
 	\end{center}
-	Solutions : \begin{itemize}
+	\alert{Solutions} \begin{itemize}
 		\item remote control through TCP socket
 		\item scripts
 	\end{itemize}
@@ -105,17 +114,17 @@ todo : -enlever le fond de l'image de conclusion\\
 \section{Applications}
 \frame{\frametitle{Applications (1/2)}
 \centering
-\movie[label=show3,width=0.8\textwidth, poster]{\includegraphics[width=0.8\textwidth]{images/intro_ks}}{prone.avi}
+\movie[label=show3,width=0.8\textwidth, poster]{\includegraphics[width=\textwidth]{images/intro_ks}}{supine2prone.avi}
 }
 
 \frame{\frametitle{Applications (2/2)}
 \centering
-\movie[label=show3,width=0.8\textwidth, poster]{\includegraphics[width=0.8\textwidth]{images/intro_ks}}{prone.avi}
+\movie[label=show3,width=0.8\textwidth, poster]{\includegraphics[width=\textwidth]{images/intro_ks}}{prone.avi}
 }
 
 \frame{\frametitle{Conclusion}
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/robot_ortho}
+	\includegraphics[width=0.5\textwidth]{images/conclusion}
 }
 
 \end{document}
