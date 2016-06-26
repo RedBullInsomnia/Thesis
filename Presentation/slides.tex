@@ -1,5 +1,5 @@
 \documentclass[12pt, handout]{beamer}
-\usetheme{Warsaw}
+\usetheme{default}
 \usepackage{multimedia}
 \usepackage{graphicx}
 \usepackage{url}
@@ -25,12 +25,15 @@
 
 \section{Introduction}
 \frame{\frametitle{Context \& Motivation}
+todo : -enlever le fond de l'image de conclusion\\
+- modifier le schéma bloc\\
+- ajouter TCP/IP au dessus de la flèche entre simulator et Controller\\
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/intro_roboSoccer}
 }
 
 \frame{\frametitle{Problem statement}
-	Required simulator features:
+	Goals
 	\begin{itemize}
 		\item realistic rigid bodies physics simulation
 		\item constraints
@@ -39,7 +42,7 @@
 }
 
 \section{Software solutions}
-\frame{\frametitle{Software choices}
+\frame{\frametitle{Proposed environment}
 	\centering
 	\includegraphics[width=\textwidth]{images/overview}
 }
@@ -59,6 +62,8 @@
 }
 
 \frame{\frametitle{Modelling (2/2)}
+	\centering
+	\includegraphics[width=\textwidth]{images/overview}
 	\begin{columns}[T] % align columns
 		\begin{column}{.48\textwidth}
 			Blender :\begin{itemize}
@@ -68,8 +73,7 @@
 		\hfill%
 		\begin{column}{.48\textwidth}
 			V-Rep : \begin{itemize}
-				\item mass
-				\item inertia
+				\item mass \& inertia
 				\item function
 				\item constraints
 			\end{itemize}
@@ -89,9 +93,11 @@
 }
 
 \frame{\frametitle{Control (2/2)}
+	\begin{center}
+	\includegraphics[width=\textwidth]{images/overview}
+	\end{center}
 	Solutions : \begin{itemize}
 		\item remote control through TCP socket
-		\item synchronous operation
 		\item scripts
 	\end{itemize}
 }
