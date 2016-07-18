@@ -22,15 +22,15 @@ vrep.simxSynchronous(id, true);
 
 % retrieve handles to servos, joints
 h = robot_init(vrep, id);
-reset_robot_position(vrep, id, h, 'prone');
+reset_robot_position(vrep, id, h, 'supine');
 
 vrep.simxStartSimulation(id, vrep.simx_opmode_oneshot_wait);
 
 % display points
 t = 0;
 i = 1;
-while t < 4
-    instructions = standup_prone(h, t);
+while t < 2.5
+    instructions = go_prone(h, t);
     
     send_instructions(vrep, id, instructions);
     i = i + 1; t = t + dt
